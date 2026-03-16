@@ -646,3 +646,21 @@ a:hover {
   flex-direction: column;
   justify-content: space-between;
 }
+
+.shop-products-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.shop-product-card {
+  flex: 0 0 350px;
+  max-width: 350px;
+}
+
+.shop-product-card .card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
