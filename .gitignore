@@ -1,0 +1,29 @@
+# JetBrains IDEs (IntelliJ IDEA, WebStorm, etc.)
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Editor backups and temp files
+*.swp
+*.swo
+*.bak
+*.tmp
+*~
+
+# Log files
+*.log
+
+# Node modules (if npm/yarn is used in future)
+node_modules/
+
+# Build artifacts (if build process is added in future)
+dist/
+build/

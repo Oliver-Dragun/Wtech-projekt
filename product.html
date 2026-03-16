@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Healing Potion — Potion Spot</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="bootstrap-custom.css" />
+    <link rel="stylesheet" href="bootstrap-components.css" />
+  </head>
+  <body>
+
+    <div class="header shadow">
+      <div
+        class="banner-stripes d-flex justify-content-between align-items-center px-1 px-lg-4"
+      >
+        <div class="banner-left-buttons d-flex gap-2 gap-lg-3">
+          <button type="button" class="btn btn-secondary">Contact</button>
+          <button type="button" class="btn btn-secondary">About</button>
+        </div>
+
+        <button type="button" class="btn btn-secondary">
+          info@potionspot.com
+        </button>
+      </div>
+
+      <div
+        class="header-center-section d-flex flex-wrap align-items-center py-2 px-2 px-lg-5 gap-2 gap-lg-5"
+      >
+        <img class="logo order-1" src="images/logo_resized.png" alt="Potion Spot" />
+
+        <div class="d-flex w-100 gap-2 order-3 order-lg-2 d-lg-none">
+          <div class="dropdown">
+            <button
+              class="btn btn-outline-primary dropdown-toggle"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Categories
+            </button>
+            <ul class="dropdown-menu">
+              <li>
+                <a class="dropdown-item" href="shop-potions.html">Potions</a>
+              </li>
+              <li><a class="dropdown-item" href="#">Scrolls</a></li>
+              <li><a class="dropdown-item" href="#">Orbs</a></li>
+              <li><a class="dropdown-item" href="#">Artifacts</a></li>
+              <li><a class="dropdown-item" href="#">Bundles</a></li>
+              <li><a class="dropdown-item" href="#">Sale</a></li>
+            </ul>
+          </div>
+          <form class="flex-grow-1" role="search">
+            <div class="input-group">
+              <input
+                class="form-control"
+                type="search"
+                placeholder="Search for magical items..."
+                aria-label="Search"
+              />
+              <button class="btn btn-outline-primary" type="submit">
+                Search
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <form class="flex-grow-1 d-none d-lg-block order-lg-2" role="search">
+          <div class="input-group">
+            <input
+              class="form-control"
+              type="search"
+              placeholder="Search for magical items..."
+              aria-label="Search"
+            />
+            <button class="btn btn-outline-primary" type="submit">
+              Search
+            </button>
+          </div>
+        </form>
+
+        <div class="order-2 order-lg-3 ms-auto">
+          <button type="button" class="btn btn-light">
+            <img src="images/user_resized.png" alt="" aria-hidden="true" />
+            John Doe
+          </button>
+
+          <button type="button" class="btn btn-light">
+            <img src="images/cart_resized.png" alt="" aria-hidden="true" />
+            Cart
+          </button>
+        </div>
+      </div>
+
+      <div class="header-bottom-section py-0">
+        <nav
+          class="navbar navbar-expand-lg justify-content-center py-0 d-none d-lg-block"
+        >
+          <div class="container-fluid">
+            <ul class="navbar-nav mx-auto gap-5">
+              <li class="nav-item">
+                <a class="nav-link" href="#">Potions</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Scrolls</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Orbs</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Artifacts</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Bundles</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Sale</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <main>
+      <div class="container-lg my-4">
+
+        <!-- Product path -->
+        <nav aria-label="Product path" class="mb-4">
+          <ol class="ps-path-list">
+            <li class="ps-path-item"><a href="index.html">Home</a></li>
+            <li class="ps-path-item"><a href="shop-potions.html">Potions</a></li>
+            <li class="ps-path-item active" aria-current="page">Healing Potion</li>
+          </ol>
+        </nav>
+
+        <!-- Product -->
+        <section aria-label="Product details" class="mb-5">
+          <div class="row g-4 g-lg-5">
+
+            <!-- Image gallery -->
+            <div class="col-12 col-lg-5">
+              <div class="ps-gallery-main mb-3">
+                <img src="" alt="Healing Potion — main img" />
+              </div>
+
+              <div class="row g-2">
+                <div class="col-3">
+                  <img src="" alt="Healing Potion — img 1" class="ps-gallery-thumb" />
+                </div>
+                <div class="col-3">
+                  <img src="" alt="Healing Potion — img 2" class="ps-gallery-thumb" />
+                </div>
+                <div class="col-3">
+                  <img src="" alt="Healing Potion — img 3" class="ps-gallery-thumb" />
+                </div>
+                <div class="col-3">
+                  <img src="" alt="Healing Potion — img 4" class="ps-gallery-thumb" />
+                </div>
+              </div>
+            </div>
+
+            <!-- Description -->
+            <div class="col-12 col-lg-7">
+
+              <h1 class="ps-product-title mb-2">Healing Potion</h1>
+              <p class="ps-font-lg text-ps-black-60 mb-4"><strong>25 Gold</strong></p>
+
+              <h2 class="ps-font-xl mb-3">Description</h2>
+              <p class="ps-font-lg text-ps-grey mb-4">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac mattis ex,
+                sit amet convallis justo. Cras pharetra massa ut suscipit cursus. Curabitur
+                porttitor lacus eu nulla mollis, non efficitur massa varius. Nunc faucibus
+                finibus scelerisque purus eget gravida. Nullam blandit posuere aliquam.
+                Aenean et tempus erat. Duis nec quam lectus.
+              </p>
+
+              <!-- Quantity selector and add to a cart -->
+              <form action="#" method="post" class="d-flex align-items-center gap-3 mt-4">
+                <fieldset class="ps-qty-stepper">
+                  <legend class="visually-hidden">Quantity</legend>
+                  <button type="button" aria-label="Decrease quantity">−</button>
+                  <input type="number" name="quantity" value="1" min="1" max="99" aria-label="Quantity" />
+                  <button type="button" aria-label="Increase quantity">+</button>
+                </fieldset>
+                <button type="submit" name="action" value="add_to_cart" class="ps-btn-add-to-cart flex-grow-1">
+                  Add to Cart
+                </button>
+              </form>
+
+            </div>
+
+          </div>
+        </section>
+
+        <!-- Product details -->
+        <section aria-label="Product information" class="mb-5">
+
+          <ul class="nav ps-tabs mb-0" id="productTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button
+                class="nav-link active"
+                id="details-tab"
+                type="button"
+                role="tab"
+                data-bs-toggle="tab"
+                data-bs-target="#details"
+                aria-controls="details"
+                aria-selected="true"
+              >
+                Product Details
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button
+                class="nav-link"
+                id="reviews-tab"
+                type="button"
+                role="tab"
+                data-bs-toggle="tab"
+                data-bs-target="#reviews"
+                aria-controls="reviews"
+                aria-selected="false"
+              >
+                Reviews (12)
+              </button>
+            </li>
+          </ul>
+
+          <div class="tab-content ps-tab-content">
+            <div class="tab-pane fade show active" id="details" role="tabpanel" aria-labelledby="details-tab">
+              <h3 class="ps-font-md fw-bold mb-3">Product Details</h3>
+              <p class="ps-font-base text-ps-black-60">
+                Curabitur non nulla sit amet nisl tempus convallis quis ac lectus.
+                Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus.
+                Praesent sapien massa, convallis a pellentesque nec, egestas non nisi.
+              </p>
+            </div>
+            <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
+              <h3 class="ps-font-md fw-bold mb-3">Customer Reviews</h3>
+              <p class="ps-font-base text-ps-black-60">No reviews yet. Be the first to share your experience!</p>
+            </div>
+          </div>
+
+        </section>
+
+      </div>
+
+      <div class="container my-5">
+        <h2 class="mb-4">Recommended for you</h2>
+        <div class="position-relative">
+          <div class="row g-4 justify-content-center">
+            <div class="col-6 col-md-3" style="min-width: 280px">
+              <div class="card border-0">
+                <div class="card-body">
+                  <div class="bg-light mb-3 rounded" style="height: 200px"></div>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                      <h5 class="card-title mb-1">Speed</h5>
+                      <p class="card-text text-muted mb-0">Potion</p>
+                    </div>
+                    <button class="btn btn-primary">Learn more</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-6 col-md-3" style="min-width: 280px">
+              <div class="card border-0">
+                <div class="card-body">
+                  <div class="bg-light mb-3 rounded" style="height: 200px"></div>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                      <h5 class="card-title mb-1">Speed</h5>
+                      <p class="card-text text-muted mb-0">Potion</p>
+                    </div>
+                    <button class="btn btn-primary">Learn more</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-6 col-md-3" style="min-width: 280px">
+              <div class="card border-0">
+                <div class="card-body">
+                  <div class="bg-light mb-3 rounded" style="height: 200px"></div>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                      <h5 class="card-title mb-1">Speed</h5>
+                      <p class="card-text text-muted mb-0">Potion</p>
+                    </div>
+                    <button class="btn btn-primary">Learn more</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-6 col-md-3" style="min-width: 280px">
+              <div class="card border-0">
+                <div class="card-body">
+                  <div class="bg-light mb-3 rounded" style="height: 200px"></div>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                      <h5 class="card-title mb-1">Speed</h5>
+                      <p class="card-text text-muted mb-0">Potion</p>
+                    </div>
+                    <button class="btn btn-primary">Learn more</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button
+            class="btn btn-light position-absolute top-50 start-0 translate-middle-y border-0 shadow-sm"
+            style="left: -20px; z-index: 10"
+          >
+            <img src="images/arrow.png" alt="previous" style="width: 20px" />
+          </button>
+          <button
+            class="btn btn-light position-absolute top-50 end-0 border-0 shadow-sm"
+            style="right: -20px; transform: translateY(-50%); z-index: 10"
+          >
+            <img
+              src="images/arrow.png"
+              alt="next"
+              style="width: 20px; transform: rotate(180deg)"
+            />
+          </button>
+        </div>
+      </div>
+
+    </main>
+
+    <footer class="bg-light py-3 mt-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 col-md-3 mb-4 mb-md-0 pe-md-4">
+            <img src="images/logo.png" alt="Potion Spot" style="width: 200px" />
+          </div>
+          <div class="col-6 col-md-3">
+            <h5 class="mb-3">Information</h5>
+            <ul class="list-unstyled">
+              <li class="mb-2">
+                <a href="#" class="text-decoration-none text-dark"
+                  >Shipping info</a
+                >
+              </li>
+              <li class="mb-2">
+                <a href="#" class="text-decoration-none text-dark"
+                  >Terms of service</a
+                >
+              </li>
+              <li class="mb-2">
+                <a href="#" class="text-decoration-none text-dark"
+                  >Privacy policy</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-decoration-none text-dark"
+                  >Refund policy</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="col-6 col-md-3">
+            <h5 class="mb-3">Products</h5>
+            <ul class="list-unstyled">
+              <li class="mb-2">
+                <a href="#" class="text-decoration-none text-dark">Potions</a>
+              </li>
+              <li class="mb-2">
+                <a href="#" class="text-decoration-none text-dark">Scrolls</a>
+              </li>
+              <li class="mb-2">
+                <a href="#" class="text-decoration-none text-dark">Orbs</a>
+              </li>
+              <li>
+                <a href="#" class="text-decoration-none text-dark">Artifacts</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-6 col-md-3">
+            <h5 class="mb-3">Pages</h5>
+            <ul class="list-unstyled">
+              <li class="mb-2">
+                <a href="#" class="text-decoration-none text-dark">Home</a>
+              </li>
+              <li class="mb-2">
+                <a href="#" class="text-decoration-none text-dark">About</a>
+              </li>
+              <li>
+                <a href="#" class="text-decoration-none text-dark">Contact</a>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
