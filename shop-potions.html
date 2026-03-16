@@ -1,0 +1,507 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Potion Spot - Potions</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="bootstrap-custom.css" />
+    <link rel="stylesheet" href="bootstrap-components.css" />
+    <script src="bootstrap/js/bootstrap.bundle.js"></script>
+  </head>
+  <body>
+    <div class="header shadow">
+      <div
+        class="banner-stripes d-flex justify-content-between align-items-center px-1 px-lg-4"
+      >
+        <div class="banner-left-buttons d-flex gap-2 gap-lg-3">
+          <button type="button" class="btn btn-secondary">Contact</button>
+          <button type="button" class="btn btn-secondary">About</button>
+        </div>
+
+        <button type="button" class="btn btn-secondary">
+          info@potionspot.com
+        </button>
+      </div>
+
+      <div
+        class="header-center-section d-flex flex-wrap align-items-center py-2 px-2 px-lg-5 gap-2 gap-lg-5"
+      >
+        <img class="logo order-1" src="images/logo_resized.png" />
+
+        <div class="d-flex w-100 gap-2 order-3 order-lg-2 d-lg-none">
+          <div class="dropdown">
+            <button
+              class="btn btn-outline-primary dropdown-toggle"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Categories
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Potions</a></li>
+              <li><a class="dropdown-item" href="#">Scrolls</a></li>
+              <li><a class="dropdown-item" href="#">Orbs</a></li>
+              <li><a class="dropdown-item" href="#">Artifacts</a></li>
+              <li><a class="dropdown-item" href="#">Bundles</a></li>
+              <li><a class="dropdown-item" href="#">Sale</a></li>
+            </ul>
+          </div>
+          <form class="flex-grow-1" role="search">
+            <div class="input-group">
+              <input
+                class="form-control"
+                type="search"
+                placeholder="Search for magical items..."
+                aria-label="Search"
+              />
+              <button class="btn btn-outline-primary" type="submit">
+                Search
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <form class="flex-grow-1 d-none d-lg-block order-lg-2" role="search">
+          <div class="input-group">
+            <input
+              class="form-control"
+              type="search"
+              placeholder="Search for magical items..."
+              aria-label="Search"
+            />
+            <button class="btn btn-outline-primary" type="submit">
+              Search
+            </button>
+          </div>
+        </form>
+
+        <div class="order-2 order-lg-3 ms-auto">
+          <button type="button" class="btn btn-light">
+            <img src="images/user_resized.png" />
+            John Doe
+          </button>
+
+          <button type="button" class="btn btn-light">
+            <img src="images/cart_resized.png" />
+            Cart
+          </button>
+        </div>
+      </div>
+
+      <div class="header-bottom-section py-0">
+        <nav
+          class="navbar navbar-expand-lg justify-content-center py-0 d-none d-lg-block"
+        >
+          <div class="container-fluid">
+            <ul class="navbar-nav mx-auto gap-5">
+              <li class="nav-item">
+                <a class="nav-link" href="#">Potions</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Scrolls</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Orbs</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Artifacts</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Bundles</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Sale</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </div>
+
+    <div class="main-content shadow">
+      <!-- Mobile Sidebar Overlay -->
+      <div class="sidebar-overlay d-lg-none" id="sidebarOverlay"></div>
+
+      <div class="shop-layout">
+        <div class="shop-sidebar accordion" id="sidebarAccordion">
+          <div class="accordion-item border-0">
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button category-title-btn"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#effectCollapse"
+                aria-expanded="true"
+                aria-controls="effectCollapse"
+              >
+                Effect
+              </button>
+            </h2>
+            <div id="effectCollapse" class="accordion-collapse collapse show">
+              <div class="accordion-body p-0">
+                <div class="category-options">
+                  <div class="category-option">
+                    <input type="checkbox" id="effect-all" checked />
+                    <label for="effect-all">All</label>
+                  </div>
+                  <div class="category-option">
+                    <input type="checkbox" id="healing" />
+                    <label for="healing">Healing</label>
+                  </div>
+                  <div class="category-option">
+                    <input type="checkbox" id="speed" />
+                    <label for="speed">Speed</label>
+                  </div>
+                  <div class="category-option">
+                    <input type="checkbox" id="fire-resistance" />
+                    <label for="fire-resistance">Fire resistance</label>
+                  </div>
+                  <div class="category-option">
+                    <input type="checkbox" id="restoration" />
+                    <label for="restoration">Restoration</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item border-0">
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button category-title-btn"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#strengthCollapse"
+                aria-expanded="false"
+                aria-controls="strengthCollapse"
+              >
+                Strength
+              </button>
+            </h2>
+            <div id="strengthCollapse" class="accordion-collapse collapse show">
+              <div class="accordion-body p-0">
+                <div class="category-options">
+                  <div class="category-option">
+                    <input type="checkbox" id="strength-all" checked />
+                    <label for="strength-all">All</label>
+                  </div>
+                  <div class="category-option">
+                    <input type="checkbox" id="basic" />
+                    <label for="basic">Basic</label>
+                  </div>
+                  <div class="category-option">
+                    <input type="checkbox" id="greater" />
+                    <label for="greater">Greater</label>
+                  </div>
+                  <div class="category-option">
+                    <input type="checkbox" id="superior" />
+                    <label for="superior">Superior</label>
+                  </div>
+                  <div class="category-option">
+                    <input type="checkbox" id="supreme" />
+                    <label for="supreme">Supreme</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="shop-content">
+          <!-- Sidebar Toggle Button (Mobile) -->
+          <button
+            class="btn btn-outline-primary d-lg-none mb-3"
+            id="sidebarToggle"
+          >
+            Filters
+          </button>
+
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="mb-0">Potions</h1>
+            <div class="d-flex align-items-center gap-2">
+              Sort by:
+              <button class="btn btn-outline-dark">Price</button>
+              <button class="btn btn-outline-dark">Orders</button>
+              <button class="btn btn-outline-dark">Reviews</button>
+            </div>
+          </div>
+
+          <div class="row g-4">
+            <div class="col-6 col-md-4 col-lg-3">
+              <div class="card">
+                <div class="card-body">
+                  <div
+                    class="bg-light mb-3 rounded"
+                    style="height: 200px"
+                  ></div>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <div class="text-start">
+                      <h5 class="card-title mb-1">Healing Potion</h5>
+                      <p class="card-text fs-5 mb-0">25 Gold</p>
+                    </div>
+                    <button class="btn btn-primary">Buy</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-6 col-md-4 col-lg-3">
+              <div class="card">
+                <div class="card-body">
+                  <div
+                    class="bg-light mb-3 rounded"
+                    style="height: 200px"
+                  ></div>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <div class="text-start">
+                      <h5 class="card-title mb-1">Speed Potion</h5>
+                      <p class="card-text fs-5 mb-0">30 Gold</p>
+                    </div>
+                    <button class="btn btn-primary">Buy</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-6 col-md-4 col-lg-3">
+              <div class="card">
+                <div class="card-body">
+                  <div
+                    class="bg-light mb-3 rounded"
+                    style="height: 200px"
+                  ></div>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <div class="text-start">
+                      <h5 class="card-title mb-1">Fire Resistance Potion</h5>
+                      <p class="card-text fs-5 mb-0">40 Gold</p>
+                    </div>
+                    <button class="btn btn-primary">Buy</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-6 col-md-4 col-lg-3">
+              <div class="card">
+                <div class="card-body">
+                  <div
+                    class="bg-light mb-3 rounded"
+                    style="height: 200px"
+                  ></div>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <div class="text-start">
+                      <h5 class="card-title mb-1">Restoration Potion</h5>
+                      <p class="card-text fs-5 mb-0">35 Gold</p>
+                    </div>
+                    <button class="btn btn-primary">Buy</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-6 col-md-4 col-lg-3">
+              <div class="card">
+                <div class="card-body">
+                  <div
+                    class="bg-light mb-3 rounded"
+                    style="height: 200px"
+                  ></div>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <div class="text-start">
+                      <h5 class="card-title mb-1">Mana Potion</h5>
+                      <p class="card-text fs-5 mb-0">20 Gold</p>
+                    </div>
+                    <button class="btn btn-primary">Buy</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-6 col-md-4 col-lg-3">
+              <div class="card">
+                <div class="card-body">
+                  <div
+                    class="bg-light mb-3 rounded"
+                    style="height: 200px"
+                  ></div>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <div class="text-start">
+                      <h5 class="card-title mb-1">Invisibility Potion</h5>
+                      <p class="card-text fs-5 mb-0">50 Gold</p>
+                    </div>
+                    <button class="btn btn-primary">Buy</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-6 col-md-4 col-lg-3">
+              <div class="card">
+                <div class="card-body">
+                  <div
+                    class="bg-light mb-3 rounded"
+                    style="height: 200px"
+                  ></div>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <div class="text-start">
+                      <h5 class="card-title mb-1">Strength Potion</h5>
+                      <p class="card-text fs-5 mb-0">45 Gold</p>
+                    </div>
+                    <button class="btn btn-primary">Buy</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-6 col-md-4 col-lg-3">
+              <div class="card">
+                <div class="card-body">
+                  <div
+                    class="bg-light mb-3 rounded"
+                    style="height: 200px"
+                  ></div>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <div class="text-start">
+                      <h5 class="card-title mb-1">Fortitude Potion</h5>
+                      <p class="card-text fs-5 mb-0">55 Gold</p>
+                    </div>
+                    <button class="btn btn-primary">Buy</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="bg-light py-3 mt-5">
+        <div class="container">
+          <div class="row">
+            <div class="col-12 col-md-3 mb-4 mb-md-0 pe-md-4">
+              <img
+                src="images/logo.png"
+                alt="Potion Spot"
+                style="width: 200px"
+              />
+            </div>
+            <div class="col-6 col-md-3">
+              <h5 class="mb-3">Information</h5>
+              <ul class="list-unstyled">
+                <li class="mb-2">
+                  <a href="#" class="text-decoration-none text-dark"
+                    >Shipping info</a
+                  >
+                </li>
+                <li class="mb-2">
+                  <a href="#" class="text-decoration-none text-dark"
+                    >Terms of service</a
+                  >
+                </li>
+                <li class="mb-2">
+                  <a href="#" class="text-decoration-none text-dark"
+                    >Privacy policy</a
+                  >
+                </li>
+                <li>
+                  <a href="#" class="text-decoration-none text-dark"
+                    >Refund policy</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <div class="col-6 col-md-3">
+              <h5 class="mb-3">Products</h5>
+              <ul class="list-unstyled">
+                <li class="mb-2">
+                  <a href="#" class="text-decoration-none text-dark">Potions</a>
+                </li>
+                <li class="mb-2">
+                  <a href="#" class="text-decoration-none text-dark">Scrolls</a>
+                </li>
+                <li class="mb-2">
+                  <a href="#" class="text-decoration-none text-dark">Orbs</a>
+                </li>
+                <li>
+                  <a href="#" class="text-decoration-none text-dark"
+                    >Artifacts</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <div class="col-6 col-md-3">
+              <h5 class="mb-3">Pages</h5>
+              <ul class="list-unstyled">
+                <li class="mb-2">
+                  <a href="#" class="text-decoration-none text-dark">Home</a>
+                </li>
+                <li class="mb-2">
+                  <a href="#" class="text-decoration-none text-dark">About</a>
+                </li>
+                <li>
+                  <a href="#" class="text-decoration-none text-dark">Contact</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const sidebarToggle = document.getElementById("sidebarToggle");
+        const sidebar = document.querySelector(".shop-sidebar");
+        const sidebarOverlay = document.getElementById("sidebarOverlay");
+
+        function updateOverlay() {
+          if (sidebar && !sidebar.classList.contains("hidden")) {
+            sidebarOverlay.classList.add("show");
+          } else {
+            sidebarOverlay.classList.remove("show");
+          }
+        }
+
+        if (sidebarToggle && sidebar) {
+          // Add hidden class initially on mobile
+          if (window.innerWidth < 992) {
+            sidebar.classList.add("hidden");
+          }
+
+          sidebarToggle.addEventListener("click", function () {
+            sidebar.classList.toggle("hidden");
+            updateOverlay();
+          });
+
+          // Close sidebar when clicking overlay
+          if (sidebarOverlay) {
+            sidebarOverlay.addEventListener("click", function () {
+              sidebar.classList.add("hidden");
+              updateOverlay();
+            });
+          }
+
+          // Handle window resize
+          window.addEventListener("resize", function () {
+            if (window.innerWidth >= 992) {
+              sidebar.classList.remove("hidden");
+            } else {
+              sidebar.classList.add("hidden");
+            }
+            updateOverlay();
+          });
+        }
+      });
+    </script>
+  </body>
+</html>
