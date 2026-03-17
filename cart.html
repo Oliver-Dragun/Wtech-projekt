@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en" class="ps-cart-page">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shopping Cart — Potion Spot</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="bootstrap-custom.css" />
+    <link rel="stylesheet" href="bootstrap-components.css" />
+  </head>
+  <body class="ps-cart-page-body">
+
+    <header class="header shadow">
+      <div
+        class="banner-stripes d-flex justify-content-between align-items-center px-1 px-lg-4"
+      >
+        <div class="banner-left-buttons d-flex gap-2 gap-lg-3">
+          <button type="button" class="btn btn-secondary">Contact</button>
+          <button type="button" class="btn btn-secondary">About</button>
+        </div>
+
+        <button type="button" class="btn btn-secondary">
+          info@potionspot.com
+        </button>
+      </div>
+
+      <div
+        class="header-center-section d-flex flex-wrap align-items-center py-2 px-2 px-lg-5 gap-2 gap-lg-5"
+      >
+        <img class="logo order-1" src="images/logo_resized.png" alt="Potion Spot" />
+
+        <div class="d-flex w-100 gap-2 order-3 order-lg-2 d-lg-none">
+          <div class="dropdown">
+            <button
+              class="btn btn-outline-primary dropdown-toggle"
+              type="button"
+              aria-expanded="false"
+            >
+              Categories
+            </button>
+            <ul class="dropdown-menu">
+              <li>
+                <a class="dropdown-item" href="shop-potions.html">Potions</a>
+              </li>
+              <li><a class="dropdown-item" href="#">Scrolls</a></li>
+              <li><a class="dropdown-item" href="#">Orbs</a></li>
+              <li><a class="dropdown-item" href="#">Artifacts</a></li>
+              <li><a class="dropdown-item" href="#">Bundles</a></li>
+              <li><a class="dropdown-item" href="#">Sale</a></li>
+            </ul>
+          </div>
+          <form class="flex-grow-1" role="search">
+            <div class="input-group">
+              <input
+                class="form-control"
+                type="search"
+                placeholder="Search for magical items..."
+                aria-label="Search"
+              />
+              <button class="btn btn-outline-primary" type="submit">
+                Search
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <form class="flex-grow-1 d-none d-lg-block order-lg-2" role="search">
+          <div class="input-group">
+            <input
+              class="form-control"
+              type="search"
+              placeholder="Search for magical items..."
+              aria-label="Search"
+            />
+            <button class="btn btn-outline-primary" type="submit">
+              Search
+            </button>
+          </div>
+        </form>
+
+        <div class="order-2 order-lg-3 ms-auto">
+          <button type="button" class="btn btn-light">
+            <img src="images/user_resized.png" alt="" aria-hidden="true" />
+            John Doe
+          </button>
+
+          <button type="button" class="btn btn-light">
+            <img src="images/cart_resized.png" alt="" aria-hidden="true" />
+            Cart
+          </button>
+        </div>
+      </div>
+
+      <div class="header-bottom-section py-0">
+        <nav
+          class="navbar navbar-expand-lg justify-content-center py-0 d-none d-lg-block"
+        >
+          <div class="container-fluid">
+            <ul class="navbar-nav mx-auto gap-5">
+              <li class="nav-item">
+                <a class="nav-link" href="#">Potions</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Scrolls</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Orbs</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Artifacts</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Bundles</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Sale</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <!-- MAIN -->
+    <main class="ps-cart-page-main">
+      <div class="container-lg my-4 my-lg-5">
+
+        <h1 class="ps-page-title mb-4">Shopping Cart</h1>
+
+        <div class="row g-4 g-lg-5">
+
+          <!-- Cart items -->
+          <section class="col-12 col-lg-8" aria-label="Cart items">
+
+            <!-- Item 1 -->
+            <article class="ps-cart-item">
+              <img class="ps-cart-item-img" src="#" alt="Healing Potion" />
+              <div class="ps-cart-item-body">
+                <div class="ps-cart-item-head">
+                  <div>
+                    <p class="ps-cart-item-name mb-0">Healing Potion</p>
+                    <p class="ps-cart-item-variant mb-0">Speed · Basic</p>
+                  </div>
+                  <span class="ps-cart-item-price">25 Gold</span>
+                </div>
+                <div class="ps-cart-item-actions">
+                  <form action="#" method="post" class="d-flex align-items-center gap-3">
+                    <fieldset class="ps-cart-stepper" aria-label="Quantity for Healing Potion">
+                      <legend class="visually-hidden">Quantity</legend>
+                      <button type="submit" name="action" value="decrease_1" aria-label="Decrease">−</button>
+                      <input type="number" name="quantity_1" value="1" min="1" max="99" aria-label="Quantity" />
+                      <button type="submit" name="action" value="increase_1" aria-label="Increase">+</button>
+                    </fieldset>
+                    <button type="submit" name="action" value="remove_1" class="ps-btn-remove">
+                      Remove
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </article>
+
+            <!-- Item 2 -->
+            <article class="ps-cart-item">
+              <img class="ps-cart-item-img" src="#" alt="Speed Potion" />
+              <div class="ps-cart-item-body">
+                <div class="ps-cart-item-head">
+                  <div>
+                    <p class="ps-cart-item-name mb-0">Speed Potion</p>
+                    <p class="ps-cart-item-variant mb-0">Speed · Greater</p>
+                  </div>
+                  <span class="ps-cart-item-price">40 Gold</span>
+                </div>
+                <div class="ps-cart-item-actions">
+                  <form action="#" method="post" class="d-flex align-items-center gap-3">
+                    <fieldset class="ps-cart-stepper" aria-label="Quantity for Speed Potion">
+                      <legend class="visually-hidden">Quantity</legend>
+                      <button type="submit" name="action" value="decrease_2" aria-label="Decrease">−</button>
+                      <input type="number" name="quantity_2" value="2" min="1" max="99" aria-label="Quantity" />
+                      <button type="submit" name="action" value="increase_2" aria-label="Increase">+</button>
+                    </fieldset>
+                    <button type="submit" name="action" value="remove_2" class="ps-btn-remove">
+                      Remove
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </article>
+
+          </section>
+
+          <!-- Summary -->
+          <aside class="col-12 col-lg-4" aria-label="Order summary">
+            <div class="ps-summary-card">
+              <h2 class="ps-summary-title mb-4">Summary</h2>
+
+              <dl>
+                <div class="ps-summary-row">
+                  <dt class="ps-summary-label">Subtotal</dt>
+                  <dd class="ps-summary-value mb-0">105 Gold</dd>
+                </div>
+                <div class="ps-summary-row">
+                  <dt class="ps-summary-label">Shipping</dt>
+                  <dd class="ps-summary-value mb-0">5 Gold</dd>
+                </div>
+              </dl>
+
+              <hr class="ps-summary-divider" />
+
+              <div class="ps-summary-total">
+                <span>Total</span>
+                <strong>110 Gold</strong>
+              </div>
+
+              <a href="checkout.html" class="ps-btn-checkout">Checkout</a>
+              <a href="index.html" class="ps-btn-continue">Continue Shopping</a>
+            </div>
+          </aside>
+
+        </div>
+      </div>
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="bg-light py-3 mt-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 col-md-3 mb-4 mb-md-0 pe-md-4">
+            <img src="images/logo.png" alt="Potion Spot" style="width: 200px" />
+          </div>
+          <div class="col-6 col-md-3">
+            <h5 class="mb-3">Information</h5>
+            <ul class="list-unstyled">
+              <li class="mb-2">
+                <a href="#" class="text-decoration-none text-dark"
+                  >Shipping info</a
+                >
+              </li>
+              <li class="mb-2">
+                <a href="#" class="text-decoration-none text-dark"
+                  >Terms of service</a
+                >
+              </li>
+              <li class="mb-2">
+                <a href="#" class="text-decoration-none text-dark"
+                  >Privacy policy</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-decoration-none text-dark"
+                  >Refund policy</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="col-6 col-md-3">
+            <h5 class="mb-3">Products</h5>
+            <ul class="list-unstyled">
+              <li class="mb-2">
+                <a href="#" class="text-decoration-none text-dark">Potions</a>
+              </li>
+              <li class="mb-2">
+                <a href="#" class="text-decoration-none text-dark">Scrolls</a>
+              </li>
+              <li class="mb-2">
+                <a href="#" class="text-decoration-none text-dark">Orbs</a>
+              </li>
+              <li>
+                <a href="#" class="text-decoration-none text-dark">Artifacts</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-6 col-md-3">
+            <h5 class="mb-3">Pages</h5>
+            <ul class="list-unstyled">
+              <li class="mb-2">
+                <a href="#" class="text-decoration-none text-dark">Home</a>
+              </li>
+              <li class="mb-2">
+                <a href="#" class="text-decoration-none text-dark">About</a>
+              </li>
+              <li>
+                <a href="#" class="text-decoration-none text-dark">Contact</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+  </body>
+</html>
