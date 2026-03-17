@@ -60,7 +60,7 @@
 .ps-offer-card {
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 4px 4px 8.6px var(--ps-black-25);
+  box-shadow: 4px 4px 9px var(--ps-black-25);
 }
 
 .ps-offer-card--main {
@@ -132,11 +132,8 @@
 
 
 
-
 /*PRODUCT PAGE*/
 
-
-/* Product path */
 .ps-path-list {
   display: flex;
   flex-wrap: wrap;
@@ -146,23 +143,24 @@
   padding: 0;
   font-size: 20px;
 }
+
 .ps-path-item { color: var(--ps-black-60); }
 .ps-path-item + .ps-path-item {
-  padding-left: 0.5rem;
+  padding-left: 8px;
 }
+
 .ps-path-item + .ps-path-item::before {
   content: "/";
-  padding-right: 0.5rem;
+  padding-right: 8px;
   color: var(--ps-black-60);
 }
+
 .ps-path-item a { color: var(--ps-black-60); }
 .ps-path-item a:hover { color: var(--ps-primary); }
 .ps-path-item.active { color: var(--ps-black); }
 
-/* Product title */
 .ps-product-title { font-size: 36px; font-weight: 400; line-height: 40px; color: var(--ps-black); }
 
-/* Main gallery image */
 .ps-gallery-main {
   background-color: var(--ps-grey-300);
   border-radius: 4px;
@@ -170,9 +168,9 @@
   width: 100%;
   overflow: hidden;
 }
+
 .ps-gallery-main img { width: 100%; height: 100%; object-fit: contain; }
 
-/* Gallery thumbnails */
 .ps-gallery-thumb {
   background-color: var(--ps-grey-300);
   border-radius: 4px;
@@ -181,21 +179,23 @@
   overflow: hidden;
   display: block;
 }
+
 .ps-gallery-thumb:hover,
 .ps-gallery-thumb:focus { border-color: var(--ps-primary); outline: none; }
 
-/* Quantity stepper */
 .ps-qty-stepper {
   border: 1px solid var(--ps-grey-300);
   display: flex;
   align-items: center;
   height: 48px;
 }
+
 .ps-qty-stepper button {
   background: transparent; border: none;
   width: 42px; height: 100%;
   font-size: 20px; color: var(--ps-black); cursor: pointer;
 }
+
 .ps-qty-stepper button:hover { background-color: var(--ps-grey-100); }
 .ps-qty-stepper input {
   width: 48px; height: 100%;
@@ -205,10 +205,10 @@
   text-align: center; font-size: 16px;
   background: var(--ps-white); outline: none;
 }
+
 .ps-qty-stepper input::-webkit-inner-spin-button,
 .ps-qty-stepper input::-webkit-outer-spin-button { -webkit-appearance: none; }
 
-/* Add to cart button */
 .ps-btn-add-to-cart {
   background-color: var(--ps-primary); color: var(--ps-white);
   border: none; height: 48px; padding: 0 32px;
@@ -216,31 +216,36 @@
   white-space: nowrap; cursor: pointer;
   transition: background-color 0.2s;
 }
+
 .ps-btn-add-to-cart:hover { background-color: var(--ps-primary-hover); }
 
-/* Product tabs */
 .ps-tabs { border-bottom: 1px solid var(--ps-grey-300); }
+
 .ps-tabs .nav-link {
   font-size: 14px; padding: 16px 8px;
   color: var(--ps-grey-500);
   border-bottom: 2px solid transparent;
   border-radius: 0; margin-bottom: -1px;
 }
+
 .ps-tabs .nav-link.active {
   color: var(--ps-primary);
   border-bottom-color: var(--ps-primary);
 }
+
 .ps-tab-content { padding: 24px 4px; }
 
-/* Recommendations section background */
 .ps-recommendations-section { background-color: var(--ps-grey-100); padding: 60px 0; }
 
+
+
 /* CART PAGE */
-html.ps-cart-page {
+
+.ps-cart-page {
   overflow-y: scroll;
 }
 
-body.ps-cart-page-body {
+.ps-cart-page-body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -261,6 +266,7 @@ body.ps-cart-page-body {
   gap: 16px;
   align-items: flex-start;
 }
+
 .ps-cart-item + .ps-cart-item { margin-top: 16px; }
 
 .ps-cart-item-img {
@@ -286,6 +292,7 @@ body.ps-cart-page-body {
 .ps-cart-item-actions { display: flex; justify-content: space-between; align-items: center; padding-top: 16px; }
 
 .ps-cart-stepper { border: 1px solid #d1d5db; display: inline-flex; align-items: center; overflow: hidden; }
+
 .ps-cart-stepper button {
   background: #f9fafb;
   border: none;
@@ -296,6 +303,7 @@ body.ps-cart-page-body {
   line-height: 24px;
 }
 .ps-cart-stepper button:hover { background: var(--ps-grey-200); }
+
 .ps-cart-stepper input {
   width: 40px;
   border: none;
@@ -319,6 +327,7 @@ body.ps-cart-page-body {
   cursor: pointer;
   padding: 0;
 }
+
 .ps-btn-remove:hover { color: #b91c1c; }
 
 .ps-summary-card {
@@ -330,6 +339,7 @@ body.ps-cart-page-body {
   position: sticky;
   top: 20px;
 }
+
 .ps-summary-title { font-size: 20px; font-weight: 700; color: var(--ps-black); }
 .ps-summary-row { display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 16px; }
 .ps-summary-row .ps-summary-label { color: #4b5563; }
