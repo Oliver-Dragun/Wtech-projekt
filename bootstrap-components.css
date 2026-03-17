@@ -507,3 +507,138 @@
   color: var(--ps-primary);
 }
 
+
+/* CHECKOUT PAGE */
+
+.ps-checkout-section-heading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 9px;
+  border-bottom: 1px solid #e5e7eb;
+  margin-bottom: 24px;
+}
+
+.ps-checkout-section-heading-icon {
+  width: 22px;
+  height: 16px;
+  flex-shrink: 0;
+  color: var(--ps-primary);
+}
+
+.ps-checkout-section-title {
+  font-size: 20px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #0f172a;
+  letter-spacing: 0.02em;
+  margin: 0;
+}
+
+.ps-checkout-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #475569;
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+}
+
+.ps-checkout-input {
+  display: block;
+  width: 100%;
+  height: 50px;
+  background-color: var(--ps-white);
+  border: 1px solid #e5e7eb;
+  border-radius: 0;
+  padding: 0 12px;
+  font-size: 16px;
+  color: #0f172a;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.ps-checkout-input:focus {
+  border-color: var(--ps-primary);
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15);
+}
+
+.ps-checkout-summary-card {
+  background: var(--ps-white);
+  border: 1px solid #f3f4f6;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  padding: 24px;
+  position: sticky;
+  top: 20px;
+}
+
+.ps-checkout-order-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #ebedf0;
+  margin-bottom: 16px;
+}
+
+.ps-checkout-order-item-img {
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
+  background-color: #f1f5f9;
+  border: 1px solid #e5e7eb;
+  object-fit: contain;
+}
+
+.ps-checkout-order-item-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: #0f172a;
+  line-height: 20px;
+}
+
+.ps-checkout-order-item-qty {
+  font-size: 12px;
+  color: #64748b;
+  line-height: 16px;
+}
+
+.ps-checkout-order-item-price {
+  font-size: 14px;
+  font-weight: 600;
+  color: #111827;
+  white-space: nowrap;
+  margin-left: auto;
+}
+
+.ps-btn-payment {
+  display: block;
+  width: 100%;
+  background-color: var(--ps-primary);
+  color: var(--ps-white);
+  border: none;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 0;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+.ps-btn-payment:hover {
+  background-color: var(--ps-primary-hover);
+  color: var(--ps-white);
+}
+
+.ps-checkout-page-subtitle {
+  font-size: 16px;
+  color: #64748b;
+  margin-top: 4px;
+  margin-bottom: 0;
+}
