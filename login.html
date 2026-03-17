@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="bootstrap-custom.css" />
+    <link rel="stylesheet" href="bootstrap-components.css" />
+    <title>Login</title>
+  </head>
+  <body>
+    <div class="login-container">
+      <div class="login-card border shadow">
+        <div class="text-center mb-4">
+          <img class="logo py-3" src="images/logo_resized.png" />
+          <h2 class="mb-4">Login</h2>
+        </div>
+
+        <form>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              placeholder="Enter your email"
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              placeholder="Enter your password"
+            />
+          </div>
+
+          <div class="text-center mb-3">
+            <a href="#" style="opacity: 0.6; text-decoration: underline"
+              >Forgot password?</a
+            >
+          </div>
+
+          <button type="submit" class="btn btn-primary w-100 mb-3">
+            Login
+          </button>
+
+          <button type="button" class="btn btn-outline-primary w-100 mb-3">
+            Create Account
+          </button>
+        </form>
+
+        <div class="text-center">
+          <a href="#" style="opacity: 0.6; text-decoration: underline"
+            >Continue as guest</a
+          >
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="bootstrap-custom.css" />
+    <link rel="stylesheet" href="bootstrap-components.css" />
+    <title>Register</title>
+  </head>
+  <body>
+    <div class="login-container">
+      <div class="login-card border shadow">
+        <div class="text-center mb-3">
+          <img class="logo py-2" src="images/logo_resized.png" />
+          <h2 class="mb-3">Register</h2>
+        </div>
+
+        <form>
+          <div class="row g-2 mb-2">
+            <div class="col-6">
+              <label for="firstName" class="form-label">First Name</label>
+              <input
+                type="text"
+                class="form-control form-control"
+                id="firstName"
+                placeholder="First name"
+              />
+            </div>
+            <div class="col-6">
+              <label for="lastName" class="form-label">Last Name</label>
+              <input
+                type="text"
+                class="form-control form-control"
+                id="lastName"
+                placeholder="Last name"
+              />
+            </div>
+          </div>
+
+          <div class="mb-2">
+            <label for="email" class="form-label">Email</label>
+            <input
+              type="email"
+              class="form-control form-control"
+              id="email"
+              placeholder="Enter your email"
+            />
+          </div>
+
+          <div class="mb-2">
+            <label for="password" class="form-label">Password</label>
+            <input
+              type="password"
+              class="form-control form-control"
+              id="password"
+              placeholder="Enter your password"
+            />
+          </div>
+
+          <div class="row g-2 mb-2">
+            <div class="col-6">
+              <label for="phone" class="form-label">Phone</label>
+              <input
+                type="tel"
+                class="form-control form-control"
+                id="phone"
+                placeholder="Phone number"
+              />
+            </div>
+            <div class="col-6">
+              <label for="city" class="form-label">City</label>
+              <input
+                type="text"
+                class="form-control form-control"
+                id="city"
+                placeholder="City"
+              />
+            </div>
+          </div>
+
+          <div class="row g-2 mb-3">
+            <div class="col-8">
+              <label for="street" class="form-label">Street</label>
+              <input
+                type="text"
+                class="form-control form-control"
+                id="street"
+                placeholder="Street address"
+              />
+            </div>
+            <div class="col-4">
+              <label for="areaCode" class="form-label">Area Code</label>
+              <input
+                type="text"
+                class="form-control form-control"
+                id="areaCode"
+                placeholder="Area code"
+              />
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary w-100 mb-3 py-2">
+            Register
+          </button>
+        </form>
+
+        <div class="text-center">
+          <a href="login.html" style="opacity: 0.6; text-decoration: underline"
+            >Already have an account? Login</a
+          >
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

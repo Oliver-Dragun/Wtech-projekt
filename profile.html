@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Potion Spot</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="bootstrap-custom.css" />
+    <link rel="stylesheet" href="bootstrap-components.css" />
+  </head>
+  <body>
+    <div class="header shadow">
+      <div
+        class="banner-stripes d-flex justify-content-between align-items-center px-1 px-lg-4"
+      >
+        <div class="banner-left-buttons d-flex gap-2 gap-lg-3">
+          <button type="button" class="btn btn-secondary">Contact</button>
+          <button type="button" class="btn btn-secondary">About</button>
+        </div>
+
+        <button type="button" class="btn btn-secondary">
+          info@potionspot.com
+        </button>
+      </div>
+
+      <div
+        class="header-center-section d-flex flex-wrap align-items-center py-2 px-2 px-lg-5 gap-2 gap-lg-5"
+      >
+        <img class="logo order-1" src="images/logo_resized.png" />
+
+        <div class="d-flex w-100 gap-2 order-3 order-lg-2 d-lg-none">
+          <div class="dropdown">
+            <button
+              class="btn btn-outline-primary dropdown-toggle"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Categories
+            </button>
+            <ul class="dropdown-menu">
+              <li>
+                <a class="dropdown-item" href="shop-potions.html">Potions</a>
+              </li>
+              <li><a class="dropdown-item" href="#">Scrolls</a></li>
+              <li><a class="dropdown-item" href="#">Orbs</a></li>
+              <li><a class="dropdown-item" href="#">Artifacts</a></li>
+              <li><a class="dropdown-item" href="#">Bundles</a></li>
+              <li><a class="dropdown-item" href="#">Sale</a></li>
+            </ul>
+          </div>
+          <form class="flex-grow-1" role="search">
+            <div class="input-group">
+              <input
+                class="form-control"
+                type="search"
+                placeholder="Search for magical items..."
+                aria-label="Search"
+              />
+              <button class="btn btn-outline-primary" type="submit">
+                Search
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <form class="flex-grow-1 d-none d-lg-block order-lg-2" role="search">
+          <div class="input-group">
+            <input
+              class="form-control"
+              type="search"
+              placeholder="Search for magical items..."
+              aria-label="Search"
+            />
+            <button class="btn btn-outline-primary" type="submit">
+              Search
+            </button>
+          </div>
+        </form>
+
+        <div class="order-2 order-lg-3 ms-auto">
+          <button type="button" class="btn btn-light">
+            <img src="images/user_resized.png" />
+            John Doe
+          </button>
+
+          <button type="button" class="btn btn-light">
+            <img src="images/cart_resized.png" />
+            Cart
+          </button>
+        </div>
+      </div>
+
+      <div class="header-bottom-section py-0">
+        <nav
+          class="navbar navbar-expand-lg justify-content-center py-0 d-none d-lg-block"
+        >
+          <div class="container-fluid">
+            <ul class="navbar-nav mx-auto gap-5">
+              <li class="nav-item">
+                <a class="nav-link" href="#">Potions</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Scrolls</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Orbs</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Artifacts</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Bundles</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Sale</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </div>
+
+    <div class="container my-5">
+      <h2 class="mb-4">My Profile</h2>
+      <hr class="mb-4" />
+
+      <div class="card border shadow mb-4">
+        <div class="card-header bg-white">
+          <h5 class="mb-0">Account Information</h5>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-6">
+              <p class="mb-2"><strong>Name:</strong> John Doe</p>
+              <p class="mb-2"><strong>Email:</strong> john@example.com</p>
+              <p class="mb-0"><strong>Phone:</strong> +123 234 567 890</p>
+            </div>
+            <div class="col-6">
+              <p class="mb-0"><strong>Address:</strong></p>
+              <p class="mb-0">123 Magic Street</p>
+              <p class="mb-0">Wizard City</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer bg-white">
+          <button class="btn btn-primary">Edit Profile</button>
+        </div>
+      </div>
+
+      <h4 class="mb-3">My Orders</h4>
+      <hr class="mb-3" />
+
+      <div
+        class="card border shadow mb-3 rounded-0"
+        style="border-radius: 0 !important"
+      >
+        <div class="card-body">
+          <div class="d-flex flex-column flex-lg-row align-items-start gap-3">
+            <div class="bg-light flex-shrink-0" style="height: 140px; width: 140px"></div>
+            <div class="d-flex flex-row flex-grow-1 justify-content-between w-100">
+              <div>
+                <h5 class="mb-1">Healing Potion</h5>
+                <p class="mb-2 text-muted">Order #1234</p>
+                <p class="mb-1"><strong>Quantity:</strong> 3</p>
+                <p class="mb-0"><strong>Price:</strong> 25 Gold</p>
+              </div>
+              <div class="text-end">
+                <p class="mb-1 text-muted">2024/3-15</p>
+                <p class="mb-1">Delivered</p>
+                <p class="mb-2 fw-bold">75 Gold</p>
+                <button class="btn btn-outline-primary">Review product</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="card border shadow mb-3 rounded-0"
+        style="border-radius: 0 !important"
+      >
+        <div class="card-body">
+          <div class="d-flex flex-column flex-lg-row align-items-start gap-3">
+            <div class="bg-light flex-shrink-0" style="height: 140px; width: 140px"></div>
+            <div class="d-flex flex-row flex-grow-1 justify-content-between w-100">
+              <div>
+                <h5 class="mb-1">Speed Potion</h5>
+                <p class="mb-2 text-muted">Order #1233</p>
+                <p class="mb-1"><strong>Quantity:</strong> 5</p>
+                <p class="mb-0"><strong>Price:</strong> 30 Gold</p>
+              </div>
+              <div class="text-end">
+                <p class="mb-1 text-muted">2024/3/10</p>
+                <p class="mb-1">Shipped</p>
+                <p class="mb-2 fw-bold">150 Gold</p>
+                <button class="btn btn-primary">Track Order</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="card border shadow mb-3 rounded-0"
+        style="border-radius: 0 !important"
+      >
+        <div class="card-body">
+          <div class="d-flex flex-column flex-lg-row align-items-start gap-3">
+            <div class="bg-light flex-shrink-0" style="height: 140px; width: 140px"></div>
+            <div class="d-flex flex-row flex-grow-1 justify-content-between w-100">
+              <div>
+                <h5 class="mb-1">Restoration Potion</h5>
+                <p class="mb-2 text-muted">Order #1232</p>
+                <p class="mb-1"><strong>Quantity:</strong> 4</p>
+                <p class="mb-0"><strong>Price:</strong> 50 Gold</p>
+              </div>
+              <div class="text-end">
+                <p class="mb-1 text-muted">2024/3/5</p>
+                <p class="mb-1">Processing</p>
+                <p class="mb-2 fw-bold">200 Gold</p>
+                <button class="btn btn-primary">Track Order</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="bg-light py-3 mt-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 col-md-3 mb-4 mb-md-0 pe-md-4">
+            <img src="images/logo.png" alt="Potion Spot" style="width: 200px" />
+          </div>
+          <div class="col-6 col-md-3">
+            <h5 class="mb-3">Information</h5>
+            <ul class="list-unstyled">
+              <li class="mb-2">
+                <a href="#" class="text-decoration-none text-dark"
+                  >Shipping info</a
+                >
+              </li>
+              <li class="mb-2">
+                <a href="#" class="text-decoration-none text-dark"
+                  >Terms of service</a
+                >
+              </li>
+              <li class="mb-2">
+                <a href="#" class="text-decoration-none text-dark"
+                  >Privacy policy</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-decoration-none text-dark"
+                  >Refund policy</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="col-6 col-md-3">
+            <h5 class="mb-3">Products</h5>
+            <ul class="list-unstyled">
+              <li class="mb-2">
+                <a href="#" class="text-decoration-none text-dark">Potions</a>
+              </li>
+              <li class="mb-2">
+                <a href="#" class="text-decoration-none text-dark">Scrolls</a>
+              </li>
+              <li class="mb-2">
+                <a href="#" class="text-decoration-none text-dark">Orbs</a>
+              </li>
+              <li>
+                <a href="#" class="text-decoration-none text-dark">Artifacts</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-6 col-md-3">
+            <h5 class="mb-3">Pages</h5>
+            <ul class="list-unstyled">
+              <li class="mb-2">
+                <a href="#" class="text-decoration-none text-dark">Home</a>
+              </li>
+              <li class="mb-2">
+                <a href="#" class="text-decoration-none text-dark">About</a>
+              </li>
+              <li>
+                <a href="#" class="text-decoration-none text-dark">Contact</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
