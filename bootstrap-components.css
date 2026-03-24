@@ -642,3 +642,8 @@
   margin-top: 4px;
   margin-bottom: 0;
 }
+
+.ps-payment-secure-link {
+  opacity: 0.6;
+  text-decoration: underline;
+}
