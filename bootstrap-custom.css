@@ -460,7 +460,6 @@ a:hover {
   }
 }
 
-/* Shop Layout */
 .shop-layout {
   padding-left: 280px;
 }
@@ -655,14 +654,21 @@ a:hover {
 }
 
 .shop-product-card {
-  flex: 0 0 350px;
-  max-width: 350px;
+  flex: 0 0 300px;
+  max-width: 300px;
 }
 
 .shop-product-card .card {
   height: 100%;
   display: flex;
   flex-direction: column;
+  border-radius: 0;
+  border-color: rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.2s;
+}
+
+.shop-product-card .card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .login-container {

@@ -52,7 +52,7 @@
           <form class="flex-grow-1" role="search">
             <div class="input-group">
               <input
-                class="form-control"
+                class="ps-input"
                 type="search"
                 placeholder="Search for magical items..."
                 aria-label="Search"
@@ -67,7 +67,7 @@
         <form class="flex-grow-1 d-none d-lg-block order-lg-2" role="search">
           <div class="input-group">
             <input
-              class="form-control"
+              class="ps-input"
               type="search"
               placeholder="Search for magical items..."
               aria-label="Search"
@@ -200,12 +200,19 @@
     <div class="container my-5">
       <h2 class="mb-4">New Products</h2>
       <hr class="mb-4" />
-      <div class="row g-4">
-        <div class="col-6 col-md-4 col-lg-3">
+      <div class="shop-products-container">
+        <div class="shop-product-card">
           <div class="card">
             <div class="card-body">
-              <div class="bg-light mb-3 rounded" style="height: 150px"></div>
-              <div class="d-flex justify-content-between align-items-center">
+              <img
+                src="images/potion-images/healing-potion.png"
+                alt="Healing Potion"
+                class="card-img-top mb-3"
+                style="height: 200px; object-fit: contain;"
+              />
+              <div
+                class="d-flex justify-content-between align-items-center"
+              >
                 <div class="text-start">
                   <h5 class="card-title mb-1">Healing Potion</h5>
                   <p class="card-text fs-5 mb-0">25 Gold</p>
@@ -215,98 +222,147 @@
             </div>
           </div>
         </div>
-        <div class="col-6 col-md-4 col-lg-3">
+        <div class="shop-product-card">
           <div class="card">
             <div class="card-body">
-              <div class="bg-light mb-3 rounded" style="height: 150px"></div>
-              <div class="d-flex justify-content-between align-items-center">
+              <img
+                src="images/potion-images/speed-potion.png"
+                alt="Speed Potion"
+                class="card-img-top mb-3"
+                style="height: 200px; object-fit: contain;"
+              />
+              <div
+                class="d-flex justify-content-between align-items-center"
+              >
                 <div class="text-start">
-                  <h5 class="card-title mb-1">Healing Potion</h5>
-                  <p class="card-text fs-5 mb-0">25 Gold</p>
+                  <h5 class="card-title mb-1">Speed Potion</h5>
+                  <p class="card-text fs-5 mb-0">30 Gold</p>
                 </div>
                 <button class="btn btn-primary">Buy</button>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-6 col-md-4 col-lg-3">
+        <div class="shop-product-card">
           <div class="card">
             <div class="card-body">
-              <div class="bg-light mb-3 rounded" style="height: 150px"></div>
-              <div class="d-flex justify-content-between align-items-center">
+              <img
+                src="images/potion-images/fireresistance-potion.png"
+                alt="Fire Resistance Potion"
+                class="card-img-top mb-3"
+                style="height: 200px; object-fit: contain;"
+              />
+              <div
+                class="d-flex justify-content-between align-items-center"
+              >
                 <div class="text-start">
-                  <h5 class="card-title mb-1">Healing Potion</h5>
-                  <p class="card-text fs-5 mb-0">25 Gold</p>
+                  <h5 class="card-title mb-1">Fire Resistance Potion</h5>
+                  <p class="card-text fs-5 mb-0">40 Gold</p>
                 </div>
                 <button class="btn btn-primary">Buy</button>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-6 col-md-4 col-lg-3">
+        <div class="shop-product-card">
           <div class="card">
             <div class="card-body">
-              <div class="bg-light mb-3 rounded" style="height: 150px"></div>
-              <div class="d-flex justify-content-between align-items-center">
+              <img
+                src="images/potion-images/restoration-potion.png"
+                alt="Restoration Potion"
+                class="card-img-top mb-3"
+                style="height: 200px; object-fit: contain;"
+              />
+              <div
+                class="d-flex justify-content-between align-items-center"
+              >
                 <div class="text-start">
-                  <h5 class="card-title mb-1">Healing Potion</h5>
-                  <p class="card-text fs-5 mb-0">25 Gold</p>
+                  <h5 class="card-title mb-1">Restoration Potion</h5>
+                  <p class="card-text fs-5 mb-0">35 Gold</p>
                 </div>
                 <button class="btn btn-primary">Buy</button>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-6 col-md-4 col-lg-3">
+        <div class="shop-product-card">
           <div class="card">
             <div class="card-body">
-              <div class="bg-light mb-3 rounded" style="height: 150px"></div>
-              <div class="d-flex justify-content-between align-items-center">
+              <img
+                src="images/potion-images/mana-potion.png"
+                alt="Mana Potion"
+                class="card-img-top mb-3"
+                style="height: 200px; object-fit: contain;"
+              />
+              <div
+                class="d-flex justify-content-between align-items-center"
+              >
                 <div class="text-start">
-                  <h5 class="card-title mb-1">Healing Potion</h5>
-                  <p class="card-text fs-5 mb-0">25 Gold</p>
+                  <h5 class="card-title mb-1">Mana Potion</h5>
+                  <p class="card-text fs-5 mb-0">20 Gold</p>
                 </div>
                 <button class="btn btn-primary">Buy</button>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-6 col-md-4 col-lg-3">
+        <div class="shop-product-card">
           <div class="card">
             <div class="card-body">
-              <div class="bg-light mb-3 rounded" style="height: 150px"></div>
-              <div class="d-flex justify-content-between align-items-center">
+              <img
+                src="images/potion-images/invisibility-potion.png"
+                alt="Invisibility Potion"
+                class="card-img-top mb-3"
+                style="height: 200px; object-fit: contain;"
+              />
+              <div
+                class="d-flex justify-content-between align-items-center"
+              >
                 <div class="text-start">
-                  <h5 class="card-title mb-1">Healing Potion</h5>
-                  <p class="card-text fs-5 mb-0">25 Gold</p>
+                  <h5 class="card-title mb-1">Invisibility Potion</h5>
+                  <p class="card-text fs-5 mb-0">50 Gold</p>
                 </div>
                 <button class="btn btn-primary">Buy</button>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-6 col-md-4 col-lg-3">
+        <div class="shop-product-card">
           <div class="card">
             <div class="card-body">
-              <div class="bg-light mb-3 rounded" style="height: 150px"></div>
-              <div class="d-flex justify-content-between align-items-center">
+              <img
+                src="images/potion-images/strength-potion.png"
+                alt="Strength Potion"
+                class="card-img-top mb-3"
+                style="height: 200px; object-fit: contain;"
+              />
+              <div
+                class="d-flex justify-content-between align-items-center"
+              >
                 <div class="text-start">
-                  <h5 class="card-title mb-1">Healing Potion</h5>
-                  <p class="card-text fs-5 mb-0">25 Gold</p>
+                  <h5 class="card-title mb-1">Strength Potion</h5>
+                  <p class="card-text fs-5 mb-0">45 Gold</p>
                 </div>
                 <button class="btn btn-primary">Buy</button>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-6 col-md-4 col-lg-3">
+        <div class="shop-product-card">
           <div class="card">
             <div class="card-body">
-              <div class="bg-light mb-3 rounded" style="height: 150px"></div>
-              <div class="d-flex justify-content-between align-items-center">
+              <img
+                src="images/potion-images/fortitude-potion.png"
+                alt="Fortitude Potion"
+                class="card-img-top mb-3"
+                style="height: 200px; object-fit: contain;"
+              />
+              <div
+                class="d-flex justify-content-between align-items-center"
+              >
                 <div class="text-start">
-                  <h5 class="card-title mb-1">Healing Potion</h5>
-                  <p class="card-text fs-5 mb-0">25 Gold</p>
+                  <h5 class="card-title mb-1">Fortitude Potion</h5>
+                  <p class="card-text fs-5 mb-0">55 Gold</p>
                 </div>
                 <button class="btn btn-primary">Buy</button>
               </div>
@@ -318,82 +374,91 @@
 
     <div class="container my-5">
       <h2 class="mb-4">Recommended for you</h2>
-      <div class="position-relative">
-        <div class="row g-4 justify-content-center">
-          <div class="col-6 col-md-3" style="min-width: 280px">
-            <div class="card border-0">
-              <div class="card-body">
-                <div class="bg-light mb-3 rounded" style="height: 200px"></div>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div>
-                    <h5 class="card-title mb-1">Speed</h5>
-                    <p class="card-text text-muted mb-0">Potion</p>
-                  </div>
-                  <button class="btn btn-primary">Learn more</button>
+      <div class="shop-products-container">
+        <div class="shop-product-card">
+          <div class="card">
+            <div class="card-body">
+              <img
+                src="images/potion-images/speed-potion.png"
+                alt="Speed Potion"
+                class="card-img-top mb-3"
+                style="height: 200px; object-fit: contain;"
+              />
+              <div
+                class="d-flex justify-content-between align-items-center"
+              >
+                <div class="text-start">
+                  <h5 class="card-title mb-1">Speed Potion</h5>
+                  <p class="card-text fs-5 mb-0">30 Gold</p>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-6 col-md-3" style="min-width: 280px">
-            <div class="card border-0">
-              <div class="card-body">
-                <div class="bg-light mb-3 rounded" style="height: 200px"></div>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div>
-                    <h5 class="card-title mb-1">Speed</h5>
-                    <p class="card-text text-muted mb-0">Potion</p>
-                  </div>
-                  <button class="btn btn-primary">Learn more</button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-6 col-md-3" style="min-width: 280px">
-            <div class="card border-0">
-              <div class="card-body">
-                <div class="bg-light mb-3 rounded" style="height: 200px"></div>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div>
-                    <h5 class="card-title mb-1">Speed</h5>
-                    <p class="card-text text-muted mb-0">Potion</p>
-                  </div>
-                  <button class="btn btn-primary">Learn more</button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-6 col-md-3" style="min-width: 280px">
-            <div class="card border-0">
-              <div class="card-body">
-                <div class="bg-light mb-3 rounded" style="height: 200px"></div>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div>
-                    <h5 class="card-title mb-1">Speed</h5>
-                    <p class="card-text text-muted mb-0">Potion</p>
-                  </div>
-                  <button class="btn btn-primary">Learn more</button>
-                </div>
+                <button class="btn btn-primary">Buy</button>
               </div>
             </div>
           </div>
         </div>
-
-        <button
-          class="btn btn-light position-absolute top-50 start-0 translate-middle-y border-0 shadow-sm"
-          style="left: -20px; z-index: 10"
-        >
-          <img src="images/arrow.png" alt="previous" style="width: 20px" />
-        </button>
-        <button
-          class="btn btn-light position-absolute top-50 end-0 border-0 shadow-sm"
-          style="right: -20px; transform: translateY(-50%); z-index: 10"
-        >
-          <img
-            src="images/arrow.png"
-            alt="next"
-            style="width: 20px; transform: rotate(180deg)"
-          />
-        </button>
+        <div class="shop-product-card">
+          <div class="card">
+            <div class="card-body">
+              <img
+                src="images/potion-images/healing-potion.png"
+                alt="Healing Potion"
+                class="card-img-top mb-3"
+                style="height: 200px; object-fit: contain;"
+              />
+              <div
+                class="d-flex justify-content-between align-items-center"
+              >
+                <div class="text-start">
+                  <h5 class="card-title mb-1">Healing Potion</h5>
+                  <p class="card-text fs-5 mb-0">25 Gold</p>
+                </div>
+                <button class="btn btn-primary">Buy</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="shop-product-card">
+          <div class="card">
+            <div class="card-body">
+              <img
+                src="images/potion-images/fireresistance-potion.png"
+                alt="Fire Resistance Potion"
+                class="card-img-top mb-3"
+                style="height: 200px; object-fit: contain;"
+              />
+              <div
+                class="d-flex justify-content-between align-items-center"
+              >
+                <div class="text-start">
+                  <h5 class="card-title mb-1">Fire Resistance Potion</h5>
+                  <p class="card-text fs-5 mb-0">40 Gold</p>
+                </div>
+                <button class="btn btn-primary">Buy</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="shop-product-card">
+          <div class="card">
+            <div class="card-body">
+              <img
+                src="images/potion-images/mana-potion.png"
+                alt="Mana Potion"
+                class="card-img-top mb-3"
+                style="height: 200px; object-fit: contain;"
+              />
+              <div
+                class="d-flex justify-content-between align-items-center"
+              >
+                <div class="text-start">
+                  <h5 class="card-title mb-1">Mana Potion</h5>
+                  <p class="card-text fs-5 mb-0">20 Gold</p>
+                </div>
+                <button class="btn btn-primary">Buy</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -441,7 +506,9 @@
                 <a href="#" class="text-decoration-none text-dark">Orbs</a>
               </li>
               <li>
-                <a href="#" class="text-decoration-none text-dark">Artifacts</a>
+                <a href="#" class="text-decoration-none text-dark"
+                  >Artifacts</a
+                >
               </li>
             </ul>
           </div>

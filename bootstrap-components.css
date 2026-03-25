@@ -194,6 +194,14 @@
   border: 2px solid transparent;
   overflow: hidden;
   display: block;
+  width: 100%;
+  height: auto;
+}
+
+.ps-gallery-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .ps-gallery-thumb:hover,
@@ -545,6 +553,44 @@
   margin-bottom: 4px;
 }
 
+/* Standard input styling - used across all forms */
+.ps-input {
+  display: block;
+  width: 100%;
+  height: 50px;
+  background-color: var(--ps-white);
+  border: 1px solid #e5e7eb;
+  border-radius: 0;
+  padding: 0 12px;
+  font-size: 16px;
+  color: #0f172a;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.ps-input:focus {
+  border-color: var(--ps-primary);
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15);
+}
+
+/* Input in input-group (e.g., search with button) - needs to work with flex layout */
+.input-group > .ps-input {
+  position: relative;
+  flex: 1 1 auto;
+  width: 1%;
+  min-width: 0;
+}
+
+.input-group > .ps-input:focus {
+  z-index: 5;
+}
+
+/* Categories dropdown button in mobile header - match search input height */
+.header-center-section .d-lg-none .dropdown-toggle {
+  height: 50px;
+}
+
+/* Checkout-specific input alias */
 .ps-checkout-input {
   display: block;
   width: 100%;
