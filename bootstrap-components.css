@@ -335,7 +335,7 @@
   width: 96px;
   height: 96px;
   flex-shrink: 0;
-  background-color: var(--ps-grey-300);
+  background-color: white;
   object-fit: contain;
 }
 
@@ -633,7 +633,7 @@
   width: 64px;
   height: 64px;
   flex-shrink: 0;
-  background-color: #f1f5f9;
+  background-color: white;
   border: 1px solid #e5e7eb;
   object-fit: contain;
 }
