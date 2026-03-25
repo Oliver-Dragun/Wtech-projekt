@@ -208,7 +208,7 @@
             </section>
 
             <!-- Shipping address -->
-            <section aria-labelledby="checkout-shipping-title">
+            <section class="mb-5" aria-labelledby="checkout-shipping-title">
               <div class="ps-checkout-section-heading">
                 <!-- Shipping icon -->
                 <svg
@@ -275,7 +275,7 @@
                 </div>
                 <div class="col-12 col-sm-6">
                   <label for="country" class="ps-checkout-label">Country</label>
-                  <select class="ps-checkout-input" id="country" style="appearance: auto; -webkit-appearance: auto;">
+                  <select class="ps-checkout-input ps-checkout-select" id="country">
                     <option>Slovakia</option>
                     <option>Czech Republic</option>
                     <option>Austria</option>
@@ -285,6 +285,39 @@
                     <option>Other</option>
                   </select>
                 </div>
+              </div>
+            </section>
+
+            <!-- Delivery method -->
+            <section class="ps-checkout-delivery-section" aria-labelledby="checkout-delivery-title">
+              <div class="ps-checkout-section-heading">
+                <!-- Delivery icon -->
+                <svg
+                  class="ps-checkout-section-heading-icon"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                  width="22"
+                  height="16"
+                >
+                  <rect x="1" y="3" width="15" height="13" />
+                  <polygon points="16 8 20 8 23 11 23 16 16 16 16 8" />
+                  <circle cx="5.5" cy="18.5" r="2.5" />
+                  <circle cx="18.5" cy="18.5" r="2.5" />
+                </svg>
+                <h2 id="checkout-delivery-title" class="ps-checkout-section-title">Delivery Method</h2>
+              </div>
+
+              <div>
+                <label for="deliveryMethod" class="ps-checkout-label">Delivery Method</label>
+                <select class="ps-checkout-input ps-checkout-select" id="deliveryMethod">
+                  <option>Courier delivery - 5 Gold</option>
+                </select>
               </div>
             </section>
 

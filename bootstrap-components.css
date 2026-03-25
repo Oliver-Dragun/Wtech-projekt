@@ -610,6 +610,15 @@
   box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15);
 }
 
+.ps-checkout-select {
+  appearance: auto;
+  -webkit-appearance: auto;
+}
+
+.ps-checkout-delivery-section {
+  margin-top: 48px;
+}
+
 .ps-checkout-summary-card {
   background: var(--ps-white);
   border: 1px solid #f3f4f6;
