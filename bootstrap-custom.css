@@ -647,9 +647,9 @@ a:hover {
 }
 
 .shop-products-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 300px); 
+  justify-content: center; 
   gap: 24px;
 }
 
