@@ -10,28 +10,22 @@
     <script src="bootstrap/js/bootstrap.bundle.js"></script>
   </head>
   <body>
-    <div class="header shadow">
-      <div
-        class="ps-banner-stripes d-flex justify-content-between align-items-center px-1 px-lg-4"
-      >
-        <div class="banner-left-buttons d-flex gap-2 gap-lg-3">
+    <div class="ps-header">
+      <div class="ps-banner-stripes ps-header-banner">
+        <div class="ps-header-banner-left">
           <button type="button" class="btn btn-secondary">Contact</button>
           <button type="button" class="btn btn-secondary">About</button>
         </div>
 
-        <button type="button" class="btn btn-secondary">
+        <button type="button" class="btn btn-secondary ps-header-banner-email">
           info@potionspot.com
         </button>
       </div>
 
-      <div
-        class="header-center-section d-flex flex-wrap align-items-center py-2 px-2 px-lg-5 gap-2 gap-lg-5"
-      >
-        <img class="logo order-1" src="images/logo_resized.png" />
+      <div class="ps-header-main">
+        <img class="ps-header-logo" src="images/logo_resized.png" />
 
-        <div
-          class="d-flex w-100 gap-2 order-3 order-lg-2 d-lg-none flex-column"
-        >
+        <div class="ps-header-mobile-controls">
           <form class="w-100" role="search">
             <div class="input-group">
               <input
@@ -65,7 +59,7 @@
           </div>
         </div>
 
-        <form class="flex-grow-1 d-none d-lg-block order-lg-2" role="search">
+        <form class="ps-header-search" role="search">
           <div class="input-group">
             <input
               class="ps-input"
@@ -79,7 +73,7 @@
           </div>
         </form>
 
-        <div class="order-2 order-lg-3 ms-auto d-none d-lg-flex gap-2">
+        <div class="ps-header-user-buttons">
           <button type="button" class="btn btn-light">
             <img src="images/user_resized.png" />
             John Doe
@@ -91,7 +85,7 @@
           </button>
         </div>
 
-        <div class="dropdown d-lg-none order-2 order-lg-3 ms-auto">
+        <div class="dropdown ps-header-mobile-menu">
           <button
             class="btn btn-light dropdown-toggle"
             type="button"
@@ -120,32 +114,28 @@
         </div>
       </div>
 
-      <div class="header-bottom-section py-0">
-        <nav
-          class="navbar navbar-expand-lg justify-content-center py-0 d-none d-lg-block"
-        >
-          <div class="container-fluid">
-            <ul class="navbar-nav mx-auto gap-5">
-              <li class="nav-item">
-                <a class="nav-link" href="#">Potions</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Scrolls</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Orbs</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Artifacts</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Bundles</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Sale</a>
-              </li>
-            </ul>
-          </div>
+      <div class="ps-header-nav">
+        <nav class="navbar navbar-expand-lg py-0">
+          <ul class="navbar-nav mx-auto gap-5">
+            <li class="nav-item">
+              <a class="nav-link" href="#">Potions</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Scrolls</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Orbs</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Artifacts</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Bundles</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Sale</a>
+            </li>
+          </ul>
         </nav>
       </div>
     </div>

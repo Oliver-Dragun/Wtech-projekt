@@ -9,27 +9,22 @@
     <link rel="stylesheet" href="bootstrap-components.css" />
   </head>
   <body>
-    <div class="header shadow">
-      <div
-        class="ps-banner-stripes d-flex justify-content-between align-items-center px-1 px-lg-4"
-      >
-        <div class="banner-left-buttons d-flex gap-2 gap-lg-3">
+    <div class="ps-header">
+      <div class="ps-banner-stripes ps-header-banner">
+        <div class="ps-header-banner-left">
           <button type="button" class="btn btn-secondary">Contact</button>
           <button type="button" class="btn btn-secondary">About</button>
         </div>
 
-        <button type="button" class="btn btn-secondary">
+        <button type="button" class="btn btn-secondary ps-header-banner-email">
           info@potionspot.com
         </button>
       </div>
 
-      <div
-        class="header-center-section d-flex flex-wrap align-items-center py-2 px-2 px-lg-5 gap-2 gap-lg-5"
-      >
-        <img class="logo order-1" src="images/logo_resized.png" />
+      <div class="ps-header-main">
+        <img class="ps-header-logo" src="images/logo_resized.png" />
 
-        <!-- Mobile: Search + Categories dropdown -->
-        <div class="d-flex w-100 gap-2 order-3 order-lg-2 d-lg-none flex-column">
+        <div class="ps-header-mobile-controls">
           <form class="w-100" role="search">
             <div class="input-group">
               <input
@@ -53,9 +48,7 @@
               Categories
             </button>
             <ul class="dropdown-menu">
-              <li>
-                <a class="dropdown-item" href="shop-potions.html">Potions</a>
-              </li>
+              <li><a class="dropdown-item" href="#">Potions</a></li>
               <li><a class="dropdown-item" href="#">Scrolls</a></li>
               <li><a class="dropdown-item" href="#">Orbs</a></li>
               <li><a class="dropdown-item" href="#">Artifacts</a></li>
@@ -65,8 +58,7 @@
           </div>
         </div>
 
-        <!-- Desktop: Search bar -->
-        <form class="flex-grow-1 d-none d-lg-block order-lg-2" role="search">
+        <form class="ps-header-search" role="search">
           <div class="input-group">
             <input
               class="ps-input"
@@ -80,8 +72,7 @@
           </div>
         </form>
 
-        <!-- Desktop: Profile and Cart buttons -->
-        <div class="order-2 order-lg-3 ms-auto d-none d-lg-flex gap-2">
+        <div class="ps-header-user-buttons">
           <button type="button" class="btn btn-light">
             <img src="images/user_resized.png" />
             John Doe
@@ -93,8 +84,7 @@
           </button>
         </div>
 
-        <!-- Mobile: Profile and Cart dropdown -->
-        <div class="dropdown d-lg-none order-2 order-lg-3 ms-auto">
+        <div class="dropdown ps-header-mobile-menu">
           <button
             class="btn btn-light dropdown-toggle"
             type="button"
@@ -106,13 +96,16 @@
           <ul class="dropdown-menu dropdown-menu-end">
             <li>
               <a class="dropdown-item d-flex align-items-center gap-2" href="#">
-                <img src="images/user_resized.png" style="width: 20px;" />
+                <img src="images/user_resized.png" style="width: 20px" />
                 John Doe
               </a>
             </li>
             <li>
-              <a class="dropdown-item d-flex align-items-center gap-2" href="cart.html">
-                <img src="images/cart_resized.png" style="width: 20px;" />
+              <a
+                class="dropdown-item d-flex align-items-center gap-2"
+                href="cart.html"
+              >
+                <img src="images/cart_resized.png" style="width: 20px" />
                 Cart
               </a>
             </li>
@@ -120,32 +113,28 @@
         </div>
       </div>
 
-      <div class="header-bottom-section py-0">
-        <nav
-          class="navbar navbar-expand-lg justify-content-center py-0 d-none d-lg-block"
-        >
-          <div class="container-fluid">
-            <ul class="navbar-nav mx-auto gap-5">
-              <li class="nav-item">
-                <a class="nav-link" href="#">Potions</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Scrolls</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Orbs</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Artifacts</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Bundles</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Sale</a>
-              </li>
-            </ul>
-          </div>
+      <div class="ps-header-nav">
+        <nav class="navbar navbar-expand-lg py-0">
+          <ul class="navbar-nav mx-auto gap-5">
+            <li class="nav-item">
+              <a class="nav-link" href="#">Potions</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Scrolls</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Orbs</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Artifacts</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Bundles</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Sale</a>
+            </li>
+          </ul>
         </nav>
       </div>
     </div>
@@ -153,71 +142,46 @@
     <div class="container my-4">
       <div class="row g-3">
         <div class="col-12 col-lg-8">
-          <div
-            class="card h-100 text-dark border-0"
-            style="
-              min-height: 350px;
-              background: radial-gradient(
-                50% 50% at 63% 51%,
-                rgba(245, 229, 215, 1) 0%,
-                rgba(202, 178, 158, 1) 90%
-              );
-            "
-          >
-            <div
-              class="card-body d-flex flex-column justify-content-center p-4"
-            >
-              <div class="text-muted opacity-75 mb-3 fs-5">Exclusive offer</div>
-              <h2 class="card-title display-6">Potion Brewing Starter Kit</h2>
-              <p class="card-text fs-5">
+          <div class="ps-hero-card">
+            <div class="ps-hero-card-body">
+              <img
+                src="images/starterkit.png"
+                alt="Potion Brewing Starter Kit"
+                class="ps-hero-card-img"
+              />
+              <div class="ps-hero-card-label">Exclusive offer</div>
+              <h2 class="ps-hero-card-title">Potion Brewing Starter Kit</h2>
+              <p class="ps-hero-card-text">
                 Everything you need to start your alchemical journey
               </p>
-              <div class="d-flex flex-column align-items-start gap-3 mt-3">
-                <span
-                  class="bg-warning text-dark rounded-circle d-flex align-items-center justify-content-center"
-                  style="
-                    width: 100px;
-                    height: 100px;
-                    font-size: 2rem;
-                    font-weight: bold;
-                  "
-                >
-                  -20%
-                </span>
-                <button class="btn btn-primary btn-lg">Learn more</button>
+              <div class="ps-hero-actions">
+                <span class="ps-discount-badge">-20%</span>
+                <button class="btn btn-primary btn-lg align-self-start">
+                  Learn more
+                </button>
               </div>
             </div>
           </div>
         </div>
 
         <div class="col-12 col-lg-4 d-flex flex-column gap-3">
-          <div
-            class="card text-dark h-100 border-0"
-            style="min-height: 170px; background-color: #ffe4e4"
-          >
-            <div
-              class="card-body d-flex flex-column justify-content-center p-3"
-            >
-              <div class="text-muted opacity-75 mb-2">30% Stronger</div>
-              <h4 class="card-title">Restoration Potion</h4>
-              <p class="card-text">Restore your vitality instantly</p>
-              <button class="btn btn-primary mt-2 align-self-start">
+          <div class="ps-side-offer-card">
+            <div class="ps-side-offer-card-body">
+              <div class="ps-side-offer-label">30% Stronger</div>
+              <h4 class="ps-side-offer-title">Restoration Potion</h4>
+              <p class="ps-side-offer-text">Restore your vitality instantly</p>
+              <button class="btn btn-primary mt-2 align-self-start ps-btn-buy">
                 Buy now!
               </button>
             </div>
           </div>
 
-          <div
-            class="card text-dark h-100 border-0"
-            style="min-height: 170px; background-color: #ffe4e4"
-          >
-            <div
-              class="card-body d-flex flex-column justify-content-center p-3"
-            >
-              <div class="text-muted opacity-75 mb-2">New recipe</div>
-              <h4 class="card-title">Healing Potion</h4>
-              <p class="card-text">Advanced healing formula</p>
-              <button class="btn btn-primary mt-2 align-self-start">
+          <div class="ps-side-offer-card">
+            <div class="ps-side-offer-card-body">
+              <div class="ps-side-offer-label">New recipe</div>
+              <h4 class="ps-side-offer-title">Healing Potion</h4>
+              <p class="ps-side-offer-text">Advanced healing formula</p>
+              <button class="btn btn-primary mt-2 align-self-start ps-btn-buy">
                 Buy now!
               </button>
             </div>
@@ -227,174 +191,134 @@
     </div>
 
     <div class="container my-5">
-      <h2 class="mb-4">New Products</h2>
-      <hr class="mb-4" />
-      <div class="shop-products-container">
-        <div class="shop-product-card">
-          <div class="card">
-            <div class="card-body">
-              <img
-                src="images/potion-images/healing-potion.png"
-                alt="Healing Potion"
-                class="card-img-top mb-3"
-                style="height: 200px; object-fit: contain;"
-              />
-              <div
-                class="d-flex justify-content-between align-items-center"
-              >
-                <div class="text-start">
-                  <h5 class="card-title mb-1">Healing Potion</h5>
-                  <p class="card-text fs-5 mb-0">25 Gold</p>
-                </div>
-                <button class="btn btn-primary">Buy</button>
+      <h2 class="ps-section-title">New Products</h2>
+      <hr class="ps-section-divider" />
+      <div class="ps-products-container">
+        <div class="ps-product-card">
+          <div class="ps-product-card-body">
+            <img
+              src="images/potion-images/healing-potion.png"
+              alt="Healing Potion"
+              class="ps-product-img"
+            />
+            <div class="ps-product-info">
+              <div>
+                <h5 class="ps-product-title">Healing Potion</h5>
+                <p class="ps-product-price">25 Gold</p>
               </div>
+              <button class="btn btn-primary">Buy</button>
             </div>
           </div>
         </div>
-        <div class="shop-product-card">
-          <div class="card">
-            <div class="card-body">
-              <img
-                src="images/potion-images/speed-potion.png"
-                alt="Speed Potion"
-                class="card-img-top mb-3"
-                style="height: 200px; object-fit: contain;"
-              />
-              <div
-                class="d-flex justify-content-between align-items-center"
-              >
-                <div class="text-start">
-                  <h5 class="card-title mb-1">Speed Potion</h5>
-                  <p class="card-text fs-5 mb-0">30 Gold</p>
-                </div>
-                <button class="btn btn-primary">Buy</button>
+        <div class="ps-product-card">
+          <div class="ps-product-card-body">
+            <img
+              src="images/potion-images/speed-potion.png"
+              alt="Speed Potion"
+              class="ps-product-img"
+            />
+            <div class="ps-product-info">
+              <div>
+                <h5 class="ps-product-title">Speed Potion</h5>
+                <p class="ps-product-price">30 Gold</p>
               </div>
+              <button class="btn btn-primary">Buy</button>
             </div>
           </div>
         </div>
-        <div class="shop-product-card">
-          <div class="card">
-            <div class="card-body">
-              <img
-                src="images/potion-images/fireresistance-potion.png"
-                alt="Fire Resistance Potion"
-                class="card-img-top mb-3"
-                style="height: 200px; object-fit: contain;"
-              />
-              <div
-                class="d-flex justify-content-between align-items-center"
-              >
-                <div class="text-start">
-                  <h5 class="card-title mb-1">Fire Resistance Potion</h5>
-                  <p class="card-text fs-5 mb-0">40 Gold</p>
-                </div>
-                <button class="btn btn-primary">Buy</button>
+        <div class="ps-product-card">
+          <div class="ps-product-card-body">
+            <img
+              src="images/potion-images/fireresistance-potion.png"
+              alt="Fire Resistance Potion"
+              class="ps-product-img"
+            />
+            <div class="ps-product-info">
+              <div>
+                <h5 class="ps-product-title">Fire Resistance Potion</h5>
+                <p class="ps-product-price">40 Gold</p>
               </div>
+              <button class="btn btn-primary">Buy</button>
             </div>
           </div>
         </div>
-        <div class="shop-product-card">
-          <div class="card">
-            <div class="card-body">
-              <img
-                src="images/potion-images/restoration-potion.png"
-                alt="Restoration Potion"
-                class="card-img-top mb-3"
-                style="height: 200px; object-fit: contain;"
-              />
-              <div
-                class="d-flex justify-content-between align-items-center"
-              >
-                <div class="text-start">
-                  <h5 class="card-title mb-1">Restoration Potion</h5>
-                  <p class="card-text fs-5 mb-0">35 Gold</p>
-                </div>
-                <button class="btn btn-primary">Buy</button>
+        <div class="ps-product-card">
+          <div class="ps-product-card-body">
+            <img
+              src="images/potion-images/restoration-potion.png"
+              alt="Restoration Potion"
+              class="ps-product-img"
+            />
+            <div class="ps-product-info">
+              <div>
+                <h5 class="ps-product-title">Restoration Potion</h5>
+                <p class="ps-product-price">35 Gold</p>
               </div>
+              <button class="btn btn-primary">Buy</button>
             </div>
           </div>
         </div>
-        <div class="shop-product-card">
-          <div class="card">
-            <div class="card-body">
-              <img
-                src="images/potion-images/mana-potion.png"
-                alt="Mana Potion"
-                class="card-img-top mb-3"
-                style="height: 200px; object-fit: contain;"
-              />
-              <div
-                class="d-flex justify-content-between align-items-center"
-              >
-                <div class="text-start">
-                  <h5 class="card-title mb-1">Mana Potion</h5>
-                  <p class="card-text fs-5 mb-0">20 Gold</p>
-                </div>
-                <button class="btn btn-primary">Buy</button>
+        <div class="ps-product-card">
+          <div class="ps-product-card-body">
+            <img
+              src="images/potion-images/mana-potion.png"
+              alt="Mana Potion"
+              class="ps-product-img"
+            />
+            <div class="ps-product-info">
+              <div>
+                <h5 class="ps-product-title">Mana Potion</h5>
+                <p class="ps-product-price">20 Gold</p>
               </div>
+              <button class="btn btn-primary">Buy</button>
             </div>
           </div>
         </div>
-        <div class="shop-product-card">
-          <div class="card">
-            <div class="card-body">
-              <img
-                src="images/potion-images/invisibility-potion.png"
-                alt="Invisibility Potion"
-                class="card-img-top mb-3"
-                style="height: 200px; object-fit: contain;"
-              />
-              <div
-                class="d-flex justify-content-between align-items-center"
-              >
-                <div class="text-start">
-                  <h5 class="card-title mb-1">Invisibility Potion</h5>
-                  <p class="card-text fs-5 mb-0">50 Gold</p>
-                </div>
-                <button class="btn btn-primary">Buy</button>
+        <div class="ps-product-card">
+          <div class="ps-product-card-body">
+            <img
+              src="images/potion-images/invisibility-potion.png"
+              alt="Invisibility Potion"
+              class="ps-product-img"
+            />
+            <div class="ps-product-info">
+              <div>
+                <h5 class="ps-product-title">Invisibility Potion</h5>
+                <p class="ps-product-price">50 Gold</p>
               </div>
+              <button class="btn btn-primary">Buy</button>
             </div>
           </div>
         </div>
-        <div class="shop-product-card">
-          <div class="card">
-            <div class="card-body">
-              <img
-                src="images/potion-images/strength-potion.png"
-                alt="Strength Potion"
-                class="card-img-top mb-3"
-                style="height: 200px; object-fit: contain;"
-              />
-              <div
-                class="d-flex justify-content-between align-items-center"
-              >
-                <div class="text-start">
-                  <h5 class="card-title mb-1">Strength Potion</h5>
-                  <p class="card-text fs-5 mb-0">45 Gold</p>
-                </div>
-                <button class="btn btn-primary">Buy</button>
+        <div class="ps-product-card">
+          <div class="ps-product-card-body">
+            <img
+              src="images/potion-images/strength-potion.png"
+              alt="Strength Potion"
+              class="ps-product-img"
+            />
+            <div class="ps-product-info">
+              <div>
+                <h5 class="ps-product-title">Strength Potion</h5>
+                <p class="ps-product-price">45 Gold</p>
               </div>
+              <button class="btn btn-primary">Buy</button>
             </div>
           </div>
         </div>
-        <div class="shop-product-card">
-          <div class="card">
-            <div class="card-body">
-              <img
-                src="images/potion-images/fortitude-potion.png"
-                alt="Fortitude Potion"
-                class="card-img-top mb-3"
-                style="height: 200px; object-fit: contain;"
-              />
-              <div
-                class="d-flex justify-content-between align-items-center"
-              >
-                <div class="text-start">
-                  <h5 class="card-title mb-1">Fortitude Potion</h5>
-                  <p class="card-text fs-5 mb-0">55 Gold</p>
-                </div>
-                <button class="btn btn-primary">Buy</button>
+        <div class="ps-product-card">
+          <div class="ps-product-card-body">
+            <img
+              src="images/potion-images/fortitude-potion.png"
+              alt="Fortitude Potion"
+              class="ps-product-img"
+            />
+            <div class="ps-product-info">
+              <div>
+                <h5 class="ps-product-title">Fortitude Potion</h5>
+                <p class="ps-product-price">55 Gold</p>
               </div>
+              <button class="btn btn-primary">Buy</button>
             </div>
           </div>
         </div>
@@ -402,89 +326,69 @@
     </div>
 
     <div class="container my-5">
-      <h2 class="mb-4">Recommended for you</h2>
-      <div class="shop-products-container">
-        <div class="shop-product-card">
-          <div class="card">
-            <div class="card-body">
-              <img
-                src="images/potion-images/speed-potion.png"
-                alt="Speed Potion"
-                class="card-img-top mb-3"
-                style="height: 200px; object-fit: contain;"
-              />
-              <div
-                class="d-flex justify-content-between align-items-center"
-              >
-                <div class="text-start">
-                  <h5 class="card-title mb-1">Speed Potion</h5>
-                  <p class="card-text fs-5 mb-0">30 Gold</p>
-                </div>
-                <button class="btn btn-primary">Buy</button>
+      <h2 class="ps-section-title">Recommended for you</h2>
+      <div class="ps-products-container">
+        <div class="ps-product-card">
+          <div class="ps-product-card-body">
+            <img
+              src="images/potion-images/speed-potion.png"
+              alt="Speed Potion"
+              class="ps-product-img"
+            />
+            <div class="ps-product-info">
+              <div>
+                <h5 class="ps-product-title">Speed Potion</h5>
+                <p class="ps-product-price">30 Gold</p>
               </div>
+              <button class="btn btn-primary">Buy</button>
             </div>
           </div>
         </div>
-        <div class="shop-product-card">
-          <div class="card">
-            <div class="card-body">
-              <img
-                src="images/potion-images/healing-potion.png"
-                alt="Healing Potion"
-                class="card-img-top mb-3"
-                style="height: 200px; object-fit: contain;"
-              />
-              <div
-                class="d-flex justify-content-between align-items-center"
-              >
-                <div class="text-start">
-                  <h5 class="card-title mb-1">Healing Potion</h5>
-                  <p class="card-text fs-5 mb-0">25 Gold</p>
-                </div>
-                <button class="btn btn-primary">Buy</button>
+        <div class="ps-product-card">
+          <div class="ps-product-card-body">
+            <img
+              src="images/potion-images/healing-potion.png"
+              alt="Healing Potion"
+              class="ps-product-img"
+            />
+            <div class="ps-product-info">
+              <div>
+                <h5 class="ps-product-title">Healing Potion</h5>
+                <p class="ps-product-price">25 Gold</p>
               </div>
+              <button class="btn btn-primary">Buy</button>
             </div>
           </div>
         </div>
-        <div class="shop-product-card">
-          <div class="card">
-            <div class="card-body">
-              <img
-                src="images/potion-images/fireresistance-potion.png"
-                alt="Fire Resistance Potion"
-                class="card-img-top mb-3"
-                style="height: 200px; object-fit: contain;"
-              />
-              <div
-                class="d-flex justify-content-between align-items-center"
-              >
-                <div class="text-start">
-                  <h5 class="card-title mb-1">Fire Resistance Potion</h5>
-                  <p class="card-text fs-5 mb-0">40 Gold</p>
-                </div>
-                <button class="btn btn-primary">Buy</button>
+        <div class="ps-product-card">
+          <div class="ps-product-card-body">
+            <img
+              src="images/potion-images/fireresistance-potion.png"
+              alt="Fire Resistance Potion"
+              class="ps-product-img"
+            />
+            <div class="ps-product-info">
+              <div>
+                <h5 class="ps-product-title">Fire Resistance Potion</h5>
+                <p class="ps-product-price">40 Gold</p>
               </div>
+              <button class="btn btn-primary">Buy</button>
             </div>
           </div>
         </div>
-        <div class="shop-product-card">
-          <div class="card">
-            <div class="card-body">
-              <img
-                src="images/potion-images/mana-potion.png"
-                alt="Mana Potion"
-                class="card-img-top mb-3"
-                style="height: 200px; object-fit: contain;"
-              />
-              <div
-                class="d-flex justify-content-between align-items-center"
-              >
-                <div class="text-start">
-                  <h5 class="card-title mb-1">Mana Potion</h5>
-                  <p class="card-text fs-5 mb-0">20 Gold</p>
-                </div>
-                <button class="btn btn-primary">Buy</button>
+        <div class="ps-product-card">
+          <div class="ps-product-card-body">
+            <img
+              src="images/potion-images/mana-potion.png"
+              alt="Mana Potion"
+              class="ps-product-img"
+            />
+            <div class="ps-product-info">
+              <div>
+                <h5 class="ps-product-title">Mana Potion</h5>
+                <p class="ps-product-price">20 Gold</p>
               </div>
+              <button class="btn btn-primary">Buy</button>
             </div>
           </div>
         </div>
@@ -535,9 +439,7 @@
                 <a href="#" class="text-decoration-none text-dark">Orbs</a>
               </li>
               <li>
-                <a href="#" class="text-decoration-none text-dark"
-                  >Artifacts</a
-                >
+                <a href="#" class="text-decoration-none text-dark">Artifacts</a>
               </li>
             </ul>
           </div>

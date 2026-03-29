@@ -513,6 +513,178 @@
   color: var(--ps-primary);
 }
 
+/* INDEX PAGE */
+
+.ps-section-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--ps-black);
+  margin-bottom: 16px;
+}
+
+.ps-section-divider {
+  border: none;
+  border-bottom: 2px solid #e5e7eb;
+  margin-bottom: 24px;
+}
+
+.ps-hero-card {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  min-height: 350px;
+  background: radial-gradient(
+    50% 50% at 63% 51%,
+    rgba(245, 229, 215, 1) 0%,
+    rgba(202, 178, 158, 1) 90%
+  );
+}
+
+.ps-hero-card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 24px;
+  height: 100%;
+  position: relative;
+}
+
+.ps-hero-card-img {
+  position: absolute;
+  right: 24px;
+  bottom: 24px;
+  max-width: 40%;
+  max-height: 80%;
+  object-fit: contain;
+}
+
+.ps-hero-card-label {
+  font-size: 20px;
+  color: rgba(0, 0, 0, 0.6);
+  margin-bottom: 12px;
+}
+
+.ps-hero-card-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--ps-black);
+  margin-bottom: 12px;
+}
+
+.ps-hero-card-text {
+  font-size: 20px;
+  color: var(--ps-black);
+  margin-bottom: 12px;
+}
+
+.ps-hero-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.ps-discount-badge {
+  background-color: #fef08a;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: bold;
+  color: var(--ps-black);
+}
+
+.ps-side-offer-card {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  min-height: 170px;
+  background-color: #ffe4e4;
+}
+
+.ps-side-offer-card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 12px;
+  height: 100%;
+}
+
+.ps-side-offer-label {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.6);
+  margin-bottom: 8px;
+}
+
+.ps-side-offer-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--ps-black);
+  margin-bottom: 4px;
+}
+
+.ps-side-offer-text {
+  font-size: 16px;
+  color: var(--ps-black);
+  margin-bottom: 8px;
+}
+
+.ps-products-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 24px;
+}
+
+.ps-product-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  overflow: hidden;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+  background: var(--ps-white);
+}
+
+.ps-product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.ps-product-card-body {
+  padding: 16px;
+}
+
+.ps-product-img {
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+  background-color: var(--ps-white);
+  margin-bottom: 12px;
+}
+
+.ps-product-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ps-product-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ps-black);
+  margin-bottom: 4px;
+}
+
+.ps-product-price {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--ps-black);
+  margin-bottom: 0;
+}
+
 /* CHECKOUT PAGE */
 
 .ps-checkout-section-heading {
@@ -686,4 +858,219 @@
 .ps-payment-secure-link {
   opacity: 0.6;
   text-decoration: underline;
+}
+
+/* ADMIN PAGE */
+
+.ps-admin-header {
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.ps-admin-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.ps-admin-filter-section {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .ps-admin-filter-section {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.ps-admin-product-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ps-admin-product-card {
+  border-radius: 0;
+  border-color: rgba(0, 0, 0, 0.6);
+}
+
+.ps-admin-product-body {
+  display: flex;
+  gap: 12px;
+}
+
+.ps-admin-product-img {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.ps-admin-product-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.ps-admin-product-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.ps-admin-product-info {
+  flex: 1;
+}
+
+.ps-admin-product-id {
+  font-size: 14px;
+  color: #6b7280;
+  margin: 0 0 8px 0;
+}
+
+.ps-admin-product-details {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.ps-admin-product-price {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0 0 8px 0;
+}
+
+.ps-admin-product-stock {
+  font-size: 14px;
+  color: #6b7280;
+  margin: 0;
+}
+
+.ps-admin-product-actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* HEADER STYLES */
+
+.ps-header {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.ps-header-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 4px;
+}
+
+@media (min-width: 992px) {
+  .ps-header-banner {
+    padding: 0 16px;
+  }
+}
+
+.ps-header-banner-left {
+  display: flex;
+  gap: 8px;
+}
+
+@media (min-width: 992px) {
+  .ps-header-banner-left {
+    gap: 12px;
+  }
+}
+
+.ps-header-banner-email {
+  display: none;
+}
+
+@media (min-width: 992px) {
+  .ps-header-banner-email {
+    display: block;
+  }
+}
+
+.ps-header-main {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 8px 8px;
+  gap: 8px;
+}
+
+@media (min-width: 992px) {
+  .ps-header-main {
+    padding: 8px 20px;
+    gap: 20px;
+  }
+}
+
+.ps-header-logo {
+  width: 150px;
+}
+
+@media (min-width: 992px) {
+  .ps-header-logo {
+    width: 211px;
+  }
+}
+
+.ps-header-mobile-controls {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 8px;
+  order: 3;
+}
+
+@media (min-width: 992px) {
+  .ps-header-mobile-controls {
+    display: none;
+  }
+}
+
+.ps-header-search {
+  display: none;
+  flex-grow: 1;
+}
+
+@media (min-width: 992px) {
+  .ps-header-search {
+    display: block;
+  }
+}
+
+.ps-header-user-buttons {
+  display: none;
+  gap: 8px;
+  margin-left: auto;
+}
+
+@media (min-width: 992px) {
+  .ps-header-user-buttons {
+    display: flex;
+  }
+}
+
+.ps-header-mobile-menu {
+  display: flex;
+  margin-left: auto;
+}
+
+@media (min-width: 992px) {
+  .ps-header-mobile-menu {
+    display: none;
+  }
+}
+
+.ps-header-nav {
+  display: none;
+}
+
+@media (min-width: 992px) {
+  .ps-header-nav {
+    display: block;
+  }
 }
