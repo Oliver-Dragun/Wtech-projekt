@@ -28,7 +28,22 @@
       >
         <img class="logo order-1" src="images/logo_resized.png" />
 
-        <div class="d-flex w-100 gap-2 order-3 order-lg-2 d-lg-none">
+        <div
+          class="d-flex w-100 gap-2 order-3 order-lg-2 d-lg-none flex-column"
+        >
+          <form class="w-100" role="search">
+            <div class="input-group">
+              <input
+                class="ps-input"
+                type="search"
+                placeholder="Search for magical items..."
+                aria-label="Search"
+              />
+              <button class="btn btn-outline-primary" type="submit">
+                Search
+              </button>
+            </div>
+          </form>
           <div class="dropdown">
             <button
               class="btn btn-outline-primary dropdown-toggle"
@@ -39,9 +54,7 @@
               Categories
             </button>
             <ul class="dropdown-menu">
-              <li>
-                <a class="dropdown-item" href="shop-potions.html">Potions</a>
-              </li>
+              <li><a class="dropdown-item" href="#">Potions</a></li>
               <li><a class="dropdown-item" href="#">Scrolls</a></li>
               <li><a class="dropdown-item" href="#">Orbs</a></li>
               <li><a class="dropdown-item" href="#">Artifacts</a></li>
@@ -49,25 +62,12 @@
               <li><a class="dropdown-item" href="#">Sale</a></li>
             </ul>
           </div>
-          <form class="flex-grow-1" role="search">
-            <div class="input-group">
-              <input
-                class="form-control"
-                type="search"
-                placeholder="Search for magical items..."
-                aria-label="Search"
-              />
-              <button class="btn btn-outline-primary" type="submit">
-                Search
-              </button>
-            </div>
-          </form>
         </div>
 
         <form class="flex-grow-1 d-none d-lg-block order-lg-2" role="search">
           <div class="input-group">
             <input
-              class="form-control"
+              class="ps-input"
               type="search"
               placeholder="Search for magical items..."
               aria-label="Search"
@@ -78,7 +78,7 @@
           </div>
         </form>
 
-        <div class="order-2 order-lg-3 ms-auto">
+        <div class="order-2 order-lg-3 ms-auto d-none d-lg-flex gap-2">
           <button type="button" class="btn btn-light">
             <img src="images/user_resized.png" />
             John Doe
@@ -88,6 +88,34 @@
             <img src="images/cart_resized.png" />
             Cart
           </button>
+        </div>
+
+        <div class="dropdown d-lg-none order-2 order-lg-3 ms-auto">
+          <button
+            class="btn btn-light dropdown-toggle"
+            type="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Menu
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li>
+              <a class="dropdown-item d-flex align-items-center gap-2" href="#">
+                <img src="images/user_resized.png" style="width: 20px" />
+                John Doe
+              </a>
+            </li>
+            <li>
+              <a
+                class="dropdown-item d-flex align-items-center gap-2"
+                href="cart.html"
+              >
+                <img src="images/cart_resized.png" style="width: 20px" />
+                Cart
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
 
@@ -157,8 +185,21 @@
       >
         <div class="card-body">
           <div class="d-flex flex-column flex-lg-row align-items-start gap-3">
-            <img src="images/potion-images/healing-potion.png" alt="Healing Potion" class="flex-shrink-0" style="height: 140px; width: 140px; object-fit: contain; background-color: white; border: 1px solid #e5e7eb;" />
-            <div class="d-flex flex-row flex-grow-1 justify-content-between w-100">
+            <img
+              src="images/potion-images/healing-potion.png"
+              alt="Healing Potion"
+              class="flex-shrink-0"
+              style="
+                height: 140px;
+                width: 140px;
+                object-fit: contain;
+                background-color: white;
+                border: 1px solid #e5e7eb;
+              "
+            />
+            <div
+              class="d-flex flex-row flex-grow-1 justify-content-between w-100"
+            >
               <div>
                 <h5 class="mb-1">Healing Potion</h5>
                 <p class="mb-2 text-muted">Order #1234</p>
@@ -182,8 +223,21 @@
       >
         <div class="card-body">
           <div class="d-flex flex-column flex-lg-row align-items-start gap-3">
-            <img src="images/potion-images/speed-potion.png" alt="Speed Potion" class="flex-shrink-0" style="height: 140px; width: 140px; object-fit: contain; background-color: white; border: 1px solid #e5e7eb;" />
-            <div class="d-flex flex-row flex-grow-1 justify-content-between w-100">
+            <img
+              src="images/potion-images/speed-potion.png"
+              alt="Speed Potion"
+              class="flex-shrink-0"
+              style="
+                height: 140px;
+                width: 140px;
+                object-fit: contain;
+                background-color: white;
+                border: 1px solid #e5e7eb;
+              "
+            />
+            <div
+              class="d-flex flex-row flex-grow-1 justify-content-between w-100"
+            >
               <div>
                 <h5 class="mb-1">Speed Potion</h5>
                 <p class="mb-2 text-muted">Order #1233</p>
@@ -207,8 +261,21 @@
       >
         <div class="card-body">
           <div class="d-flex flex-column flex-lg-row align-items-start gap-3">
-            <img src="images/potion-images/restoration-potion.png" alt="Restoration Potion" class="flex-shrink-0" style="height: 140px; width: 140px; object-fit: contain; background-color: white; border: 1px solid #e5e7eb;" />
-            <div class="d-flex flex-row flex-grow-1 justify-content-between w-100">
+            <img
+              src="images/potion-images/restoration-potion.png"
+              alt="Restoration Potion"
+              class="flex-shrink-0"
+              style="
+                height: 140px;
+                width: 140px;
+                object-fit: contain;
+                background-color: white;
+                border: 1px solid #e5e7eb;
+              "
+            />
+            <div
+              class="d-flex flex-row flex-grow-1 justify-content-between w-100"
+            >
               <div>
                 <h5 class="mb-1">Restoration Potion</h5>
                 <p class="mb-2 text-muted">Order #1232</p>

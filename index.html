@@ -28,7 +28,21 @@
       >
         <img class="logo order-1" src="images/logo_resized.png" />
 
-        <div class="d-flex w-100 gap-2 order-3 order-lg-2 d-lg-none">
+        <!-- Mobile: Search + Categories dropdown -->
+        <div class="d-flex w-100 gap-2 order-3 order-lg-2 d-lg-none flex-column">
+          <form class="w-100" role="search">
+            <div class="input-group">
+              <input
+                class="ps-input"
+                type="search"
+                placeholder="Search for magical items..."
+                aria-label="Search"
+              />
+              <button class="btn btn-outline-primary" type="submit">
+                Search
+              </button>
+            </div>
+          </form>
           <div class="dropdown">
             <button
               class="btn btn-outline-primary dropdown-toggle"
@@ -49,21 +63,9 @@
               <li><a class="dropdown-item" href="#">Sale</a></li>
             </ul>
           </div>
-          <form class="flex-grow-1" role="search">
-            <div class="input-group">
-              <input
-                class="ps-input"
-                type="search"
-                placeholder="Search for magical items..."
-                aria-label="Search"
-              />
-              <button class="btn btn-outline-primary" type="submit">
-                Search
-              </button>
-            </div>
-          </form>
         </div>
 
+        <!-- Desktop: Search bar -->
         <form class="flex-grow-1 d-none d-lg-block order-lg-2" role="search">
           <div class="input-group">
             <input
@@ -78,7 +80,8 @@
           </div>
         </form>
 
-        <div class="order-2 order-lg-3 ms-auto">
+        <!-- Desktop: Profile and Cart buttons -->
+        <div class="order-2 order-lg-3 ms-auto d-none d-lg-flex gap-2">
           <button type="button" class="btn btn-light">
             <img src="images/user_resized.png" />
             John Doe
@@ -88,6 +91,32 @@
             <img src="images/cart_resized.png" />
             Cart
           </button>
+        </div>
+
+        <!-- Mobile: Profile and Cart dropdown -->
+        <div class="dropdown d-lg-none order-2 order-lg-3 ms-auto">
+          <button
+            class="btn btn-light dropdown-toggle"
+            type="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Menu
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li>
+              <a class="dropdown-item d-flex align-items-center gap-2" href="#">
+                <img src="images/user_resized.png" style="width: 20px;" />
+                John Doe
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item d-flex align-items-center gap-2" href="cart.html">
+                <img src="images/cart_resized.png" style="width: 20px;" />
+                Cart
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
 

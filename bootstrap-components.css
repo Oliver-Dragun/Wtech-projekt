@@ -129,7 +129,6 @@
   background-color: var(--ps-grey-300);
 }
 
-
 /* PRODUCT PAGE */
 
 .ps-path-list {
@@ -293,7 +292,6 @@
   padding: 60px 0;
 }
 
-
 /* CART PAGE */
 
 .ps-cart-page {
@@ -335,7 +333,7 @@
   width: 96px;
   height: 96px;
   flex-shrink: 0;
-  background-color: white;
+  background-color: var(--ps-white);
   object-fit: contain;
 }
 
@@ -515,7 +513,6 @@
   color: var(--ps-primary);
 }
 
-
 /* CHECKOUT PAGE */
 
 .ps-checkout-section-heading {
@@ -573,7 +570,6 @@
   box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15);
 }
 
-/* Input in input-group (e.g., search with button) - needs to work with flex layout */
 .input-group > .ps-input {
   position: relative;
   flex: 1 1 auto;
@@ -585,12 +581,10 @@
   z-index: 5;
 }
 
-/* Categories dropdown button in mobile header - match search input height */
 .header-center-section .d-lg-none .dropdown-toggle {
   height: 50px;
 }
 
-/* Checkout-specific input alias */
 .ps-checkout-input {
   display: block;
   width: 100%;
@@ -608,15 +602,6 @@
 .ps-checkout-input:focus {
   border-color: var(--ps-primary);
   box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15);
-}
-
-.ps-checkout-select {
-  appearance: auto;
-  -webkit-appearance: auto;
-}
-
-.ps-checkout-delivery-section {
-  margin-top: 48px;
 }
 
 .ps-checkout-summary-card {
@@ -642,7 +627,7 @@
   width: 64px;
   height: 64px;
   flex-shrink: 0;
-  background-color: white;
+  background-color: #f1f5f9;
   border: 1px solid #e5e7eb;
   object-fit: contain;
 }

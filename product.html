@@ -9,8 +9,7 @@
     <link rel="stylesheet" href="bootstrap-components.css" />
   </head>
   <body>
-
-    <header class="header shadow">
+    <div class="header shadow">
       <div
         class="ps-banner-stripes d-flex justify-content-between align-items-center px-1 px-lg-4"
       >
@@ -27,30 +26,12 @@
       <div
         class="header-center-section d-flex flex-wrap align-items-center py-2 px-2 px-lg-5 gap-2 gap-lg-5"
       >
-        <img class="logo order-1" src="images/logo_resized.png" alt="Potion Spot" />
+        <img class="logo order-1" src="images/logo_resized.png" />
 
-        <div class="d-flex w-100 gap-2 order-3 order-lg-2 d-lg-none">
-          <div class="dropdown">
-            <button
-              class="btn btn-outline-primary dropdown-toggle"
-              type="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              Categories
-            </button>
-            <ul class="dropdown-menu">
-              <li>
-                <a class="dropdown-item" href="shop-potions.html">Potions</a>
-              </li>
-              <li><a class="dropdown-item" href="#">Scrolls</a></li>
-              <li><a class="dropdown-item" href="#">Orbs</a></li>
-              <li><a class="dropdown-item" href="#">Artifacts</a></li>
-              <li><a class="dropdown-item" href="#">Bundles</a></li>
-              <li><a class="dropdown-item" href="#">Sale</a></li>
-            </ul>
-          </div>
-          <form class="flex-grow-1" role="search">
+        <div
+          class="d-flex w-100 gap-2 order-3 order-lg-2 d-lg-none flex-column"
+        >
+          <form class="w-100" role="search">
             <div class="input-group">
               <input
                 class="ps-input"
@@ -63,6 +44,24 @@
               </button>
             </div>
           </form>
+          <div class="dropdown">
+            <button
+              class="btn btn-outline-primary dropdown-toggle"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Categories
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Potions</a></li>
+              <li><a class="dropdown-item" href="#">Scrolls</a></li>
+              <li><a class="dropdown-item" href="#">Orbs</a></li>
+              <li><a class="dropdown-item" href="#">Artifacts</a></li>
+              <li><a class="dropdown-item" href="#">Bundles</a></li>
+              <li><a class="dropdown-item" href="#">Sale</a></li>
+            </ul>
+          </div>
         </div>
 
         <form class="flex-grow-1 d-none d-lg-block order-lg-2" role="search">
@@ -79,16 +78,44 @@
           </div>
         </form>
 
-        <div class="order-2 order-lg-3 ms-auto">
+        <div class="order-2 order-lg-3 ms-auto d-none d-lg-flex gap-2">
           <button type="button" class="btn btn-light">
-            <img src="images/user_resized.png" alt="" aria-hidden="true" />
+            <img src="images/user_resized.png" />
             John Doe
           </button>
 
           <button type="button" class="btn btn-light">
-            <img src="images/cart_resized.png" alt="" aria-hidden="true" />
+            <img src="images/cart_resized.png" />
             Cart
           </button>
+        </div>
+
+        <div class="dropdown d-lg-none order-2 order-lg-3 ms-auto">
+          <button
+            class="btn btn-light dropdown-toggle"
+            type="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Menu
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li>
+              <a class="dropdown-item d-flex align-items-center gap-2" href="#">
+                <img src="images/user_resized.png" style="width: 20px" />
+                John Doe
+              </a>
+            </li>
+            <li>
+              <a
+                class="dropdown-item d-flex align-items-center gap-2"
+                href="cart.html"
+              >
+                <img src="images/cart_resized.png" style="width: 20px" />
+                Cart
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
 
@@ -120,83 +147,123 @@
           </div>
         </nav>
       </div>
-    </header>
+    </div>
 
     <!-- MAIN CONTENT -->
     <main>
       <div class="container-lg my-4">
-
         <!-- Product path -->
         <nav aria-label="Product path" class="mb-4">
           <ol class="ps-path-list">
             <li class="ps-path-item"><a href="index.html">Home</a></li>
-            <li class="ps-path-item"><a href="shop-potions.html">Potions</a></li>
-            <li class="ps-path-item active" aria-current="page">Healing Potion</li>
+            <li class="ps-path-item">
+              <a href="shop-potions.html">Potions</a>
+            </li>
+            <li class="ps-path-item active" aria-current="page">
+              Healing Potion
+            </li>
           </ol>
         </nav>
 
         <!-- Product -->
         <section aria-label="Product details" class="mb-5">
           <div class="row g-4 g-lg-5">
-
             <!-- Image gallery -->
             <div class="col-12 col-lg-5">
               <div class="ps-gallery-main mb-3">
-                <img src="images/product-images/healing-potion/healing-potion-product-1.png" alt="Healing Potion — main img" />
+                <img
+                  src="images/product-images/healing-potion/healing-potion-product-1.png"
+                  alt="Healing Potion — main img"
+                />
               </div>
 
               <div class="row g-2">
                 <div class="col-3">
-                  <img src="images/product-images/healing-potion/healing-potion-product-1.png" alt="Healing Potion — img 1" class="ps-gallery-thumb" />
+                  <img
+                    src="images/product-images/healing-potion/healing-potion-product-1.png"
+                    alt="Healing Potion — img 1"
+                    class="ps-gallery-thumb"
+                  />
                 </div>
                 <div class="col-3">
-                  <img src="images/product-images/healing-potion/healing-potion-product-2.png" alt="Healing Potion — img 2" class="ps-gallery-thumb" />
+                  <img
+                    src="images/product-images/healing-potion/healing-potion-product-2.png"
+                    alt="Healing Potion — img 2"
+                    class="ps-gallery-thumb"
+                  />
                 </div>
                 <div class="col-3">
-                  <img src="images/product-images/healing-potion/healing-potion-product-3.png" alt="Healing Potion — img 3" class="ps-gallery-thumb" />
+                  <img
+                    src="images/product-images/healing-potion/healing-potion-product-3.png"
+                    alt="Healing Potion — img 3"
+                    class="ps-gallery-thumb"
+                  />
                 </div>
                 <div class="col-3">
-                  <img src="images/product-images/healing-potion/healing-potion-product-1.png" alt="Healing Potion — img 4" class="ps-gallery-thumb" />
+                  <img
+                    src="images/product-images/healing-potion/healing-potion-product-1.png"
+                    alt="Healing Potion — img 4"
+                    class="ps-gallery-thumb"
+                  />
                 </div>
               </div>
             </div>
 
             <!-- Description -->
             <div class="col-12 col-lg-7">
-
               <h1 class="ps-product-title mb-2">Healing Potion</h1>
-              <p class="ps-font-lg text-ps-black-60 mb-4"><strong>25 Gold</strong></p>
+              <p class="ps-font-lg text-ps-black-60 mb-4">
+                <strong>25 Gold</strong>
+              </p>
 
               <h2 class="ps-font-xl mb-3">Description</h2>
               <p class="ps-font-lg text-ps-grey mb-4">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac mattis ex,
-                sit amet convallis justo. Cras pharetra massa ut suscipit cursus. Curabitur
-                porttitor lacus eu nulla mollis, non efficitur massa varius. Nunc faucibus
-                finibus scelerisque purus eget gravida. Nullam blandit posuere aliquam.
-                Aenean et tempus erat. Duis nec quam lectus.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac
+                mattis ex, sit amet convallis justo. Cras pharetra massa ut
+                suscipit cursus. Curabitur porttitor lacus eu nulla mollis, non
+                efficitur massa varius. Nunc faucibus finibus scelerisque purus
+                eget gravida. Nullam blandit posuere aliquam. Aenean et tempus
+                erat. Duis nec quam lectus.
               </p>
 
               <!-- Quantity selector and add to a cart -->
-              <form action="#" method="post" class="d-flex align-items-center gap-3 mt-4">
+              <form
+                action="#"
+                method="post"
+                class="d-flex align-items-center gap-3 mt-4"
+              >
                 <fieldset class="ps-qty-stepper">
                   <legend class="visually-hidden">Quantity</legend>
-                  <button type="button" aria-label="Decrease quantity">−</button>
-                  <input type="number" name="quantity" value="1" min="1" max="99" aria-label="Quantity" />
-                  <button type="button" aria-label="Increase quantity">+</button>
+                  <button type="button" aria-label="Decrease quantity">
+                    −
+                  </button>
+                  <input
+                    type="number"
+                    name="quantity"
+                    value="1"
+                    min="1"
+                    max="99"
+                    aria-label="Quantity"
+                  />
+                  <button type="button" aria-label="Increase quantity">
+                    +
+                  </button>
                 </fieldset>
-                <button type="submit" name="action" value="add_to_cart" class="ps-btn-add-to-cart flex-grow-1">
+                <button
+                  type="submit"
+                  name="action"
+                  value="add_to_cart"
+                  class="ps-btn-add-to-cart flex-grow-1"
+                >
                   Add to Cart
                 </button>
               </form>
-
             </div>
-
           </div>
         </section>
 
         <!-- Product details -->
         <section aria-label="Product information" class="mb-5">
-
           <ul class="nav ps-tabs mb-0" id="productTabs" role="tablist">
             <li class="nav-item" role="presentation">
               <button
@@ -229,22 +296,33 @@
           </ul>
 
           <div class="tab-content ps-tab-content">
-            <div class="tab-pane fade show active" id="details" role="tabpanel" aria-labelledby="details-tab">
+            <div
+              class="tab-pane fade show active"
+              id="details"
+              role="tabpanel"
+              aria-labelledby="details-tab"
+            >
               <h3 class="ps-font-md fw-bold mb-3">Product Details</h3>
               <p class="ps-font-base text-ps-black-60">
-                Curabitur non nulla sit amet nisl tempus convallis quis ac lectus.
-                Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus.
-                Praesent sapien massa, convallis a pellentesque nec, egestas non nisi.
+                Curabitur non nulla sit amet nisl tempus convallis quis ac
+                lectus. Vivamus magna justo, lacinia eget consectetur sed,
+                convallis at tellus. Praesent sapien massa, convallis a
+                pellentesque nec, egestas non nisi.
               </p>
             </div>
-            <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
+            <div
+              class="tab-pane fade"
+              id="reviews"
+              role="tabpanel"
+              aria-labelledby="reviews-tab"
+            >
               <h3 class="ps-font-md fw-bold mb-3">Customer Reviews</h3>
-              <p class="ps-font-base text-ps-black-60">No reviews yet. Be the first to share your experience!</p>
+              <p class="ps-font-base text-ps-black-60">
+                No reviews yet. Be the first to share your experience!
+              </p>
             </div>
           </div>
-
         </section>
-
       </div>
 
       <div class="container my-5">
@@ -254,8 +332,13 @@
             <div class="col-6 col-md-3" style="min-width: 280px">
               <div class="card border-0">
                 <div class="card-body">
-                  <div class="bg-light mb-3 rounded" style="height: 200px"></div>
-                  <div class="d-flex justify-content-between align-items-center">
+                  <div
+                    class="bg-light mb-3 rounded"
+                    style="height: 200px"
+                  ></div>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
                     <div>
                       <h5 class="card-title mb-1">Speed</h5>
                       <p class="card-text text-muted mb-0">Potion</p>
@@ -268,8 +351,13 @@
             <div class="col-6 col-md-3" style="min-width: 280px">
               <div class="card border-0">
                 <div class="card-body">
-                  <div class="bg-light mb-3 rounded" style="height: 200px"></div>
-                  <div class="d-flex justify-content-between align-items-center">
+                  <div
+                    class="bg-light mb-3 rounded"
+                    style="height: 200px"
+                  ></div>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
                     <div>
                       <h5 class="card-title mb-1">Speed</h5>
                       <p class="card-text text-muted mb-0">Potion</p>
@@ -282,8 +370,13 @@
             <div class="col-6 col-md-3" style="min-width: 280px">
               <div class="card border-0">
                 <div class="card-body">
-                  <div class="bg-light mb-3 rounded" style="height: 200px"></div>
-                  <div class="d-flex justify-content-between align-items-center">
+                  <div
+                    class="bg-light mb-3 rounded"
+                    style="height: 200px"
+                  ></div>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
                     <div>
                       <h5 class="card-title mb-1">Speed</h5>
                       <p class="card-text text-muted mb-0">Potion</p>
@@ -296,8 +389,13 @@
             <div class="col-6 col-md-3" style="min-width: 280px">
               <div class="card border-0">
                 <div class="card-body">
-                  <div class="bg-light mb-3 rounded" style="height: 200px"></div>
-                  <div class="d-flex justify-content-between align-items-center">
+                  <div
+                    class="bg-light mb-3 rounded"
+                    style="height: 200px"
+                  ></div>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
                     <div>
                       <h5 class="card-title mb-1">Speed</h5>
                       <p class="card-text text-muted mb-0">Potion</p>
@@ -327,7 +425,6 @@
           </button>
         </div>
       </div>
-
     </main>
 
     <footer class="bg-light py-3 mt-5">
@@ -392,7 +489,6 @@
               </li>
             </ul>
           </div>
-
         </div>
       </div>
     </footer>
