@@ -8,6 +8,7 @@
 @section('content')
 <div class="login-container">
   <div class="login-card border shadow">
+    <button type="button" onclick="history.back()" class="login-card-close" aria-label="Close">&times;</button>
     <div class="text-center mb-4">
       <img class="logo py-3" src="{{ asset('images/logo_resized.png') }}" />
       <h2 class="mb-4">Login</h2>

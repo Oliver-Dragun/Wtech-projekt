@@ -750,10 +750,36 @@ a:hover {
   display: flex;
   align-items: center;
   justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
 }
 
 .login-card {
+  position: relative;
   width: 100%;
   max-width: 450px;
   padding: 2rem;
+  background: #fff;
+}
+
+.login-card-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  line-height: 1;
+  color: var(--ps-black-60, #666);
+  cursor: pointer;
+  padding: 0;
+  text-decoration: none;
+}
+
+.login-card-close:hover {
+  color: #000;
 }
