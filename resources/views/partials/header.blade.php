@@ -68,12 +68,32 @@
     </form>
 
     <div class="ps-header-user-buttons">
-      <a href="{{ url('/profile') }}" class="btn btn-light">
-        <img src="{{ asset('images/user_resized.png') }}" />
-        John Doe
-      </a>
+      @auth
+        <div class="dropdown">
+          <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="{{ asset('images/user_resized.png') }}" />
+            {{ auth()->user()->name }}
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li>
+              <a class="dropdown-item" href="{{ url('/profile') }}">Profile &amp; Orders</a>
+            </li>
+            <li>
+              <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="dropdown-item">Log Out</button>
+              </form>
+            </li>
+          </ul>
+        </div>
+      @else
+        <a href="{{ route('login') }}" class="btn btn-light">
+          <img src="{{ asset('images/user_resized.png') }}" />
+          Login
+        </a>
+      @endauth
 
-      <a href="{{ url('/cart') }}" class="btn btn-light">
+      <a href="{{ route('cart.index') }}" class="btn btn-light">
         <img src="{{ asset('images/cart_resized.png') }}" />
         Cart
       </a>
@@ -89,16 +109,31 @@
         Menu
       </button>
       <ul class="dropdown-menu dropdown-menu-end">
-        <li>
-          <a class="dropdown-item d-flex align-items-center gap-2" href="{{ url('/profile') }}">
-            <img src="{{ asset('images/user_resized.png') }}" style="width: 20px" />
-            John Doe
-          </a>
-        </li>
+        @auth
+          <li>
+            <a class="dropdown-item d-flex align-items-center gap-2" href="{{ url('/profile') }}">
+              <img src="{{ asset('images/user_resized.png') }}" style="width: 20px" />
+              {{ auth()->user()->name }}
+            </a>
+          </li>
+          <li>
+            <form method="POST" action="{{ route('logout') }}">
+              @csrf
+              <button type="submit" class="dropdown-item">Log Out</button>
+            </form>
+          </li>
+        @else
+          <li>
+            <a class="dropdown-item d-flex align-items-center gap-2" href="{{ route('login') }}">
+              <img src="{{ asset('images/user_resized.png') }}" style="width: 20px" />
+              Login
+            </a>
+          </li>
+        @endauth
         <li>
           <a
             class="dropdown-item d-flex align-items-center gap-2"
-            href="{{ url('/cart') }}"
+            href="{{ route('cart.index') }}"
           >
             <img src="{{ asset('images/cart_resized.png') }}" style="width: 20px" />
             Cart

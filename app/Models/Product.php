@@ -12,6 +12,11 @@ class Product extends Model
 
     protected $fillable = ['product_type_id', 'size_id', 'price', 'is_bundle'];
 
+    protected $casts = [
+        'price'     => 'integer',
+        'is_bundle' => 'boolean',
+    ];
+
     public function type(): BelongsTo
     {
         return $this->belongsTo(ProductType::class, 'product_type_id');

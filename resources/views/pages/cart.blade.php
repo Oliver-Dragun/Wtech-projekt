@@ -13,125 +13,68 @@
     <div class="row g-4 g-lg-5">
       {{-- Cart items --}}
       <section class="col-12 col-lg-8" aria-label="Cart items">
-        {{-- Item 1 --}}
-        <article class="ps-cart-item">
-          <img
-            class="ps-cart-item-img"
-            src="{{ asset('images/potion-images/healing-potion.png') }}"
-            alt="Healing Potion"
-          />
-          <div class="ps-cart-item-body">
-            <div class="ps-cart-item-head">
-              <div>
-                <p class="ps-cart-item-name mb-0">Healing Potion</p>
-                <p class="ps-cart-item-variant mb-0">Speed · Basic</p>
+        @forelse($items as $item)
+          <article class="ps-cart-item">
+            <img
+              class="ps-cart-item-img"
+              src="{{ asset($item->product->type->mainPhoto?->img ?? 'images/potion-images/healing-potion.png') }}"
+              alt="{{ $item->product->type->name }}"
+            />
+            <div class="ps-cart-item-body">
+              <div class="ps-cart-item-head">
+                <div>
+                  <p class="ps-cart-item-name mb-0">{{ $item->product->type->name }}</p>
+                  <p class="ps-cart-item-variant mb-0">{{ $item->product->size->size }}</p>
+                </div>
+                <div class="text-end">
+                  <span class="ps-cart-item-price d-block">{{ $item->product->price }} Gold</span>
+                  <form method="POST" action="{{ route('cart.update', $item->id) }}">
+                    @csrf
+                    <button type="submit" name="action" value="remove" class="ps-btn-remove mt-1">
+                      Remove
+                    </button>
+                  </form>
+                </div>
               </div>
-              <span class="ps-cart-item-price">25 Gold</span>
-            </div>
-            <div class="ps-cart-item-actions">
-              <form
-                action="#"
-                method="post"
-                class="d-flex align-items-center gap-3"
-              >
-                <fieldset
-                  class="ps-cart-stepper"
-                  aria-label="Quantity for Healing Potion"
+              <div class="ps-cart-item-actions">
+                <form
+                  action="{{ route('cart.update', $item->id) }}"
+                  method="post"
                 >
-                  <legend class="visually-hidden">Quantity</legend>
-                  <button
-                    type="submit"
-                    name="action"
-                    value="decrease_1"
-                    aria-label="Decrease"
-                  >−</button>
-                  <input
-                    type="number"
-                    name="quantity_1"
-                    value="1"
-                    min="1"
-                    max="99"
-                    aria-label="Quantity"
-                  />
-                  <button
-                    type="submit"
-                    name="action"
-                    value="increase_1"
-                    aria-label="Increase"
-                  >+</button>
-                </fieldset>
-                <button
-                  type="submit"
-                  name="action"
-                  value="remove_1"
-                  class="ps-btn-remove"
-                >
-                  Remove
-                </button>
-              </form>
-            </div>
-          </div>
-        </article>
-
-        {{-- Item 2 --}}
-        <article class="ps-cart-item">
-          <img
-            class="ps-cart-item-img"
-            src="{{ asset('images/potion-images/speed-potion.png') }}"
-            alt="Speed Potion"
-          />
-          <div class="ps-cart-item-body">
-            <div class="ps-cart-item-head">
-              <div>
-                <p class="ps-cart-item-name mb-0">Speed Potion</p>
-                <p class="ps-cart-item-variant mb-0">Speed · Greater</p>
+                  @csrf
+                  <fieldset
+                    class="ps-cart-stepper"
+                    aria-label="Quantity for {{ $item->product->type->name }}"
+                  >
+                    <legend class="visually-hidden">Quantity</legend>
+                    <button
+                      type="submit"
+                      name="action"
+                      value="decrease"
+                      aria-label="Decrease"
+                    >−</button>
+                    <input
+                      type="number"
+                      name="quantity"
+                      value="{{ $item->quantity }}"
+                      min="1"
+                      max="99"
+                      aria-label="Quantity"
+                    />
+                    <button
+                      type="submit"
+                      name="action"
+                      value="increase"
+                      aria-label="Increase"
+                    >+</button>
+                  </fieldset>
+                </form>
               </div>
-              <span class="ps-cart-item-price">40 Gold</span>
             </div>
-            <div class="ps-cart-item-actions">
-              <form
-                action="#"
-                method="post"
-                class="d-flex align-items-center gap-3"
-              >
-                <fieldset
-                  class="ps-cart-stepper"
-                  aria-label="Quantity for Speed Potion"
-                >
-                  <legend class="visually-hidden">Quantity</legend>
-                  <button
-                    type="submit"
-                    name="action"
-                    value="decrease_2"
-                    aria-label="Decrease"
-                  >−</button>
-                  <input
-                    type="number"
-                    name="quantity_2"
-                    value="2"
-                    min="1"
-                    max="99"
-                    aria-label="Quantity"
-                  />
-                  <button
-                    type="submit"
-                    name="action"
-                    value="increase_2"
-                    aria-label="Increase"
-                  >+</button>
-                </fieldset>
-                <button
-                  type="submit"
-                  name="action"
-                  value="remove_2"
-                  class="ps-btn-remove"
-                >
-                  Remove
-                </button>
-              </form>
-            </div>
-          </div>
-        </article>
+          </article>
+        @empty
+          <p class="text-muted py-4">Your cart is empty.</p>
+        @endforelse
       </section>
 
       {{-- Summary --}}
@@ -142,11 +85,11 @@
           <dl>
             <div class="ps-summary-row">
               <dt class="ps-summary-label">Subtotal</dt>
-              <dd class="ps-summary-value mb-0">105 Gold</dd>
+              <dd class="ps-summary-value mb-0">{{ $subtotal }} Gold</dd>
             </div>
             <div class="ps-summary-row">
               <dt class="ps-summary-label">Shipping</dt>
-              <dd class="ps-summary-value mb-0">5 Gold</dd>
+              <dd class="ps-summary-value mb-0">—</dd>
             </div>
           </dl>
 
@@ -154,10 +97,10 @@
 
           <div class="ps-summary-total">
             <span>Total</span>
-            <strong>110 Gold</strong>
+            <strong>{{ $subtotal }} Gold</strong>
           </div>
 
-          <a href="{{ route('login') }}" class="ps-btn-checkout">Checkout</a>
+          <a href="{{ url('/checkout') }}" class="ps-btn-checkout">Checkout</a>
           <a href="{{ url('/') }}" class="ps-btn-continue">Continue Shopping</a>
         </div>
       </aside>

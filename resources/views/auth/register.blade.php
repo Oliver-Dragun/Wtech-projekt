@@ -33,13 +33,18 @@
           <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
         <div class="col-6">
-          <label for="last_name" class="form-label">Last Name</label>
+          <label for="surname" class="form-label">Last Name</label>
           <input
             type="text"
             class="ps-input"
-            id="last_name"
+            id="surname"
+            name="surname"
+            value="{{ old('surname') }}"
             placeholder="Last name"
+            required
+            autocomplete="family-name"
           />
+          <x-input-error :messages="$errors->get('surname')" class="mt-2" />
         </div>
       </div>
 
