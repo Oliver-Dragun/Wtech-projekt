@@ -21,5 +21,6 @@
     @show
 
     <script src="{{ asset('bootstrap/js/bootstrap.bundle.js') }}"></script>
+    @stack('scripts')
   </body>
 </html>

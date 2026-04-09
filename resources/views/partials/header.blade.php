@@ -16,13 +16,15 @@
     </a>
 
     <div class="ps-header-mobile-controls">
-      <form class="w-100" role="search">
+      <form class="w-100" role="search" method="GET" action="{{ url('/shop') }}">
         <div class="input-group">
           <input
             class="ps-input"
             type="search"
+            name="search"
             placeholder="Search for magical items..."
             aria-label="Search"
+            value="{{ request('search') }}"
           />
           <button class="btn btn-outline-primary" type="submit">
             Search
@@ -39,23 +41,25 @@
           Categories
         </button>
         <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="#">Potions</a></li>
-          <li><a class="dropdown-item" href="#">Scrolls</a></li>
-          <li><a class="dropdown-item" href="#">Orbs</a></li>
-          <li><a class="dropdown-item" href="#">Artifacts</a></li>
-          <li><a class="dropdown-item" href="#">Bundles</a></li>
-          <li><a class="dropdown-item" href="#">Sale</a></li>
+          <li><a class="dropdown-item" href="{{ url('/shop?category=1') }}">Potions</a></li>
+          <li><a class="dropdown-item" href="{{ url('/shop?category=2') }}">Scrolls</a></li>
+          <li><a class="dropdown-item" href="{{ url('/shop?category=3') }}">Orbs</a></li>
+          <li><a class="dropdown-item" href="{{ url('/shop?category=4') }}">Artifacts</a></li>
+          <li><a class="dropdown-item" href="{{ url('/shop?category=5') }}">Bundles</a></li>
+          <li><a class="dropdown-item" href="{{ url('/shop?category=5') }}">Sale</a></li>
         </ul>
       </div>
     </div>
 
-    <form class="ps-header-search" role="search">
+    <form class="ps-header-search" role="search" method="GET" action="{{ url('/shop') }}">
       <div class="input-group">
         <input
           class="ps-input"
           type="search"
+          name="search"
           placeholder="Search for magical items..."
           aria-label="Search"
+          value="{{ request('search') }}"
         />
         <button class="btn btn-outline-primary" type="submit">
           Search
@@ -108,22 +112,22 @@
     <nav class="navbar navbar-expand-lg py-0">
       <ul class="navbar-nav mx-auto gap-5">
         <li class="nav-item">
-          <a class="nav-link" href="#">Potions</a>
+          <a class="nav-link" href="{{ url('/shop?category=1') }}">Potions</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Scrolls</a>
+          <a class="nav-link" href="{{ url('/shop?category=2') }}">Scrolls</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Orbs</a>
+          <a class="nav-link" href="{{ url('/shop?category=3') }}">Orbs</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Artifacts</a>
+          <a class="nav-link" href="{{ url('/shop?category=4') }}">Artifacts</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Bundles</a>
+          <a class="nav-link" href="{{ url('/shop?category=5') }}">Bundles</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Sale</a>
+          <a class="nav-link" href="{{ url('/shop?category=5') }}">Sale</a>
         </li>
       </ul>
     </nav>

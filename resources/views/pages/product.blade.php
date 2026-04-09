@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', 'Healing Potion — Potion Spot')
+@section('title', $product->type->name . ' — Potion Spot')
 
 @section('content')
 <main>
@@ -10,10 +10,10 @@
       <ol class="ps-path-list">
         <li class="ps-path-item"><a href="{{ url('/') }}">Home</a></li>
         <li class="ps-path-item">
-          <a href="#">Potions</a>
+          <a href="{{ url('/shop?category=' . $product->type->category_id) }}">{{ $product->type->category->name }}</a>
         </li>
         <li class="ps-path-item active" aria-current="page">
-          Healing Potion
+          {{ $product->type->name }}
         </li>
       </ol>
     </nav>
@@ -23,68 +23,55 @@
       <div class="row g-4 g-lg-5">
         {{-- Image gallery --}}
         <div class="col-12 col-lg-5">
+          @php
+            $photos = $product->type->photos;
+            $mainPhoto = $photos->firstWhere('number', 1) ?? $photos->first();
+            $thumbSlots = $photos->take(4)->values();
+            while ($thumbSlots->count() < 4) {
+                $thumbSlots->push($mainPhoto);
+            }
+          @endphp
+
           <div class="ps-gallery-main mb-3">
             <img
-              src="{{ asset('images/product-images/healing-potion/healing-potion-product-1.png') }}"
-              alt="Healing Potion — main img"
+              src="{{ asset($mainPhoto->img) }}"
+              alt="{{ $product->type->name }} — main img"
             />
           </div>
 
           <div class="row g-2">
-            <div class="col-3">
-              <img
-                src="{{ asset('images/product-images/healing-potion/healing-potion-product-1.png') }}"
-                alt="Healing Potion — img 1"
-                class="ps-gallery-thumb"
-              />
-            </div>
-            <div class="col-3">
-              <img
-                src="{{ asset('images/product-images/healing-potion/healing-potion-product-2.png') }}"
-                alt="Healing Potion — img 2"
-                class="ps-gallery-thumb"
-              />
-            </div>
-            <div class="col-3">
-              <img
-                src="{{ asset('images/product-images/healing-potion/healing-potion-product-3.png') }}"
-                alt="Healing Potion — img 3"
-                class="ps-gallery-thumb"
-              />
-            </div>
-            <div class="col-3">
-              <img
-                src="{{ asset('images/product-images/healing-potion/healing-potion-product-1.png') }}"
-                alt="Healing Potion — img 4"
-                class="ps-gallery-thumb"
-              />
-            </div>
+            @foreach($thumbSlots as $thumb)
+              <div class="col-3">
+                <img
+                  src="{{ asset($thumb->img) }}"
+                  alt="{{ $product->type->name }} — img {{ $loop->iteration }}"
+                  class="ps-gallery-thumb"
+                />
+              </div>
+            @endforeach
           </div>
         </div>
 
         {{-- Description --}}
         <div class="col-12 col-lg-7">
-          <h1 class="ps-product-title mb-2">Healing Potion</h1>
+          <h1 class="ps-product-title mb-2">{{ $product->type->name }}</h1>
           <p class="ps-font-lg text-ps-black-60 mb-4">
-            <strong>25 Gold</strong>
+            <strong>{{ $product->price }} Gold</strong>
           </p>
 
           <h2 class="ps-font-xl mb-3">Description</h2>
           <p class="ps-font-lg text-ps-grey mb-4">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac
-            mattis ex, sit amet convallis justo. Cras pharetra massa ut
-            suscipit cursus. Curabitur porttitor lacus eu nulla mollis, non
-            efficitur massa varius. Nunc faucibus finibus scelerisque purus
-            eget gravida. Nullam blandit posuere aliquam. Aenean et tempus
-            erat. Duis nec quam lectus.
+            {{ $product->type->description }}
           </p>
 
           {{-- Quantity selector and add to cart --}}
           <form
-            action="{{ url('/cart') }}"
-            method="get"
+            action="#"
+            method="post"
             class="d-flex align-items-center gap-3 mt-4"
           >
+            @csrf
+            <input type="hidden" name="product_id" value="{{ $product->id }}" />
             <fieldset class="ps-qty-stepper">
               <legend class="visually-hidden">Quantity</legend>
               <button type="button" aria-label="Decrease quantity">−</button>
@@ -139,7 +126,7 @@
             aria-controls="reviews"
             aria-selected="false"
           >
-            Reviews (12)
+            Reviews ({{ $product->type->reviews->count() }})
           </button>
         </li>
       </ul>
@@ -152,12 +139,15 @@
           aria-labelledby="details-tab"
         >
           <h3 class="ps-font-md fw-bold mb-3">Product Details</h3>
-          <p class="ps-font-base text-ps-black-60">
-            Curabitur non nulla sit amet nisl tempus convallis quis ac
-            lectus. Vivamus magna justo, lacinia eget consectetur sed,
-            convallis at tellus. Praesent sapien massa, convallis a
-            pellentesque nec, egestas non nisi.
-          </p>
+          @if($product->type->effects->isNotEmpty())
+            <ul class="ps-font-base text-ps-black-60 mb-0">
+              @foreach($product->type->effects as $pe)
+                <li>{{ $pe->effect->name }} — {{ $pe->strength }}</li>
+              @endforeach
+            </ul>
+          @else
+            <p class="ps-font-base text-ps-black-60">No details available.</p>
+          @endif
         </div>
         <div
           class="tab-pane fade"
@@ -178,62 +168,27 @@
     <h2 class="mb-4">Recommended for you</h2>
     <div class="position-relative">
       <div class="row g-4 justify-content-center">
-        <div class="col-6 col-md-3" style="min-width: 280px">
-          <div class="card border-0">
-            <div class="card-body">
-              <div class="bg-light mb-3 rounded" style="height: 200px"></div>
-              <div class="d-flex justify-content-between align-items-center">
-                <div>
-                  <h5 class="card-title mb-1">Speed</h5>
-                  <p class="card-text text-muted mb-0">Potion</p>
+        @foreach($recommended as $rec)
+          <div class="col-6 col-md-3" style="min-width: 280px">
+            <div class="card border-0">
+              <div class="card-body">
+                <img
+                  src="{{ asset($rec->type->mainPhoto?->img ?? 'images/potion-images/healing-potion.png') }}"
+                  alt="{{ $rec->type->name }}"
+                  class="bg-light mb-3 rounded"
+                  style="height: 200px; width: 100%; object-fit: contain"
+                />
+                <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                    <h5 class="card-title mb-1">{{ $rec->type->name }}</h5>
+                    <p class="card-text text-muted mb-0">{{ $rec->price }} Gold</p>
+                  </div>
+                  <a href="{{ url('/product/' . $rec->id) }}" class="btn btn-primary">Learn more</a>
                 </div>
-                <button class="btn btn-primary">Learn more</button>
               </div>
             </div>
           </div>
-        </div>
-        <div class="col-6 col-md-3" style="min-width: 280px">
-          <div class="card border-0">
-            <div class="card-body">
-              <div class="bg-light mb-3 rounded" style="height: 200px"></div>
-              <div class="d-flex justify-content-between align-items-center">
-                <div>
-                  <h5 class="card-title mb-1">Speed</h5>
-                  <p class="card-text text-muted mb-0">Potion</p>
-                </div>
-                <button class="btn btn-primary">Learn more</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-6 col-md-3" style="min-width: 280px">
-          <div class="card border-0">
-            <div class="card-body">
-              <div class="bg-light mb-3 rounded" style="height: 200px"></div>
-              <div class="d-flex justify-content-between align-items-center">
-                <div>
-                  <h5 class="card-title mb-1">Speed</h5>
-                  <p class="card-text text-muted mb-0">Potion</p>
-                </div>
-                <button class="btn btn-primary">Learn more</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-6 col-md-3" style="min-width: 280px">
-          <div class="card border-0">
-            <div class="card-body">
-              <div class="bg-light mb-3 rounded" style="height: 200px"></div>
-              <div class="d-flex justify-content-between align-items-center">
-                <div>
-                  <h5 class="card-title mb-1">Speed</h5>
-                  <p class="card-text text-muted mb-0">Potion</p>
-                </div>
-                <button class="btn btn-primary">Learn more</button>
-              </div>
-            </div>
-          </div>
-        </div>
+        @endforeach
       </div>
 
       <button

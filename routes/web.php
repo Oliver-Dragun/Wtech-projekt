@@ -1,10 +1,13 @@
 <?php
 
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ShopController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', fn() => view('pages.home'));
-Route::get('/product', fn() => view('pages.product'));
+Route::get('/shop', [ShopController::class, 'index']);
+Route::get('/product/{id}', [ProductController::class, 'show']);
 Route::get('/cart', fn() => view('pages.cart'));
 Route::get('/checkout', fn() => view('pages.checkout'));
 Route::get('/payment', fn() => view('pages.payment'));
