@@ -65,47 +65,35 @@
           </p>
 
           {{-- Quantity selector and add to cart --}}
-          @auth
-            <form
-              action="{{ route('cart.add') }}"
-              method="post"
-              class="d-flex align-items-center gap-3 mt-4"
+          <form
+            action="{{ route('cart.add') }}"
+            method="post"
+            class="d-flex align-items-center gap-3 mt-4"
+          >
+            @csrf
+            <input type="hidden" name="product_id" value="{{ $product->id }}" />
+            <fieldset class="ps-qty-stepper">
+              <legend class="visually-hidden">Quantity</legend>
+              <button type="button" aria-label="Decrease quantity"
+                onclick="let i=this.nextElementSibling;i.value=Math.max(1,+i.value-1)">−</button>
+              <input
+                type="number"
+                name="quantity"
+                value="1"
+                min="1"
+                max="99"
+                aria-label="Quantity"
+              />
+              <button type="button" aria-label="Increase quantity"
+                onclick="let i=this.previousElementSibling;i.value=Math.min(99,+i.value+1)">+</button>
+            </fieldset>
+            <button
+              type="submit"
+              class="ps-btn-add-to-cart flex-grow-1"
             >
-              @csrf
-              <input type="hidden" name="product_id" value="{{ $product->id }}" />
-              <fieldset class="ps-qty-stepper">
-                <legend class="visually-hidden">Quantity</legend>
-                <button type="button" aria-label="Decrease quantity"
-                  onclick="let i=this.nextElementSibling;i.value=Math.max(1,+i.value-1)">−</button>
-                <input
-                  type="number"
-                  name="quantity"
-                  value="1"
-                  min="1"
-                  max="99"
-                  aria-label="Quantity"
-                />
-                <button type="button" aria-label="Increase quantity"
-                  onclick="let i=this.previousElementSibling;i.value=Math.min(99,+i.value+1)">+</button>
-              </fieldset>
-              <button
-                type="submit"
-                class="ps-btn-add-to-cart flex-grow-1"
-              >
-                Add to Cart
-              </button>
-            </form>
-          @else
-            <div class="d-flex align-items-center gap-3 mt-4">
-              <a
-                href="{{ route('login') }}"
-                class="ps-btn-add-to-cart flex-grow-1"
-                style="display:flex;align-items:center;justify-content:center;text-decoration:none;"
-              >
-                Login to Add to Cart
-              </a>
-            </div>
-          @endauth
+              Add to Cart
+            </button>
+          </form>
         </div>
       </div>
     </section>

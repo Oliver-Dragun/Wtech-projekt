@@ -4,11 +4,30 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
-    private function getCart(): Order
+    // -------------------------------------------------------------------------
+    // Guest (session) helpers
+    // -------------------------------------------------------------------------
+
+    private function getSessionCart(): array
+    {
+        return session('cart', []);
+    }
+
+    private function saveSessionCart(array $cart): void
+    {
+        session(['cart' => $cart]);
+    }
+
+    // -------------------------------------------------------------------------
+    // Auth (DB) helpers
+    // -------------------------------------------------------------------------
+
+    private function getDbCart(): Order
     {
         $cart = Order::where('user_id', auth()->id())
             ->whereNull('status_id')
@@ -21,17 +40,66 @@ class CartController extends Controller
         return $cart;
     }
 
+    // -------------------------------------------------------------------------
+    // Merge session cart into DB cart on login / register
+    // -------------------------------------------------------------------------
+
+    public static function mergeGuestCart(): void
+    {
+        $sessionCart = session('cart', []);
+
+        if (empty($sessionCart)) {
+            return;
+        }
+
+        $cart = Order::where('user_id', auth()->id())
+            ->whereNull('status_id')
+            ->first() ?? Order::create(['user_id' => auth()->id()]);
+
+        foreach ($sessionCart as $productId => $quantity) {
+            $item = $cart->items()->where('product_id', $productId)->first();
+
+            if ($item) {
+                $item->update(['quantity' => min(99, $item->quantity + $quantity)]);
+            } else {
+                $cart->items()->create([
+                    'product_id' => (int) $productId,
+                    'quantity'   => (int) $quantity,
+                ]);
+            }
+        }
+
+        session()->forget('cart');
+    }
+
+    // -------------------------------------------------------------------------
+    // Controller actions
+    // -------------------------------------------------------------------------
+
     public function index()
     {
-        $cart = Order::with([
-            'items.product.type.mainPhoto',
-            'items.product.size',
-        ])
-        ->where('user_id', auth()->id())
-        ->whereNull('status_id')
-        ->first();
+        if (auth()->check()) {
+            $cart  = Order::with(['items.product.type.mainPhoto', 'items.product.size'])
+                ->where('user_id', auth()->id())
+                ->whereNull('status_id')
+                ->first();
 
-        $items    = $cart ? $cart->items : collect();
+            $items = $cart ? $cart->items : collect();
+        } else {
+            $sessionCart = $this->getSessionCart();
+
+            $products = Product::with(['type.mainPhoto', 'size'])
+                ->whereIn('id', array_keys($sessionCart))
+                ->get()
+                ->keyBy('id');
+
+            $items = collect($sessionCart)->map(fn($qty, $pid) => (object) [
+                'product_id' => (int) $pid,
+                'product'    => $products->get($pid),
+                'quantity'   => (int) $qty,
+            ]);
+        }
+
         $subtotal = $items->sum(fn($item) => $item->product->price * $item->quantity);
 
         return view('pages.cart', compact('items', 'subtotal'));
@@ -44,42 +112,71 @@ class CartController extends Controller
             'quantity'   => 'required|integer|min:1|max:99',
         ]);
 
-        $cart     = $this->getCart();
-        $quantity = (int) $request->quantity;
-        $item     = $cart->items()->where('product_id', $request->product_id)->first();
+        $productId = (int) $request->product_id;
+        $quantity  = (int) $request->quantity;
 
-        if ($item) {
-            $item->update(['quantity' => min(99, $item->quantity + $quantity)]);
+        if (auth()->check()) {
+            $cart = $this->getDbCart();
+            $item = $cart->items()->where('product_id', $productId)->first();
+
+            if ($item) {
+                $item->update(['quantity' => min(99, $item->quantity + $quantity)]);
+            } else {
+                $cart->items()->create([
+                    'product_id' => $productId,
+                    'quantity'   => $quantity,
+                ]);
+            }
         } else {
-            $cart->items()->create([
-                'product_id' => (int) $request->product_id,
-                'quantity'   => $quantity,
-            ]);
+            $cart = $this->getSessionCart();
+            $cart[$productId] = min(99, ($cart[$productId] ?? 0) + $quantity);
+            $this->saveSessionCart($cart);
         }
 
         return redirect()->back()->with('success', 'Added to cart.');
     }
 
-    public function updateItem(Request $request, int $id)
+    public function updateItem(Request $request, int $productId)
     {
-        $item = OrderItem::where('id', $id)
-            ->whereHas('order', fn($q) => $q->where('user_id', auth()->id())->whereNull('status_id'))
-            ->firstOrFail();
+        $action = $request->input('action');
 
-        $action   = $request->input('action');
-        $quantity = (int) $item->quantity;
+        if (auth()->check()) {
+            $cart = Order::where('user_id', auth()->id())
+                ->whereNull('status_id')
+                ->firstOrFail();
 
-        if ($action === 'remove') {
-            $item->delete();
-        } elseif ($action === 'increase') {
-            $item->update(['quantity' => min(99, $quantity + 1)]);
-        } elseif ($action === 'decrease') {
-            if ($quantity > 1) {
-                $item->update(['quantity' => $quantity - 1]);
+            $item     = $cart->items()->where('product_id', $productId)->firstOrFail();
+            $quantity = (int) $item->quantity;
+
+            if ($action === 'remove') {
+                $item->delete();
+            } elseif ($action === 'increase') {
+                $item->update(['quantity' => min(99, $quantity + 1)]);
+            } elseif ($action === 'decrease') {
+                if ($quantity > 1) {
+                    $item->update(['quantity' => $quantity - 1]);
+                }
+            } elseif ($request->filled('quantity')) {
+                $request->validate(['quantity' => 'integer|min:1|max:99']);
+                $item->update(['quantity' => (int) $request->quantity]);
             }
-        } elseif ($request->filled('quantity')) {
-            $request->validate(['quantity' => 'integer|min:1|max:99']);
-            $item->update(['quantity' => (int) $request->quantity]);
+        } else {
+            $cart = $this->getSessionCart();
+
+            if ($action === 'remove' || !isset($cart[$productId])) {
+                unset($cart[$productId]);
+            } elseif ($action === 'increase') {
+                $cart[$productId] = min(99, $cart[$productId] + 1);
+            } elseif ($action === 'decrease') {
+                if ($cart[$productId] > 1) {
+                    $cart[$productId]--;
+                }
+            } elseif ($request->filled('quantity')) {
+                $request->validate(['quantity' => 'integer|min:1|max:99']);
+                $cart[$productId] = (int) $request->quantity;
+            }
+
+            $this->saveSessionCart($cart);
         }
 
         return redirect()->route('cart.index');
