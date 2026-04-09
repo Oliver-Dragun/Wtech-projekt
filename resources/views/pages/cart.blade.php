@@ -27,7 +27,7 @@
                   <p class="ps-cart-item-variant mb-0">{{ $item->product->size->size }}</p>
                 </div>
                 <div class="text-end">
-                  <span class="ps-cart-item-price d-block">{{ $item->product->price }} Gold</span>
+                  <span class="ps-cart-item-price d-block">{{ $item->product->price * $item->quantity }} Gold</span>
                   <form method="POST" action="{{ route('cart.update', $item->id) }}">
                     @csrf
                     <button type="submit" name="action" value="remove" class="ps-btn-remove mt-1">
