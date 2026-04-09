@@ -106,12 +106,32 @@
       <div class="d-flex justify-content-between align-items-center mb-4">
         <h1 class="mb-0">{{ $categoryName }}</h1>
 
+        @php
+          $currentSort = request('sort', '');
+          $sortDefs = [
+            'price'   => ['label' => 'Price',   'asc' => 'price_asc',   'desc' => 'price_desc'],
+            'orders'  => ['label' => 'Orders',  'asc' => 'orders_asc',  'desc' => 'orders_desc'],
+            'reviews' => ['label' => 'Reviews', 'asc' => 'reviews_asc', 'desc' => 'reviews_desc'],
+          ];
+        @endphp
+
         {{-- Desktop sort buttons --}}
         <div class="d-flex align-items-center gap-2 d-none d-md-flex">
           Sort by:
-          <button class="btn btn-outline-dark">Price</button>
-          <button class="btn btn-outline-dark">Orders</button>
-          <button class="btn btn-outline-dark">Reviews</button>
+          @foreach($sortDefs as $def)
+            @php
+              $isAsc    = $currentSort === $def['asc'];
+              $isDesc   = $currentSort === $def['desc'];
+              $isActive = $isAsc || $isDesc;
+              $nextSort = $isAsc ? $def['desc'] : $def['asc'];
+              $arrow    = $isAsc ? ' ↑' : ($isDesc ? ' ↓' : '');
+            @endphp
+            <a href="{{ request()->fullUrlWithQuery(['sort' => $nextSort]) }}"
+               class="btn {{ $isActive ? 'btn-dark' : 'btn-outline-dark' }}">
+              {{ $def['label'] }}{{ $arrow }}
+            </a>
+          @endforeach
+          <a href="{{ request()->fullUrlWithQuery(['sort' => null]) }}" class="btn btn-outline-dark">Clear</a>
         </div>
 
         {{-- Mobile sort dropdown --}}
@@ -125,9 +145,22 @@
             Sort by
           </button>
           <ul class="dropdown-menu">
-            <li><button class="dropdown-item" type="button">Price</button></li>
-            <li><button class="dropdown-item" type="button">Orders</button></li>
-            <li><button class="dropdown-item" type="button">Reviews</button></li>
+            @foreach($sortDefs as $def)
+              @php
+                $isAsc    = $currentSort === $def['asc'];
+                $isDesc   = $currentSort === $def['desc'];
+                $nextSort = $isAsc ? $def['desc'] : $def['asc'];
+                $arrow    = $isAsc ? ' ↑' : ($isDesc ? ' ↓' : '');
+              @endphp
+              <li>
+                <a href="{{ request()->fullUrlWithQuery(['sort' => $nextSort]) }}" class="dropdown-item">
+                  {{ $def['label'] }}{{ $arrow }}
+                </a>
+              </li>
+            @endforeach
+            <li>
+              <a href="{{ request()->fullUrlWithQuery(['sort' => null]) }}" class="dropdown-item">Clear</a>
+            </li>
           </ul>
         </div>
       </div>

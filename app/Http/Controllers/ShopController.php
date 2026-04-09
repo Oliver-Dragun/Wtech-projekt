@@ -45,8 +45,16 @@ class ShopController extends Controller
             });
         }
 
-        // Default sort by price ascending
-        $query->orderBy('products.price', 'asc');
+        // Sorting
+        match ($request->input('sort', '')) {
+            'price_asc'    => $query->orderBy('products.price', 'asc'),
+            'price_desc'   => $query->orderBy('products.price', 'desc'),
+            'orders_asc'   => $query->orderByRaw('(SELECT COUNT(*) FROM order_items WHERE order_items.product_id = products.id) ASC'),
+            'orders_desc'  => $query->orderByRaw('(SELECT COUNT(*) FROM order_items WHERE order_items.product_id = products.id) DESC'),
+            'reviews_asc'  => $query->orderByRaw('(SELECT COUNT(*) FROM reviews WHERE reviews.product_type_id = products.product_type_id) ASC'),
+            'reviews_desc' => $query->orderByRaw('(SELECT COUNT(*) FROM reviews WHERE reviews.product_type_id = products.product_type_id) DESC'),
+            default        => null,
+        };
 
         $products = $query->paginate(12)->withQueryString();
 
