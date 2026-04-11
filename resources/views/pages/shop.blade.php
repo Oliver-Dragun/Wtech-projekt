@@ -2,7 +2,6 @@
 
 @section('title', 'Potion Spot - ' . $categoryName)
 
-@section('page_footer')@endsection
 
 @section('content')
 <div class="main-content shadow">
@@ -43,13 +42,13 @@
                   <div class="category-option">
                     <input
                       type="checkbox"
-                      id="effect-{{ $effect->id }}"
+                      id="effect-{{ Str::slug($effect) }}"
                       name="effects[]"
-                      value="{{ $effect->id }}"
-                      {{ in_array($effect->id, request('effects', [])) ? 'checked' : '' }}
+                      value="{{ $effect }}"
+                      {{ in_array($effect, request('effects', [])) ? 'checked' : '' }}
                       onchange="document.getElementById('filter-form').submit()"
                     />
-                    <label for="effect-{{ $effect->id }}">{{ $effect->name }}</label>
+                    <label for="effect-{{ Str::slug($effect) }}">{{ $effect }}</label>
                   </div>
                 @endforeach
               </div>
@@ -57,36 +56,80 @@
           </div>
         </div>
 
-        {{-- Strength filter --}}
+        {{-- Grade filter --}}
         <div class="accordion-item border-0">
           <h2 class="accordion-header">
             <button
               class="accordion-button category-title-btn"
               type="button"
               data-bs-toggle="collapse"
-              data-bs-target="#strengthCollapse"
+              data-bs-target="#gradeCollapse"
               aria-expanded="true"
-              aria-controls="strengthCollapse"
+              aria-controls="gradeCollapse"
             >
-              Strength
+              Grade
             </button>
           </h2>
-          <div id="strengthCollapse" class="accordion-collapse collapse show">
+          <div id="gradeCollapse" class="accordion-collapse collapse show">
             <div class="accordion-body p-0">
               <div class="category-options">
-                @foreach($strengths as $strength)
+                @foreach($grades as $grade)
                   <div class="category-option">
                     <input
                       type="checkbox"
-                      id="strength-{{ Str::slug($strength) }}"
-                      name="strengths[]"
-                      value="{{ $strength }}"
-                      {{ in_array($strength, request('strengths', [])) ? 'checked' : '' }}
+                      id="grade-{{ Str::slug($grade) }}"
+                      name="grades[]"
+                      value="{{ $grade }}"
+                      {{ in_array($grade, request('grades', [])) ? 'checked' : '' }}
                       onchange="document.getElementById('filter-form').submit()"
                     />
-                    <label for="strength-{{ Str::slug($strength) }}">{{ $strength }}</label>
+                    <label for="grade-{{ Str::slug($grade) }}">{{ $grade }}</label>
                   </div>
                 @endforeach
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {{-- Price range filter --}}
+        <div class="accordion-item border-0">
+          <h2 class="accordion-header">
+            <button
+              class="accordion-button category-title-btn"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#priceCollapse"
+              aria-expanded="true"
+              aria-controls="priceCollapse"
+            >
+              Price
+            </button>
+          </h2>
+          <div id="priceCollapse" class="accordion-collapse collapse show">
+            <div class="accordion-body p-0">
+              <div class="category-options">
+                <div class="px-2 py-2">
+                  <div class="d-flex gap-2 align-items-center">
+                    <input
+                      type="number"
+                      name="price_min"
+                      class="ps-input"
+                      placeholder="Min"
+                      value="{{ request('price_min') }}"
+                      min="0"
+                    />
+                    <span>—</span>
+                    <input
+                      type="number"
+                      name="price_max"
+                      class="ps-input"
+                      placeholder="Max"
+                      value="{{ request('price_max') }}"
+                      min="0"
+                    />
+                  </div>
+                  <button type="submit" class="btn btn-outline-primary btn-sm mt-2">Go</button>
+                </div>
               </div>
             </div>
           </div>
@@ -172,15 +215,16 @@
             <div class="card">
               <div class="card-body">
                 <img
-                  src="{{ asset($product->type->mainPhoto?->img ?? 'images/potion-images/healing-potion.png') }}"
-                  alt="{{ $product->type->name }}"
+                  src="{{ asset($product->mainPhoto?->img ?? 'images/potion-images/healing-potion.png') }}"
+                  alt="{{ $product->name }}"
                   class="card-img-top mb-3"
                   style="height: 200px; object-fit: contain"
                 />
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="text-start">
-                    <h5 class="card-title mb-1">{{ $product->type->name }}</h5>
+                    <h5 class="card-title mb-1">{{ $product->name }}</h5>
                     <p class="card-text fs-5 mb-0">{{ $product->price }} Gold</p>
+                    <span class="badge ps-grade-{{ Str::slug($product->grade) }}">{{ $product->grade }}</span>
                   </div>
                   <a href="{{ url('/product/' . $product->id) }}" class="btn btn-primary">Buy</a>
                 </div>
@@ -202,7 +246,6 @@
     </div>
   </div>
 
-  @include('partials.footer')
 </div>
 @endsection
 

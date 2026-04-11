@@ -79,7 +79,7 @@ class CartController extends Controller
     public function index()
     {
         if (auth()->check()) {
-            $cart  = Order::with(['items.product.type.mainPhoto', 'items.product.size'])
+            $cart  = Order::with(['items.product.mainPhoto'])
                 ->where('user_id', auth()->id())
                 ->whereNull('status_id')
                 ->first();
@@ -88,7 +88,7 @@ class CartController extends Controller
         } else {
             $sessionCart = $this->getSessionCart();
 
-            $products = Product::with(['type.mainPhoto', 'size'])
+            $products = Product::with('mainPhoto')
                 ->whereIn('id', array_keys($sessionCart))
                 ->get()
                 ->keyBy('id');

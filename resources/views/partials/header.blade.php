@@ -16,21 +16,35 @@
     </a>
 
     <div class="ps-header-mobile-controls">
-      <form class="w-100" role="search" method="GET" action="{{ url('/shop') }}">
-        <div class="input-group">
-          <input
-            class="ps-input"
-            type="search"
-            name="search"
-            placeholder="Search for magical items..."
-            aria-label="Search"
-            value="{{ request('search') }}"
-          />
-          <button class="btn btn-outline-primary" type="submit">
-            Search
-          </button>
+      <div class="w-100" style="position: relative" x-data="searchDropdown()" @click.outside="results = []">
+        <form role="search" method="GET" action="{{ url('/shop') }}">
+          <div class="input-group">
+            <input
+              class="ps-input"
+              type="search"
+              name="search"
+              placeholder="Search for magical items..."
+              aria-label="Search"
+              value="{{ request('search') }}"
+              x-model="query"
+              @input.debounce.300ms="fetchResults"
+              @focus="fetchResults"
+              autocomplete="off"
+            />
+            <button class="btn btn-outline-primary" type="submit">
+              Search
+            </button>
+          </div>
+        </form>
+        <div class="ps-search-dropdown" x-show="results.length > 0" x-cloak>
+          <template x-for="item in results" :key="item.id">
+            <a :href="'/product/' + item.product_id" class="ps-search-item">
+              <img :src="item.image ? ('/' + item.image) : '/images/potion-images/healing-potion.png'" :alt="item.name" />
+              <span x-text="item.name"></span>
+            </a>
+          </template>
         </div>
-      </form>
+      </div>
       <div class="dropdown">
         <button
           class="btn btn-outline-primary dropdown-toggle"
@@ -46,26 +60,39 @@
           <li><a class="dropdown-item" href="{{ url('/shop?category=3') }}">Orbs</a></li>
           <li><a class="dropdown-item" href="{{ url('/shop?category=4') }}">Artifacts</a></li>
           <li><a class="dropdown-item" href="{{ url('/shop?category=5') }}">Bundles</a></li>
-          <li><a class="dropdown-item" href="{{ url('/shop?category=5') }}">Sale</a></li>
         </ul>
       </div>
     </div>
 
-    <form class="ps-header-search" role="search" method="GET" action="{{ url('/shop') }}">
-      <div class="input-group">
-        <input
-          class="ps-input"
-          type="search"
-          name="search"
-          placeholder="Search for magical items..."
-          aria-label="Search"
-          value="{{ request('search') }}"
-        />
-        <button class="btn btn-outline-primary" type="submit">
-          Search
-        </button>
+    <div class="ps-header-search" x-data="searchDropdown()" @click.outside="results = []">
+      <form role="search" method="GET" action="{{ url('/shop') }}">
+        <div class="input-group">
+          <input
+            class="ps-input"
+            type="search"
+            name="search"
+            placeholder="Search for magical items..."
+            aria-label="Search"
+            value="{{ request('search') }}"
+            x-model="query"
+            @input.debounce.300ms="fetchResults"
+            @focus="fetchResults"
+            autocomplete="off"
+          />
+          <button class="btn btn-outline-primary" type="submit">
+            Search
+          </button>
+        </div>
+      </form>
+      <div class="ps-search-dropdown" x-show="results.length > 0" x-cloak>
+        <template x-for="item in results" :key="item.id">
+          <a :href="'/product/' + item.product_id" class="ps-search-item">
+            <img :src="item.image ? ('/' + item.image) : '/images/potion-images/healing-potion.png'" :alt="item.name" />
+            <span x-text="item.name"></span>
+          </a>
+        </template>
       </div>
-    </form>
+    </div>
 
     <div class="ps-header-user-buttons">
       @auth
@@ -160,9 +187,6 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{{ url('/shop?category=5') }}">Bundles</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url('/shop?category=5') }}">Sale</a>
         </li>
       </ul>
     </nav>

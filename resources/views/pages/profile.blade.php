@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', 'My Profile — Potion Spot')
+@section('title', 'My Profile | Potion Spot')
 
 @section('content')
 <div class="container my-5">

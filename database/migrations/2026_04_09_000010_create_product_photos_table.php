@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('product_photos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('photo_id')->nullable()->constrained('product_types');
+            $table->foreignId('product_id')->nullable()->constrained('products');
             $table->smallInteger('number');
             $table->text('img');
         });

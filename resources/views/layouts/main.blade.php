@@ -14,13 +14,16 @@
       @include('partials.header')
     @show
 
-    @yield('content')
+    <div class="ps-page-content">
+      @yield('content')
+    </div>
 
     @section('page_footer')
       @include('partials.footer')
     @show
 
     <script src="{{ asset('bootstrap/js/bootstrap.bundle.js') }}"></script>
+    @vite('resources/js/app.js')
     @stack('scripts')
   </body>
 </html>

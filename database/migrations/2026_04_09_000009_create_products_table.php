@@ -10,10 +10,13 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_type_id')->constrained('product_types');
-            $table->foreignId('size_id')->constrained('sizes');
+            $table->string('name', 255);
+            $table->text('description');
+            $table->foreignId('category_id')->constrained('product_categories');
+            $table->string('effect', 63);
+            $table->string('grade', 31);
             $table->integer('price');
-            $table->boolean('is_bundle');
+            $table->boolean('is_bundle')->default(false);
         });
     }
 

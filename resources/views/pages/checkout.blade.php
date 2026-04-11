@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', 'Checkout — Potion Spot')
+@section('title', 'Checkout | Potion Spot')
 
 @section('content')
 <main>

@@ -11,8 +11,8 @@ class ProductCategory extends Model
 
     protected $fillable = ['name'];
 
-    public function productTypes(): HasMany
+    public function products(): HasMany
     {
-        return $this->hasMany(ProductType::class, 'category_id');
+        return $this->hasMany(Product::class, 'category_id');
     }
 }

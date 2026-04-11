@@ -9,22 +9,19 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-            // Independent tables first
+            // Independent tables
             ProductCategorySeeder::class,
-            EffectSeeder::class,
-            SizeSeeder::class,
             ShippingMethodSeeder::class,
             OrderStatusSeeder::class,
 
             // Depends on categories
-            ProductTypeSeeder::class,
-
-            // Depends on product types and sizes
             ProductSeeder::class,
 
-            // Depends on product types
+            // Depends on products
             ProductPhotoSeeder::class,
-            ProductEffectSeeder::class,
+
+            // Admin user
+            AdminSeeder::class,
         ]);
     }
 }

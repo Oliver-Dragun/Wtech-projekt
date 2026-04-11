@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', 'Shopping Cart — Potion Spot')
+@section('title', 'Shopping Cart | Potion Spot')
 
 @section('html_class', 'ps-cart-page')
 @section('body_class', 'ps-cart-page-body')
@@ -17,14 +17,14 @@
           <article class="ps-cart-item">
             <img
               class="ps-cart-item-img"
-              src="{{ asset($item->product->type->mainPhoto?->img ?? 'images/potion-images/healing-potion.png') }}"
-              alt="{{ $item->product->type->name }}"
+              src="{{ asset($item->product->mainPhoto?->img ?? 'images/potion-images/healing-potion.png') }}"
+              alt="{{ $item->product->name }}"
             />
             <div class="ps-cart-item-body">
               <div class="ps-cart-item-head">
                 <div>
-                  <p class="ps-cart-item-name mb-0">{{ $item->product->type->name }}</p>
-                  <p class="ps-cart-item-variant mb-0">{{ $item->product->size->size }}</p>
+                  <p class="ps-cart-item-name mb-0">{{ $item->product->name }}</p>
+                  <p class="ps-cart-item-variant mb-0">{{ $item->product->grade }}</p>
                 </div>
                 <div class="text-end">
                   <span class="ps-cart-item-price d-block">{{ $item->product->price * $item->quantity }} Gold</span>
@@ -44,7 +44,7 @@
                   @csrf
                   <fieldset
                     class="ps-cart-stepper"
-                    aria-label="Quantity for {{ $item->product->type->name }}"
+                    aria-label="Quantity for {{ $item->product->name }}"
                   >
                     <legend class="visually-hidden">Quantity</legend>
                     <button

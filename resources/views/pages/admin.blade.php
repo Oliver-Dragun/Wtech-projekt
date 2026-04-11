@@ -89,196 +89,73 @@
   <hr class="ps-section-divider" />
   <div class="ps-admin-filter-section mb-4">
     <div>
-      <div class="input-group">
+      <form method="GET" action="{{ url('/admin') }}" class="input-group">
+        @if(request('category'))
+          <input type="hidden" name="category" value="{{ request('category') }}" />
+        @endif
         <input
           class="ps-input"
           type="search"
+          name="search"
           placeholder="Search products..."
           aria-label="Search"
+          value="{{ request('search') }}"
         />
         <button class="btn btn-outline-primary" type="submit">Search</button>
-      </div>
+      </form>
     </div>
     <div>
-      <select class="form-select ps-input">
-        <option value="">All Categories</option>
-        <option value="potions">Potions</option>
-        <option value="scrolls">Scrolls</option>
-        <option value="orbs">Orbs</option>
-        <option value="artifacts">Artifacts</option>
-      </select>
+      <form method="GET" action="{{ url('/admin') }}">
+        @if(request('search'))
+          <input type="hidden" name="search" value="{{ request('search') }}" />
+        @endif
+        <select class="form-select ps-input" name="category" onchange="this.form.submit()">
+          <option value="">All Categories</option>
+          @foreach($categories as $cat)
+            <option value="{{ $cat->id }}" {{ request('category') == $cat->id ? 'selected' : '' }}>
+              {{ $cat->name }}
+            </option>
+          @endforeach
+        </select>
+      </form>
     </div>
   </div>
 
   <div class="ps-admin-product-list">
-    <div class="card ps-admin-product-card">
-      <div class="card-body ps-admin-product-body">
-        <img class="ps-admin-product-img" src="{{ asset('images/potion-images/healing-potion.png') }}" alt="Healing Potion" />
-        <div class="ps-admin-product-content">
-          <div class="ps-admin-product-header">
-            <div class="ps-admin-product-info">
-              <h5 class="card-title mb-1">Healing Potion</h5>
-              <p class="ps-admin-product-id">ID: POT-001</p>
+    @forelse($products as $product)
+      <div class="card ps-admin-product-card">
+        <div class="card-body ps-admin-product-body">
+          <img
+            class="ps-admin-product-img"
+            src="{{ asset($product->mainPhoto?->img ?? 'images/potion-images/healing-potion.png') }}"
+            alt="{{ $product->name }}"
+          />
+          <div class="ps-admin-product-content">
+            <div class="ps-admin-product-header">
+              <div class="ps-admin-product-info">
+                <h5 class="card-title mb-1">{{ $product->name }}</h5>
+                <p class="ps-admin-product-id">ID: {{ $product->id }} &middot; {{ $product->effect }} &middot; <span class="badge ps-grade-{{ Str::slug($product->grade) }}">{{ $product->grade }}</span></p>
+              </div>
+              <div class="ps-admin-product-details">
+                <p class="ps-admin-product-price">{{ $product->price }} Gold</p>
+              </div>
             </div>
-            <div class="ps-admin-product-details">
-              <p class="ps-admin-product-price">25 Gold</p>
-              <p class="ps-admin-product-stock">Stock: 50</p>
+            <div class="ps-admin-product-actions">
+              <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editProductModal">Edit</button>
+              <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#removeProductModal">Delete</button>
             </div>
-          </div>
-          <div class="ps-admin-product-actions">
-            <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editProductModal">Edit</button>
-            <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#removeProductModal">Delete</button>
           </div>
         </div>
       </div>
-    </div>
-    <div class="card ps-admin-product-card">
-      <div class="card-body ps-admin-product-body">
-        <img class="ps-admin-product-img" src="{{ asset('images/potion-images/speed-potion.png') }}" alt="Speed Potion" />
-        <div class="ps-admin-product-content">
-          <div class="ps-admin-product-header">
-            <div class="ps-admin-product-info">
-              <h5 class="card-title mb-1">Speed Potion</h5>
-              <p class="ps-admin-product-id">ID: POT-002</p>
-            </div>
-            <div class="ps-admin-product-details">
-              <p class="ps-admin-product-price">30 Gold</p>
-              <p class="ps-admin-product-stock">Stock: 35</p>
-            </div>
-          </div>
-          <div class="ps-admin-product-actions">
-            <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editProductModal">Edit</button>
-            <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#removeProductModal">Delete</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="card ps-admin-product-card">
-      <div class="card-body ps-admin-product-body">
-        <img class="ps-admin-product-img" src="{{ asset('images/potion-images/fireresistance-potion.png') }}" alt="Fire Resistance Potion" />
-        <div class="ps-admin-product-content">
-          <div class="ps-admin-product-header">
-            <div class="ps-admin-product-info">
-              <h5 class="card-title mb-1">Fire Resistance Potion</h5>
-              <p class="ps-admin-product-id">ID: POT-003</p>
-            </div>
-            <div class="ps-admin-product-details">
-              <p class="ps-admin-product-price">40 Gold</p>
-              <p class="ps-admin-product-stock">Stock: 25</p>
-            </div>
-          </div>
-          <div class="ps-admin-product-actions">
-            <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editProductModal">Edit</button>
-            <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#removeProductModal">Delete</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="card ps-admin-product-card">
-      <div class="card-body ps-admin-product-body">
-        <img class="ps-admin-product-img" src="{{ asset('images/potion-images/restoration-potion.png') }}" alt="Restoration Potion" />
-        <div class="ps-admin-product-content">
-          <div class="ps-admin-product-header">
-            <div class="ps-admin-product-info">
-              <h5 class="card-title mb-1">Restoration Potion</h5>
-              <p class="ps-admin-product-id">ID: POT-004</p>
-            </div>
-            <div class="ps-admin-product-details">
-              <p class="ps-admin-product-price">35 Gold</p>
-              <p class="ps-admin-product-stock">Stock: 40</p>
-            </div>
-          </div>
-          <div class="ps-admin-product-actions">
-            <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editProductModal">Edit</button>
-            <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#removeProductModal">Delete</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="card ps-admin-product-card">
-      <div class="card-body ps-admin-product-body">
-        <img class="ps-admin-product-img" src="{{ asset('images/potion-images/mana-potion.png') }}" alt="Mana Potion" />
-        <div class="ps-admin-product-content">
-          <div class="ps-admin-product-header">
-            <div class="ps-admin-product-info">
-              <h5 class="card-title mb-1">Mana Potion</h5>
-              <p class="ps-admin-product-id">ID: POT-005</p>
-            </div>
-            <div class="ps-admin-product-details">
-              <p class="ps-admin-product-price">20 Gold</p>
-              <p class="ps-admin-product-stock">Stock: 60</p>
-            </div>
-          </div>
-          <div class="ps-admin-product-actions">
-            <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editProductModal">Edit</button>
-            <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#removeProductModal">Delete</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="card ps-admin-product-card">
-      <div class="card-body ps-admin-product-body">
-        <img class="ps-admin-product-img" src="{{ asset('images/potion-images/invisibility-potion.png') }}" alt="Invisibility Potion" />
-        <div class="ps-admin-product-content">
-          <div class="ps-admin-product-header">
-            <div class="ps-admin-product-info">
-              <h5 class="card-title mb-1">Invisibility Potion</h5>
-              <p class="ps-admin-product-id">ID: POT-006</p>
-            </div>
-            <div class="ps-admin-product-details">
-              <p class="ps-admin-product-price">50 Gold</p>
-              <p class="ps-admin-product-stock">Stock: 15</p>
-            </div>
-          </div>
-          <div class="ps-admin-product-actions">
-            <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editProductModal">Edit</button>
-            <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#removeProductModal">Delete</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="card ps-admin-product-card">
-      <div class="card-body ps-admin-product-body">
-        <img class="ps-admin-product-img" src="{{ asset('images/potion-images/strength-potion.png') }}" alt="Strength Potion" />
-        <div class="ps-admin-product-content">
-          <div class="ps-admin-product-header">
-            <div class="ps-admin-product-info">
-              <h5 class="card-title mb-1">Strength Potion</h5>
-              <p class="ps-admin-product-id">ID: POT-007</p>
-            </div>
-            <div class="ps-admin-product-details">
-              <p class="ps-admin-product-price">45 Gold</p>
-              <p class="ps-admin-product-stock">Stock: 30</p>
-            </div>
-          </div>
-          <div class="ps-admin-product-actions">
-            <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editProductModal">Edit</button>
-            <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#removeProductModal">Delete</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="card ps-admin-product-card">
-      <div class="card-body ps-admin-product-body">
-        <img class="ps-admin-product-img" src="{{ asset('images/potion-images/fortitude-potion.png') }}" alt="Fortitude Potion" />
-        <div class="ps-admin-product-content">
-          <div class="ps-admin-product-header">
-            <div class="ps-admin-product-info">
-              <h5 class="card-title mb-1">Fortitude Potion</h5>
-              <p class="ps-admin-product-id">ID: POT-008</p>
-            </div>
-            <div class="ps-admin-product-details">
-              <p class="ps-admin-product-price">55 Gold</p>
-              <p class="ps-admin-product-stock">Stock: 20</p>
-            </div>
-          </div>
-          <div class="ps-admin-product-actions">
-            <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editProductModal">Edit</button>
-            <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#removeProductModal">Delete</button>
-          </div>
-        </div>
-      </div>
-    </div>
+    @empty
+      <p class="text-muted py-4">No products found.</p>
+    @endforelse
   </div>
+
+  @if($products->hasPages())
+    <div class="d-flex justify-content-center mt-4">
+      {{ $products->links('pagination::bootstrap-5') }}
+    </div>
+  @endif
 </div>
 @endsection

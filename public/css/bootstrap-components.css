@@ -1,3 +1,19 @@
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.ps-page-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
 .ps-banner-stripes {
   height: 43px;
   position: relative;
@@ -546,16 +562,19 @@
   justify-content: center;
   padding: 24px;
   height: 100%;
-  position: relative;
+}
+
+.ps-hero-card-bottom {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 16px;
 }
 
 .ps-hero-card-img {
-  position: absolute;
-  right: 24px;
-  bottom: 24px;
-  max-width: 40%;
-  max-height: 80%;
+  max-height: 120px;
   object-fit: contain;
+  margin-left: auto;
 }
 
 .ps-hero-card-label {
@@ -601,7 +620,7 @@
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  min-height: 170px;
+  flex: 1;
   background-color: #ffe4e4;
 }
 
@@ -611,6 +630,7 @@
   justify-content: center;
   padding: 12px;
   height: 100%;
+  position: relative;
 }
 
 .ps-side-offer-label {
@@ -1034,12 +1054,58 @@
 .ps-header-search {
   display: none;
   flex-grow: 1;
+  position: relative;
 }
 
 @media (min-width: 992px) {
   .ps-header-search {
     display: block;
   }
+}
+
+[x-cloak] {
+  display: none !important;
+}
+
+.ps-search-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1050;
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.ps-search-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  text-decoration: none;
+  color: #333;
+  transition: background 0.15s;
+}
+
+.ps-search-item:hover {
+  background: #f0f0f0;
+  color: #333;
+}
+
+.ps-search-item img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.ps-search-item span {
+  font-size: 0.95rem;
 }
 
 .ps-header-user-buttons {
@@ -1073,4 +1139,29 @@
   .ps-header-nav {
     display: block;
   }
+}
+
+/* Grade badges */
+.ps-grade-basic {
+  background-color: #8b8b8b;
+  color: #fff;
+  font-size: 0.75rem;
+}
+
+.ps-grade-greater {
+  background-color: #2e7d32;
+  color: #fff;
+  font-size: 0.75rem;
+}
+
+.ps-grade-superior {
+  background-color: #1565c0;
+  color: #fff;
+  font-size: 0.75rem;
+}
+
+.ps-grade-supreme {
+  background-color: #9c27b0;
+  color: #fff;
+  font-size: 0.75rem;
 }

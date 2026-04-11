@@ -9,10 +9,10 @@ class ProductPhoto extends Model
 {
     public $timestamps = false;
 
-    protected $fillable = ['photo_id', 'number', 'img'];
+    protected $fillable = ['product_id', 'number', 'img'];
 
-    public function productType(): BelongsTo
+    public function product(): BelongsTo
     {
-        return $this->belongsTo(ProductType::class, 'photo_id');
+        return $this->belongsTo(Product::class);
     }
 }

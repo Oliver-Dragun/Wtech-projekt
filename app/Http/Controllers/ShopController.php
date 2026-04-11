@@ -2,75 +2,68 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Effect;
 use App\Models\Product;
 use App\Models\ProductCategory;
-use App\Models\ProductEffect;
-use App\Models\ProductType;
 use Illuminate\Http\Request;
 
 class ShopController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Product::with(['type.mainPhoto', 'type.category', 'size'])
-            ->join('product_types', 'products.product_type_id', '=', 'product_types.id')
-            ->select('products.*');
+        $query = Product::with('mainPhoto');
 
         // Full-text search
         if ($request->filled('search')) {
-            $search = $request->search;
-            $query->where(function ($q) use ($search) {
-                $q->whereILike('product_types.name', "%{$search}%")
-                  ->orWhereILike('product_types.description', "%{$search}%");
-            });
+            $lower = strtolower($request->search);
+            $query->whereRaw('LOWER(name) LIKE ?', ["%{$lower}%"]);
         }
 
         // Category filter
         if ($request->filled('category')) {
-            $query->where('product_types.category_id', $request->category);
+            $query->where('category_id', $request->category);
         }
 
-        // Effect filter (multi-select — product must have at least one of the selected effects)
+        // Effect filter (multi-select)
         if ($request->filled('effects')) {
-            $query->whereHas('type.effects', function ($q) use ($request) {
-                $q->whereIn('effect_id', $request->effects);
-            });
+            $query->whereIn('effect', $request->effects);
         }
 
-        // Strength filter (multi-select — product must have at least one effect with that strength)
-        if ($request->filled('strengths')) {
-            $query->whereHas('type.effects', function ($q) use ($request) {
-                $q->whereIn('strength', $request->strengths);
-            });
+        // Grade filter (multi-select)
+        if ($request->filled('grades')) {
+            $query->whereIn('grade', $request->grades);
+        }
+
+        // Price range filter
+        if ($request->filled('price_min')) {
+            $query->where('price', '>=', (int) $request->price_min);
+        }
+        if ($request->filled('price_max')) {
+            $query->where('price', '<=', (int) $request->price_max);
         }
 
         // Sorting
         match ($request->input('sort', '')) {
-            'price_asc'    => $query->orderBy('products.price', 'asc'),
-            'price_desc'   => $query->orderBy('products.price', 'desc'),
+            'price_asc'    => $query->orderBy('price', 'asc'),
+            'price_desc'   => $query->orderBy('price', 'desc'),
             'orders_asc'   => $query->orderByRaw('(SELECT COUNT(*) FROM order_items WHERE order_items.product_id = products.id) ASC'),
             'orders_desc'  => $query->orderByRaw('(SELECT COUNT(*) FROM order_items WHERE order_items.product_id = products.id) DESC'),
-            'reviews_asc'  => $query->orderByRaw('(SELECT COUNT(*) FROM reviews WHERE reviews.product_type_id = products.product_type_id) ASC'),
-            'reviews_desc' => $query->orderByRaw('(SELECT COUNT(*) FROM reviews WHERE reviews.product_type_id = products.product_type_id) DESC'),
+            'reviews_asc'  => $query->orderByRaw('(SELECT COUNT(*) FROM reviews WHERE reviews.product_id = products.id) ASC'),
+            'reviews_desc' => $query->orderByRaw('(SELECT COUNT(*) FROM reviews WHERE reviews.product_id = products.id) DESC'),
             default        => null,
         };
 
         $products = $query->paginate(12)->withQueryString();
 
-        // Scope sidebar filters to product types in the selected category
-        $typeIds = ProductType::when($request->filled('category'),
-            fn($q) => $q->where('category_id', $request->category)
-        )->pluck('id');
+        // Scope sidebar filters to the selected category
+        $scopedQuery = Product::query();
+        if ($request->filled('category')) {
+            $scopedQuery->where('category_id', $request->category);
+        }
 
-        $effects = Effect::whereHas('productEffects', fn($q) =>
-            $q->whereIn('product_type_id', $typeIds)
-        )->orderBy('name')->get();
+        $effects = (clone $scopedQuery)->distinct()->orderBy('effect')->pluck('effect');
 
-        $strengths = ProductEffect::whereIn('product_type_id', $typeIds)
-            ->distinct()
-            ->pluck('strength')
-            ->sortBy(fn($s) => array_search($s, ['Basic', 'Greater', 'Superior', 'Supreme']))
+        $grades = (clone $scopedQuery)->distinct()->pluck('grade')
+            ->sortBy(fn($g) => array_search($g, ['Basic', 'Greater', 'Superior', 'Supreme']))
             ->values();
 
         // Current category name for the page title
@@ -80,6 +73,34 @@ class ShopController extends Controller
             $categoryName = $category?->name ?? 'All Products';
         }
 
-        return view('pages.shop', compact('products', 'effects', 'strengths', 'categoryName'));
+        return view('pages.shop', compact('products', 'effects', 'grades', 'categoryName'));
+    }
+
+    public function search(Request $request)
+    {
+        $search = $request->input('q', '');
+
+        if (strlen($search) < 1) {
+            return response()->json([]);
+        }
+
+        $results = Product::with('mainPhoto')
+            ->whereRaw('LOWER(name) LIKE ?', ['%' . strtolower($search) . '%'])
+            ->whereIn('id', function ($q) use ($search) {
+                $q->selectRaw('MIN(id)')
+                    ->from('products')
+                    ->whereRaw('LOWER(name) LIKE ?', ['%' . strtolower($search) . '%'])
+                    ->groupBy('name');
+            })
+            ->limit(5)
+            ->get()
+            ->map(fn($product) => [
+                'id'         => $product->id,
+                'name'       => $product->name,
+                'image'      => $product->mainPhoto?->img,
+                'product_id' => $product->id,
+            ]);
+
+        return response()->json($results);
     }
 }
