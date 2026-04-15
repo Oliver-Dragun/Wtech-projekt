@@ -9,9 +9,7 @@ use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
-    // -------------------------------------------------------------------------
-    // Guest (session) helpers
-    // -------------------------------------------------------------------------
+    // Guest session helpers.
 
     private function getSessionCart(): array
     {
@@ -23,9 +21,7 @@ class CartController extends Controller
         session(['cart' => $cart]);
     }
 
-    // -------------------------------------------------------------------------
-    // Auth (DB) helpers
-    // -------------------------------------------------------------------------
+    // Authenticated database cart helpers.
 
     private function getDbCart(): Order
     {
@@ -40,9 +36,7 @@ class CartController extends Controller
         return $cart;
     }
 
-    // -------------------------------------------------------------------------
-    // Merge session cart into DB cart on login / register
-    // -------------------------------------------------------------------------
+    // Merge session cart into DB cart on login or registration.
 
     public static function mergeGuestCart(): void
     {
@@ -72,9 +66,7 @@ class CartController extends Controller
         session()->forget('cart');
     }
 
-    // -------------------------------------------------------------------------
-    // Controller actions
-    // -------------------------------------------------------------------------
+    // Cart controller actions.
 
     public function index()
     {
