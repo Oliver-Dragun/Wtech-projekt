@@ -11,7 +11,8 @@ CREATE TABLE "products" (
   "effect" varchar(63) NOT NULL,
   "grade" varchar(31) NOT NULL,
   "price" integer NOT NULL,
-  "is_bundle" boolean NOT NULL DEFAULT false
+  "is_bundle" boolean NOT NULL DEFAULT false,
+  "created_at" timestamp
 );
 
 CREATE TABLE "product_photos" (
