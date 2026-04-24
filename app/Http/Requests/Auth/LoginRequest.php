@@ -12,13 +12,11 @@ use Illuminate\Validation\ValidationException;
 
 class LoginRequest extends FormRequest
 {
-    // Determine whether the user is authorized to make this request.
     public function authorize(): bool
     {
         return true;
     }
 
-    // Return validation rules for login.
     public function rules(): array
     {
         return [
@@ -27,7 +25,6 @@ class LoginRequest extends FormRequest
         ];
     }
 
-    // Attempt to authenticate the request credentials.
     public function authenticate(): void
     {
         $this->ensureIsNotRateLimited();
@@ -43,7 +40,6 @@ class LoginRequest extends FormRequest
         RateLimiter::clear($this->throttleKey());
     }
 
-    // Ensure the login request is not rate limited.
     public function ensureIsNotRateLimited(): void
     {
         if (! RateLimiter::tooManyAttempts($this->throttleKey(), 5)) {
@@ -62,7 +58,6 @@ class LoginRequest extends FormRequest
         ]);
     }
 
-    // Build the throttle key used by the rate limiter.
     public function throttleKey(): string
     {
         return Str::transliterate(Str::lower($this->string('email')).'|'.$this->ip());

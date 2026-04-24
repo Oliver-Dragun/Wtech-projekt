@@ -7,27 +7,25 @@ use App\Models\OrderItem;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
+// Handles cart logic for both guests (session) and logged-in users (DB)
 class CartController extends Controller
 {
-    // Guest session helpers.
-
+    // Returns cart from session for guests
     private function getSessionCart(): array
     {
         return session('cart', []);
     }
 
+    // Saves cart to session for guests
     private function saveSessionCart(array $cart): void
     {
         session(['cart' => $cart]);
     }
 
-    // Authenticated database cart helpers.
-
+    // Returns DB cart for authenticated user, creates one if missing
     private function getDbCart(): Order
     {
-        $cart = Order::where('user_id', auth()->id())
-            ->whereNull('status_id')
-            ->first();
+        $cart = Order::activeCart()->first();
 
         if (!$cart) {
             $cart = Order::create(['user_id' => auth()->id()]);
@@ -36,8 +34,7 @@ class CartController extends Controller
         return $cart;
     }
 
-    // Merge session cart into DB cart on login or registration.
-
+    // Merges session cart into DB cart on login or registration
     public static function mergeGuestCart(): void
     {
         $sessionCart = session('cart', []);
@@ -46,9 +43,7 @@ class CartController extends Controller
             return;
         }
 
-        $cart = Order::where('user_id', auth()->id())
-            ->whereNull('status_id')
-            ->first() ?? Order::create(['user_id' => auth()->id()]);
+        $cart = Order::activeCart()->first() ?? Order::create(['user_id' => auth()->id()]);
 
         foreach ($sessionCart as $productId => $quantity) {
             $item = $cart->items()->where('product_id', $productId)->first();
@@ -58,7 +53,7 @@ class CartController extends Controller
             } else {
                 $cart->items()->create([
                     'product_id' => (int) $productId,
-                    'quantity'   => (int) $quantity,
+                    'quantity' => (int) $quantity,
                 ]);
             }
         }
@@ -66,14 +61,12 @@ class CartController extends Controller
         session()->forget('cart');
     }
 
-    // Cart controller actions.
-
+    // Shows the cart page
     public function index()
     {
         if (auth()->check()) {
-            $cart  = Order::with(['items.product.mainPhoto'])
-                ->where('user_id', auth()->id())
-                ->whereNull('status_id')
+            $cart = Order::with(['items.product.mainPhoto'])
+                ->activeCart()
                 ->first();
 
             $items = $cart ? $cart->items : collect();
@@ -87,8 +80,8 @@ class CartController extends Controller
 
             $items = collect($sessionCart)->map(fn($qty, $pid) => (object) [
                 'product_id' => (int) $pid,
-                'product'    => $products->get($pid),
-                'quantity'   => (int) $qty,
+                'product' => $products->get($pid),
+                'quantity' => (int) $qty,
             ]);
         }
 
@@ -97,15 +90,16 @@ class CartController extends Controller
         return view('pages.cart', compact('items', 'subtotal'));
     }
 
+    // Adds a product to the cart
     public function add(Request $request)
     {
         $request->validate([
             'product_id' => 'required|exists:products,id',
-            'quantity'   => 'required|integer|min:1|max:99',
+            'quantity' => 'required|integer|min:1|max:99',
         ]);
 
         $productId = (int) $request->product_id;
-        $quantity  = (int) $request->quantity;
+        $quantity = (int) $request->quantity;
 
         if (auth()->check()) {
             $cart = $this->getDbCart();
@@ -116,7 +110,7 @@ class CartController extends Controller
             } else {
                 $cart->items()->create([
                     'product_id' => $productId,
-                    'quantity'   => $quantity,
+                    'quantity' => $quantity,
                 ]);
             }
         } else {
@@ -128,16 +122,15 @@ class CartController extends Controller
         return redirect()->back()->with('success', 'Added to cart.');
     }
 
+    // Updates quantity or removes a cart item
     public function updateItem(Request $request, int $productId)
     {
         $action = $request->input('action');
 
         if (auth()->check()) {
-            $cart = Order::where('user_id', auth()->id())
-                ->whereNull('status_id')
-                ->firstOrFail();
+            $cart = Order::activeCart()->firstOrFail();
 
-            $item     = $cart->items()->where('product_id', $productId)->firstOrFail();
+            $item = $cart->items()->where('product_id', $productId)->firstOrFail();
             $quantity = (int) $item->quantity;
 
             if ($action === 'remove') {

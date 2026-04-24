@@ -61,7 +61,7 @@
         Login
       </button>
 
-      <a href="{{ route('register') }}" class="btn btn-outline-primary w-100 mb-3">
+      <a href="{{ route('register', array_filter(['redirect' => request('redirect')])) }}" class="btn btn-outline-primary w-100 mb-3">
         Create Account
       </a>
     </form>

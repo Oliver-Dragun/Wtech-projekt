@@ -16,13 +16,11 @@ use Illuminate\View\View;
 
 class NewPasswordController extends Controller
 {
-    // Display the password reset view.
     public function create(Request $request): View
     {
         return view('auth.reset-password', ['request' => $request]);
     }
 
-    // Handle an incoming new password request.
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
@@ -31,7 +29,6 @@ class NewPasswordController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        // Attempt to reset the password and persist the updated user credentials.
         $status = Password::reset(
             $request->only('email', 'password', 'password_confirmation', 'token'),
             function (User $user) use ($request) {
@@ -44,7 +41,6 @@ class NewPasswordController extends Controller
             }
         );
 
-        // Redirect on success, otherwise return with the translated reset error.
         return $status == Password::PASSWORD_RESET
                     ? redirect()->route('login')->with('status', __($status))
                     : back()->withInput($request->only('email'))

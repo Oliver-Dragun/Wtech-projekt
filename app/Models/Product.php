@@ -47,4 +47,9 @@ class Product extends Model
     {
         return $this->hasMany(BundleComponent::class, 'bundle_product_id');
     }
+
+    public function scopeSearch($query, string $term)
+    {
+        return $query->whereRaw('LOWER(name) LIKE ?', ['%' . strtolower($term) . '%']);
+    }
 }

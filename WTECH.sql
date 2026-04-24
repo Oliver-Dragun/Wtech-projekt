@@ -28,12 +28,17 @@ CREATE TABLE "users" (
   "phone_number" varchar(31),
   "email" varchar(127) NOT NULL,
   "password" varchar(255) NOT NULL,
-  "is_admin" boolean NOT NULL DEFAULT false
+  "is_admin" boolean NOT NULL DEFAULT false,
+  "address_id" integer
 );
 
 CREATE TABLE "orders" (
   "id" integer PRIMARY KEY,
   "user_id" integer NOT NULL,
+  "name" varchar(63),
+  "surname" varchar(63),
+  "email" varchar(127),
+  "phone_number" varchar(31),
   "sum" integer,
   "shipping_address_id" integer,
   "shipping_method_id" integer,
@@ -103,6 +108,8 @@ ALTER TABLE "orders" ADD FOREIGN KEY ("shipping_address_id") REFERENCES "address
 ALTER TABLE "reviews" ADD FOREIGN KEY ("product_id") REFERENCES "products" ("id") DEFERRABLE INITIALLY IMMEDIATE;
 
 ALTER TABLE "reviews" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id") DEFERRABLE INITIALLY IMMEDIATE;
+
+ALTER TABLE "users" ADD FOREIGN KEY ("address_id") REFERENCES "addresses" ("id") DEFERRABLE INITIALLY IMMEDIATE;
 
 ALTER TABLE "bundle_components" ADD FOREIGN KEY ("bundle_product_id") REFERENCES "products" ("id") DEFERRABLE INITIALLY IMMEDIATE;
 

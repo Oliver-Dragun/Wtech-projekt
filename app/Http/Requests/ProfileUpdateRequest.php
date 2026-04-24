@@ -9,7 +9,6 @@ use Illuminate\Validation\Rule;
 
 class ProfileUpdateRequest extends FormRequest
 {
-    // Return validation rules for profile update.
     public function rules(): array
     {
         return [

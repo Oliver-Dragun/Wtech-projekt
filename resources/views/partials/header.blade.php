@@ -16,35 +16,7 @@
     </a>
 
     <div class="ps-header-mobile-controls">
-      <div class="w-100" style="position: relative" x-data="searchDropdown()" @click.outside="results = []">
-        <form role="search" method="GET" action="{{ url('/shop') }}">
-          <div class="input-group">
-            <input
-              class="ps-input"
-              type="search"
-              name="search"
-              placeholder="Search for magical items..."
-              aria-label="Search"
-              value="{{ request('search') }}"
-              x-model="query"
-              @input.debounce.300ms="fetchResults"
-              @focus="fetchResults"
-              autocomplete="off"
-            />
-            <button class="btn btn-outline-primary" type="submit">
-              Search
-            </button>
-          </div>
-        </form>
-        <div class="ps-search-dropdown" x-show="results.length > 0" x-cloak>
-          <template x-for="item in results" :key="item.id">
-            <a :href="'/product/' + item.product_id" class="ps-search-item">
-              <img :src="item.image ? ('/' + item.image) : '/images/potion-images/healing-potion.png'" :alt="item.name" />
-              <span x-text="item.name"></span>
-            </a>
-          </template>
-        </div>
-      </div>
+      @include('partials.search-form', ['wrapperClass' => 'w-100 position-relative'])
       <div class="dropdown">
         <button
           class="btn btn-outline-primary dropdown-toggle"
@@ -64,35 +36,7 @@
       </div>
     </div>
 
-    <div class="ps-header-search" x-data="searchDropdown()" @click.outside="results = []">
-      <form role="search" method="GET" action="{{ url('/shop') }}">
-        <div class="input-group">
-          <input
-            class="ps-input"
-            type="search"
-            name="search"
-            placeholder="Search for magical items..."
-            aria-label="Search"
-            value="{{ request('search') }}"
-            x-model="query"
-            @input.debounce.300ms="fetchResults"
-            @focus="fetchResults"
-            autocomplete="off"
-          />
-          <button class="btn btn-outline-primary" type="submit">
-            Search
-          </button>
-        </div>
-      </form>
-      <div class="ps-search-dropdown" x-show="results.length > 0" x-cloak>
-        <template x-for="item in results" :key="item.id">
-          <a :href="'/product/' + item.product_id" class="ps-search-item">
-            <img :src="item.image ? ('/' + item.image) : '/images/potion-images/healing-potion.png'" :alt="item.name" />
-            <span x-text="item.name"></span>
-          </a>
-        </template>
-      </div>
-    </div>
+    @include('partials.search-form', ['wrapperClass' => 'ps-header-search'])
 
     <div class="ps-header-user-buttons">
       @auth
@@ -114,7 +58,7 @@
           </ul>
         </div>
       @else
-        <a href="{{ route('login') }}" class="btn btn-light">
+        <a href="{{ route('login', ['redirect' => url()->current()]) }}" class="btn btn-light">
           <img src="{{ asset('images/user_resized.png') }}" />
           Login
         </a>
@@ -151,7 +95,7 @@
           </li>
         @else
           <li>
-            <a class="dropdown-item d-flex align-items-center gap-2" href="{{ route('login') }}">
+            <a class="dropdown-item d-flex align-items-center gap-2" href="{{ route('login', ['redirect' => url()->current()]) }}">
               <img src="{{ asset('images/user_resized.png') }}" style="width: 20px" />
               Login
             </a>

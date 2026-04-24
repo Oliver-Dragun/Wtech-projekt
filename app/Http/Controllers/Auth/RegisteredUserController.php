@@ -14,28 +14,31 @@ use Illuminate\Validation\Rules;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
+// Handles user registration
 class RegisteredUserController extends Controller
 {
-    // Display the registration view.
     public function create(): View
     {
+        if (request()->has('redirect')) {
+            session()->put('url.intended', request('redirect'));
+        }
+
         return view('auth.register');
     }
 
-    // Handle an incoming registration request.
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'name'     => ['required', 'string', 'max:255'],
-            'surname'  => ['required', 'string', 'max:255'],
-            'email'    => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'name' => ['required', 'string', 'max:255'],
+            'surname' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
         $user = User::create([
-            'name'     => $request->name,
-            'surname'  => $request->surname,
-            'email'    => $request->email,
+            'name' => $request->name,
+            'surname' => $request->surname,
+            'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
 
@@ -45,6 +48,6 @@ class RegisteredUserController extends Controller
 
         CartController::mergeGuestCart();
 
-        return redirect('/');
+        return redirect()->intended('/');
     }
 }

@@ -6,12 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+// Represents both an active cart (status_id = null) and a placed order
 class Order extends Model
 {
     public $timestamps = false;
 
     protected $fillable = [
         'user_id',
+        'name',
+        'surname',
+        'email',
+        'phone_number',
         'sum',
         'shipping_address_id',
         'shipping_method_id',
@@ -42,5 +47,10 @@ class Order extends Model
     public function items(): HasMany
     {
         return $this->hasMany(OrderItem::class);
+    }
+
+    public function scopeActiveCart($query)
+    {
+        return $query->where('user_id', auth()->id())->whereNull('status_id');
     }
 }

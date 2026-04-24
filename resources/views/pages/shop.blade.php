@@ -9,9 +9,7 @@
 
   <div class="shop-layout">
 
-    {{-- Sidebar filters --}}
     <form method="GET" action="{{ url('/shop') }}" id="filter-form">
-      {{-- Preserve search and category across filter changes --}}
       @if(request('search'))
         <input type="hidden" name="search" value="{{ request('search') }}" />
       @endif
@@ -21,7 +19,6 @@
 
       <div class="shop-sidebar accordion" id="sidebarAccordion">
 
-        {{-- Effect filter --}}
         <div class="accordion-item border-0">
           <h2 class="accordion-header">
             <button
@@ -56,7 +53,6 @@
           </div>
         </div>
 
-        {{-- Grade filter --}}
         <div class="accordion-item border-0">
           <h2 class="accordion-header">
             <button
@@ -91,7 +87,6 @@
           </div>
         </div>
 
-        {{-- Price range filter --}}
         <div class="accordion-item border-0">
           <h2 class="accordion-header">
             <button
@@ -138,10 +133,8 @@
       </div>
     </form>
 
-    {{-- Main content --}}
     <div class="shop-content">
 
-      {{-- Mobile sidebar toggle --}}
       <button class="btn btn-outline-primary d-lg-none mb-3" id="sidebarToggle">
         Filters
       </button>
@@ -158,7 +151,6 @@
           ];
         @endphp
 
-        {{-- Desktop sort buttons --}}
         <div class="d-flex align-items-center gap-2 d-none d-md-flex">
           Sort by:
           @foreach($sortDefs as $def)
@@ -177,7 +169,6 @@
           <a href="{{ request()->fullUrlWithQuery(['sort' => null]) }}" class="btn btn-outline-dark">Clear</a>
         </div>
 
-        {{-- Mobile sort dropdown --}}
         <div class="dropdown d-md-none">
           <button
             class="btn btn-outline-dark dropdown-toggle"
@@ -208,7 +199,6 @@
         </div>
       </div>
 
-      {{-- Product grid --}}
       <div class="shop-products-container">
         @forelse($products as $product)
           <div class="shop-product-card">
@@ -236,7 +226,6 @@
         @endforelse
       </div>
 
-      {{-- Pagination --}}
       @if($products->hasPages())
         <div class="d-flex justify-content-center mt-4">
           {{ $products->links('pagination::bootstrap-5') }}

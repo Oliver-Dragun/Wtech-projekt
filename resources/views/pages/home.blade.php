@@ -4,7 +4,9 @@
 
 @section('content')
 <div class="container my-4">
+  @if($featuredBundle || $sideOffers->isNotEmpty())
   <div class="row g-3">
+    @if($featuredBundle)
     <div class="col-12 col-lg-8">
       <div class="ps-hero-card">
         <div class="ps-hero-card-body">
@@ -31,6 +33,7 @@
         </div>
       </div>
     </div>
+    @endif
 
     <div class="col-12 col-lg-4 d-flex flex-column gap-3" style="min-height: 100%">
       @foreach($sideOffers as $offer)
@@ -52,6 +55,7 @@
       @endforeach
     </div>
   </div>
+  @endif
 </div>
 
 <div class="container my-5">
@@ -81,25 +85,6 @@
 
 <div class="container my-5">
   <h2 class="ps-section-title">Recommended for you</h2>
-  <div class="ps-products-container">
-    @foreach($recommended as $product)
-      <div class="ps-product-card">
-        <div class="ps-product-card-body">
-          <img
-            src="{{ asset($product->mainPhoto?->img ?? 'images/potion-images/healing-potion.png') }}"
-            alt="{{ $product->name }}"
-            class="ps-product-img"
-          />
-          <div class="ps-product-info">
-            <div>
-              <h5 class="ps-product-title">{{ $product->name }}</h5>
-              <p class="ps-product-price">{{ $product->price }} Gold</p>
-            </div>
-            <a href="{{ url('/product/' . $product->id) }}" class="btn btn-primary">Buy</a>
-          </div>
-        </div>
-      </div>
-    @endforeach
-  </div>
+  @include('partials.product-slider', ['products' => $recommended])
 </div>
 @endsection

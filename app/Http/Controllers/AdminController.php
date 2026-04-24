@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Models\ProductCategory;
 use Illuminate\Http\Request;
 
+// Admin panel for browsing and searching all products
 class AdminController extends Controller
 {
     public function index(Request $request)
@@ -13,8 +14,7 @@ class AdminController extends Controller
         $query = Product::with('mainPhoto');
 
         if ($request->filled('search')) {
-            $lower = strtolower($request->search);
-            $query->whereRaw('LOWER(name) LIKE ?', ["%{$lower}%"]);
+            $query->search($request->search);
         }
 
         if ($request->filled('category')) {

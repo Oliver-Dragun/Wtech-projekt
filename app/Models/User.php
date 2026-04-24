@@ -2,19 +2,18 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+// Registered user of the shop
 class User extends Authenticatable
 {
-    // Uses factory support for model creation.
     use HasFactory, Notifiable;
 
-    // Attributes that are mass assignable.
     protected $fillable = [
         'name',
         'surname',
@@ -22,15 +21,14 @@ class User extends Authenticatable
         'email',
         'password',
         'is_admin',
+        'address_id',
     ];
 
-    // Attributes hidden during serialization.
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    // Return attributes that should be cast.
     protected function casts(): array
     {
         return [
@@ -38,6 +36,12 @@ class User extends Authenticatable
             'password' => 'hashed',
             'is_admin' => 'boolean',
         ];
+    }
+
+    // Default saved address of the user
+    public function address(): BelongsTo
+    {
+        return $this->belongsTo(Address::class);
     }
 
     public function orders(): HasMany

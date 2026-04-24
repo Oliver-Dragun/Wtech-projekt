@@ -4,7 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
+// Stores a physical address, used by both users and orders
 class Address extends Model
 {
     public $timestamps = false;
@@ -16,6 +18,11 @@ class Address extends Model
         'postal_code',
         'country',
     ];
+
+    public function user(): HasOne
+    {
+        return $this->hasOne(User::class);
+    }
 
     public function orders(): HasMany
     {

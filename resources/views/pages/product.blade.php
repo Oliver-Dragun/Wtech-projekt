@@ -5,7 +5,6 @@
 @section('content')
 <main>
   <div class="container-lg my-4">
-    {{-- Product path --}}
     <nav aria-label="Product path" class="mb-4">
       <ol class="ps-path-list">
         <li class="ps-path-item"><a href="{{ url('/') }}">Home</a></li>
@@ -18,42 +17,67 @@
       </ol>
     </nav>
 
-    {{-- Product --}}
     <section aria-label="Product details" class="mb-5">
       <div class="row g-4 g-lg-5">
-        {{-- Image gallery --}}
         <div class="col-12 col-lg-5">
           @php
-            $storePhoto = $product->mainPhoto;
-            $detailPhotos = $product->photos->where('number', '>', 0);
-            $mainPhoto = $detailPhotos->first() ?? $storePhoto;
-            $thumbSlots = $detailPhotos->take(4)->values();
-            while ($thumbSlots->count() < 4) {
-                $thumbSlots->push($storePhoto);
-            }
+            $fallback = 'images/potion-images/healing-potion.png';
+            $allPhotos = collect([$product->mainPhoto])
+                ->concat($product->photos->where('number', '>', 0)->values())
+                ->filter()
+                ->values();
+            $photoUrls = $allPhotos->map(fn($p) => asset($p->img ?? $fallback))->values();
+            $firstImg  = $photoUrls->first() ?? asset($fallback);
           @endphp
 
-          <div class="ps-gallery-main mb-3">
-            <img
-              src="{{ asset($mainPhoto?->img ?? 'images/potion-images/healing-potion.png') }}"
-              alt="{{ $product->name }} main image"
-            />
-          </div>
+          <div x-data="{
+            photos: {{ Js::from($photoUrls) }},
+            active: '{{ $firstImg }}',
+            offset: 0,
+            get visible()  { return this.photos.slice(this.offset, this.offset + 4); },
+            get canPrev()  { return this.offset > 0; },
+            get canNext()  { return this.offset + 4 < this.photos.length; },
+            prev() { if (this.canPrev) this.offset--; },
+            next() { if (this.canNext) this.offset++; }
+          }">
+            <div class="ps-gallery-main mb-3">
+              <img x-bind:src="active" alt="{{ $product->name }} main image" />
+            </div>
 
-          <div class="row g-2">
-            @foreach($thumbSlots as $thumb)
-              <div class="col-3">
-                <img
-                  src="{{ asset($thumb?->img ?? 'images/potion-images/healing-potion.png') }}"
-                  alt="{{ $product->name }} image {{ $loop->iteration }}"
-                  class="ps-gallery-thumb"
-                />
+            <div class="position-relative" x-show="photos.length > 0">
+              <button
+                x-show="canPrev"
+                x-on:click="prev"
+                class="btn btn-light border-0 shadow-sm position-absolute top-50 translate-middle-y p-0"
+                style="width:28px;height:28px;left:-14px;z-index:1"
+                aria-label="Previous"
+              ><img src="{{ asset('images/arrow.png') }}" style="width:12px" /></button>
+
+              <div class="row g-2">
+                <template x-for="(url, i) in visible" :key="offset + i">
+                  <div class="col-3">
+                    <img
+                      :src="url"
+                      class="ps-gallery-thumb"
+                      style="cursor:pointer"
+                      x-on:click="active = url"
+                      :style="active === url ? 'border-color:var(--ps-primary)' : ''"
+                    />
+                  </div>
+                </template>
               </div>
-            @endforeach
+
+              <button
+                x-show="canNext"
+                x-on:click="next"
+                class="btn btn-light border-0 shadow-sm position-absolute top-50 translate-middle-y p-0"
+                style="width:28px;height:28px;right:-14px;z-index:1"
+                aria-label="Next"
+              ><img src="{{ asset('images/arrow.png') }}" style="width:12px;transform:rotate(180deg)" /></button>
+            </div>
           </div>
         </div>
 
-        {{-- Description --}}
         <div class="col-12 col-lg-7">
           <h1 class="ps-product-title mb-2">{{ $product->name }}</h1>
           <p class="ps-font-lg text-ps-black-60 mb-4">
@@ -65,7 +89,6 @@
             {{ $product->description }}
           </p>
 
-          {{-- Quantity selector and add to cart --}}
           <form
             action="{{ route('cart.add') }}"
             method="post"
@@ -99,7 +122,6 @@
       </div>
     </section>
 
-    {{-- Product details tabs --}}
     <section aria-label="Product information" class="mb-5">
       <ul class="nav ps-tabs mb-0" id="productTabs" role="tablist">
         <li class="nav-item" role="presentation">
@@ -152,9 +174,80 @@
           aria-labelledby="reviews-tab"
         >
           <h3 class="ps-font-md fw-bold mb-3">Customer Reviews</h3>
-          <p class="ps-font-base text-ps-black-60">
-            No reviews yet. Be the first to share your experience!
-          </p>
+
+          @if($product->reviews->isEmpty())
+            <p class="ps-font-base text-ps-black-60">
+              No reviews yet. Be the first to share your experience!
+            </p>
+          @else
+            @foreach($product->reviews as $review)
+              <div class="{{ $loop->last ? 'pb-3' : 'border-bottom pb-3 mb-3' }}">
+                <div class="d-flex justify-content-between mb-1">
+                  <span class="fw-bold ps-font-base">{{ $review->user->name }} {{ $review->user->surname }}</span>
+                  <span class="text-ps-black-60 ps-font-sm">{{ \Carbon\Carbon::parse($review->date)->format('Y/m/d') }}</span>
+                </div>
+                <p class="text-warning mb-1" aria-label="Rating: {{ $review->rating }} out of 5">
+                  @for($i = 1; $i <= 5; $i++)
+                    {{ $i <= $review->rating ? '★' : '☆' }}
+                  @endfor
+                </p>
+                <p class="ps-font-base text-ps-black-60 mb-0">{{ $review->body }}</p>
+              </div>
+            @endforeach
+          @endif
+
+          <div class="mt-4 pt-3 border-top">
+            @auth
+              @if($userReview)
+                <p class="ps-font-base text-ps-black-60 mb-0">You have already reviewed this product.</p>
+              @else
+                @if(session('review_error'))
+                  <p class="text-danger ps-font-base mb-3">{{ session('review_error') }}</p>
+                @endif
+                <h4 class="ps-font-md fw-bold mb-3">Leave a Review</h4>
+                <form action="/reviews" method="POST"
+                  x-data="{ rating: 5, hover: 0 }">
+                  @csrf
+                  <input type="hidden" name="product_id" value="{{ $product->id }}" />
+                  <input type="hidden" name="rating" x-bind:value="rating" />
+
+                  <div class="mb-3">
+                    <label class="ps-checkout-label d-block mb-2">Your Rating</label>
+                    <div class="d-flex gap-1" style="font-size: 28px; cursor: pointer; line-height: 1;">
+                      @for($i = 1; $i <= 5; $i++)
+                        <span
+                          x-on:click="rating = {{ $i }}"
+                          x-on:mouseenter="hover = {{ $i }}"
+                          x-on:mouseleave="hover = 0"
+                          x-text="(hover || rating) >= {{ $i }} ? '★' : '☆'"
+                          class="text-warning"
+                        ></span>
+                      @endfor
+                    </div>
+                    @error('rating')<div class="text-danger ps-font-sm mt-1">{{ $message }}</div>@enderror
+                  </div>
+
+                  <div class="mb-3">
+                    <label class="ps-checkout-label" for="review-body">Your Review</label>
+                    <textarea
+                      id="review-body"
+                      name="body"
+                      rows="4"
+                      class="form-control mt-1 @error('body') is-invalid @enderror"
+                      placeholder="Share your experience..."
+                    >{{ old('body') }}</textarea>
+                    @error('body')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                  </div>
+
+                  <button type="submit" class="btn btn-primary">Submit Review</button>
+                </form>
+              @endif
+            @else
+              <p class="ps-font-base text-ps-black-60 mb-0">
+                <a href="{{ route('login', ['redirect' => url()->current()]) }}">Sign in</a> to leave a review.
+              </p>
+            @endauth
+          </div>
         </div>
       </div>
     </section>
@@ -162,48 +255,7 @@
 
   <div class="container my-5">
     <h2 class="mb-4">Recommended for you</h2>
-    <div class="position-relative">
-      <div class="row g-4 justify-content-center">
-        @foreach($recommended as $rec)
-          <div class="col-6 col-md-3" style="min-width: 280px">
-            <div class="card border-0">
-              <div class="card-body">
-                <img
-                  src="{{ asset($rec->mainPhoto?->img ?? 'images/potion-images/healing-potion.png') }}"
-                  alt="{{ $rec->name }}"
-                  class="bg-light mb-3 rounded"
-                  style="height: 200px; width: 100%; object-fit: contain"
-                />
-                <div class="d-flex justify-content-between align-items-center">
-                  <div>
-                    <h5 class="card-title mb-1">{{ $rec->name }}</h5>
-                    <p class="card-text text-muted mb-0">{{ $rec->price }} Gold</p>
-                  </div>
-                  <a href="{{ url('/product/' . $rec->id) }}" class="btn btn-primary">Learn more</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        @endforeach
-      </div>
-
-      <button
-        class="btn btn-light position-absolute top-50 start-0 translate-middle-y border-0 shadow-sm"
-        style="left: -20px; z-index: 10"
-      >
-        <img src="{{ asset('images/arrow.png') }}" alt="previous" style="width: 20px" />
-      </button>
-      <button
-        class="btn btn-light position-absolute top-50 end-0 border-0 shadow-sm"
-        style="right: -20px; transform: translateY(-50%); z-index: 10"
-      >
-        <img
-          src="{{ asset('images/arrow.png') }}"
-          alt="next"
-          style="width: 20px; transform: rotate(180deg)"
-        />
-      </button>
-    </div>
+    @include('partials.product-slider', ['products' => $recommended])
   </div>
 </main>
 @endsection

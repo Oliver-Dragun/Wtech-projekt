@@ -11,7 +11,6 @@
     <h1 class="ps-page-title mb-4">Shopping Cart</h1>
 
     <div class="row g-4 g-lg-5">
-      {{-- Cart items --}}
       <section class="col-12 col-lg-8" aria-label="Cart items">
         @forelse($items as $item)
           <article class="ps-cart-item">
@@ -77,7 +76,6 @@
         @endforelse
       </section>
 
-      {{-- Summary --}}
       <aside class="col-12 col-lg-4" aria-label="Order summary">
         <div class="ps-summary-card">
           <h2 class="ps-summary-title mb-4">Summary</h2>

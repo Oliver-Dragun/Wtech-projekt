@@ -98,7 +98,7 @@
     </form>
 
     <div class="text-center">
-      <a href="{{ route('login') }}" style="opacity: 0.6; text-decoration: underline">
+      <a href="{{ route('login', array_filter(['redirect' => request('redirect')])) }}" style="opacity: 0.6; text-decoration: underline">
         Already have an account? Login
       </a>
     </div>
