@@ -86,6 +86,13 @@ Route::patch('/profile', function (Request $request) {
 
 Route::post('/reviews', [ReviewController::class, 'store'])->middleware('auth');
 
-Route::get('/admin', [\App\Http\Controllers\AdminController::class, 'index'])->middleware('admin');
+Route::middleware('admin')->group(function () {
+    Route::get('/admin', [\App\Http\Controllers\AdminController::class, 'index']);
+    Route::get('/admin/products/create', [\App\Http\Controllers\AdminController::class, 'create'])->name('admin.products.create');
+    Route::post('/admin/products', [\App\Http\Controllers\AdminController::class, 'store'])->name('admin.products.store');
+    Route::get('/admin/products/{product}/edit', [\App\Http\Controllers\AdminController::class, 'edit'])->name('admin.products.edit');
+    Route::patch('/admin/products/{product}', [\App\Http\Controllers\AdminController::class, 'update'])->name('admin.products.update');
+    Route::delete('/admin/products/{product}', [\App\Http\Controllers\AdminController::class, 'destroy'])->name('admin.products.destroy');
+});
 
 require __DIR__.'/auth.php';

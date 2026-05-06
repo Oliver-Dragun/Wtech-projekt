@@ -6,8 +6,8 @@
 @section('page_footer')@endsection
 
 @section('content')
-<div class="login-container">
-  <div class="login-card border shadow">
+<main class="login-container">
+  <section class="login-card border shadow" aria-label="Card payment">
     <div class="text-center mb-4">
       <img class="logo py-3" src="{{ asset('images/logo_resized.png') }}" alt="Potion Spot" />
       <h2 class="mb-1">Card Payment</h2>
@@ -76,6 +76,6 @@
     <div class="text-center">
       <a href="#" class="ps-payment-secure-link">Your payment is secured with encryption</a>
     </div>
-  </div>
-</div>
+  </section>
+</main>
 @endsection

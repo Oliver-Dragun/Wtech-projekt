@@ -6,8 +6,8 @@
 @section('page_footer')@endsection
 
 @section('content')
-<div class="login-container">
-  <div class="login-card border shadow">
+<main class="login-container">
+  <section class="login-card border shadow" aria-label="Register">
     <button type="button" onclick="history.back()" class="login-card-close" aria-label="Close">&times;</button>
     <div class="text-center mb-3">
       <img class="logo py-2" src="{{ asset('images/logo_resized.png') }}" />
@@ -102,6 +102,6 @@
         Already have an account? Login
       </a>
     </div>
-  </div>
-</div>
+  </section>
+</main>
 @endsection

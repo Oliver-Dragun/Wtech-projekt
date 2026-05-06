@@ -3,7 +3,7 @@
 @section('title', 'My Profile | Potion Spot')
 
 @section('content')
-<div class="container my-5">
+<main class="container my-5">
   <h2 class="mb-4">Hi, {{ $user->name }} {{ $user->surname }}</h2>
 
   <style>
@@ -20,6 +20,7 @@
     }
   </style>
 
+  <section aria-label="Profile">
   <h4 class="mb-3">Profile</h4>
 
   <div class="card border shadow mb-5">
@@ -88,7 +89,9 @@
   </form>
     </div>
   </div>
+  </section>
 
+  <section aria-label="Orders">
   <h4 class="mb-3">Orders</h4>
 
   @forelse($orders as $order)
@@ -119,8 +122,6 @@
                 @endif
                 @if(($order->status->name ?? '') === 'Delivered')
                   <a href="/product/{{ $item->product_id }}#reviews" class="btn btn-outline-primary">Review product</a>
-                @elseif($loop->first)
-                  <button class="btn btn-primary">Track Order</button>
                 @endif
               </div>
             </div>
@@ -131,5 +132,6 @@
   @empty
     <p class="text-muted">You have no orders yet.</p>
   @endforelse
-</div>
+  </section>
+</main>
 @endsection

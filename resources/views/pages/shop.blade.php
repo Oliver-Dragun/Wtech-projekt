@@ -4,7 +4,7 @@
 
 
 @section('content')
-<div class="main-content shadow">
+<main class="main-content shadow">
   <div class="sidebar-overlay d-lg-none" id="sidebarOverlay"></div>
 
   <div class="shop-layout">
@@ -17,7 +17,7 @@
         <input type="hidden" name="category" value="{{ request('category') }}" />
       @endif
 
-      <div class="shop-sidebar accordion" id="sidebarAccordion">
+      <aside class="shop-sidebar accordion" id="sidebarAccordion" aria-label="Filters">
 
         <div class="accordion-item border-0">
           <h2 class="accordion-header">
@@ -130,10 +130,10 @@
           </div>
         </div>
 
-      </div>
+      </aside>
     </form>
 
-    <div class="shop-content">
+    <section class="shop-content" aria-label="Products">
 
       <button class="btn btn-outline-primary d-lg-none mb-3" id="sidebarToggle">
         Filters
@@ -227,15 +227,15 @@
       </div>
 
       @if($products->hasPages())
-        <div class="d-flex justify-content-center mt-4">
+        <nav class="d-flex justify-content-center mt-4" aria-label="Pagination">
           {{ $products->links('pagination::bootstrap-5') }}
-        </div>
+        </nav>
       @endif
 
-    </div>
+    </section>
   </div>
 
-</div>
+</main>
 @endsection
 
 @push('scripts')

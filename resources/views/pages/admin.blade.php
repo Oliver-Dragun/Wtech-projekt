@@ -6,85 +6,26 @@
 @section('page_footer')@endsection
 
 @section('content')
+<main>
 <div class="ps-banner-stripes d-flex justify-content-center align-items-center px-1 px-lg-4"></div>
 
-<div class="container-fluid py-3 px-4 px-lg-5 ps-admin-header">
+<header class="container-fluid py-3 px-4 px-lg-5 ps-admin-header">
   <div class="d-flex flex-wrap gap-3 align-items-center">
     <h3 class="mb-0 me-3">Admin Panel</h3>
 
-    <div class="ps-admin-actions d-none d-md-flex">
-      <button
-        class="btn btn-primary"
-        type="button"
-        data-bs-toggle="modal"
-        data-bs-target="#addProductModal"
-      >
+    <div class="ps-admin-actions">
+      <a href="{{ route('admin.products.create') }}" class="btn btn-primary">
         Add Product
-      </button>
-      <button
-        class="btn btn-secondary"
-        type="button"
-        data-bs-toggle="modal"
-        data-bs-target="#editProductModal"
-      >
-        Edit Product
-      </button>
-      <button
-        class="btn btn-outline-danger"
-        type="button"
-        data-bs-toggle="modal"
-        data-bs-target="#removeProductModal"
-      >
-        Remove Product
-      </button>
-    </div>
-
-    <div class="dropdown d-md-none">
-      <button
-        class="btn btn-primary dropdown-toggle"
-        type="button"
-        data-bs-toggle="dropdown"
-        aria-expanded="false"
-      >
-        Actions
-      </button>
-      <ul class="dropdown-menu">
-        <li>
-          <button
-            class="dropdown-item"
-            type="button"
-            data-bs-toggle="modal"
-            data-bs-target="#addProductModal"
-          >
-            Add Product
-          </button>
-        </li>
-        <li>
-          <button
-            class="dropdown-item"
-            type="button"
-            data-bs-toggle="modal"
-            data-bs-target="#editProductModal"
-          >
-            Edit Product
-          </button>
-        </li>
-        <li>
-          <button
-            class="dropdown-item"
-            type="button"
-            data-bs-toggle="modal"
-            data-bs-target="#removeProductModal"
-          >
-            Remove Product
-          </button>
-        </li>
-      </ul>
+      </a>
     </div>
   </div>
-</div>
+</header>
 
-<div class="container my-5">
+<section class="container my-5" aria-label="Product catalogue">
+  @if(session('status'))
+    <div class="alert alert-success">{{ session('status') }}</div>
+  @endif
+
   <h2 class="ps-section-title">Product Catalogue</h2>
   <hr class="ps-section-divider" />
   <div class="ps-admin-filter-section mb-4">
@@ -141,8 +82,14 @@
               </div>
             </div>
             <div class="ps-admin-product-actions">
-              <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editProductModal">Edit</button>
-              <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#removeProductModal">Delete</button>
+              <a href="{{ route('admin.products.edit', $product) }}" class="btn btn-outline-primary btn-sm">Edit</a>
+              <form method="POST" action="{{ route('admin.products.destroy', $product) }}"
+                    onsubmit="return confirm('Delete &quot;{{ $product->name }}&quot;? This cannot be undone.');"
+                    class="d-inline">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
+              </form>
             </div>
           </div>
         </div>
@@ -153,9 +100,10 @@
   </div>
 
   @if($products->hasPages())
-    <div class="d-flex justify-content-center mt-4">
+    <nav class="d-flex justify-content-center mt-4" aria-label="Pagination">
       {{ $products->links('pagination::bootstrap-5') }}
-    </div>
+    </nav>
   @endif
-</div>
+</section>
+</main>
 @endsection

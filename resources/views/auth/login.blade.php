@@ -6,15 +6,13 @@
 @section('page_footer')@endsection
 
 @section('content')
-<div class="login-container">
-  <div class="login-card border shadow">
+<main class="login-container">
+  <section class="login-card border shadow" aria-label="Login">
     <button type="button" onclick="history.back()" class="login-card-close" aria-label="Close">&times;</button>
     <div class="text-center mb-4">
       <img class="logo py-3" src="{{ asset('images/logo_resized.png') }}" />
       <h2 class="mb-4">Login</h2>
     </div>
-
-    <x-auth-session-status class="mb-4" :status="session('status')" />
 
     <form method="POST" action="{{ route('login') }}">
       @csrf
@@ -49,14 +47,6 @@
         <x-input-error :messages="$errors->get('password')" class="mt-2" />
       </div>
 
-      <div class="text-center mb-3">
-        @if (Route::has('password.request'))
-          <a href="{{ route('password.request') }}" style="opacity: 0.6; text-decoration: underline">
-            Forgot password?
-          </a>
-        @endif
-      </div>
-
       <button type="submit" class="btn btn-primary w-100 mb-3">
         Login
       </button>
@@ -69,6 +59,6 @@
     <div class="text-center">
       <a href="#" style="opacity: 0.6; text-decoration: underline">Continue as guest</a>
     </div>
-  </div>
-</div>
+  </section>
+</main>
 @endsection

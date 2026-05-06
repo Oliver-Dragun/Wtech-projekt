@@ -1,4 +1,4 @@
-<div class="ps-header">
+<header class="ps-header">
   <div class="ps-banner-stripes ps-header-banner">
     <div class="ps-header-banner-left">
       <button type="button" class="btn btn-secondary">Contact</button>
@@ -115,7 +115,7 @@
   </div>
 
   <div class="ps-header-nav">
-    <nav class="navbar navbar-expand-lg py-0">
+    <nav class="navbar navbar-expand-lg py-0" aria-label="Categories">
       <ul class="navbar-nav mx-auto gap-5">
         <li class="nav-item">
           <a class="nav-link" href="{{ url('/shop?category=1') }}">Potions</a>
@@ -135,4 +135,4 @@
       </ul>
     </nav>
   </div>
-</div>
+</header>

@@ -253,9 +253,9 @@
     </section>
   </div>
 
-  <div class="container my-5">
+  <section class="container my-5" aria-label="Recommended">
     <h2 class="mb-4">Recommended for you</h2>
     @include('partials.product-slider', ['products' => $recommended])
-  </div>
+  </section>
 </main>
 @endsection
