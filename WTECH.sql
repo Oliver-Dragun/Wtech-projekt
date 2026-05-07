@@ -27,7 +27,7 @@ CREATE TABLE "users" (
   "name" varchar(63) NOT NULL,
   "surname" varchar(63) NOT NULL,
   "phone_number" varchar(31),
-  "email" varchar(127) NOT NULL,
+  "email" varchar(127) NOT NULL UNIQUE,
   "password" varchar(255) NOT NULL,
   "is_admin" boolean NOT NULL DEFAULT false,
   "address_id" integer
