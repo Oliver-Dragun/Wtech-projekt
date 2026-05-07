@@ -54,7 +54,7 @@ class AdminController extends Controller
                 'effect'      => $data['effect'],
                 'grade'       => $data['grade'],
                 'price'       => $data['price'],
-                'is_bundle'   => $request->boolean('is_bundle'),
+                'created_at'   => now(),
             ]);
 
             if ($request->hasFile('photos')) {
@@ -90,7 +90,6 @@ class AdminController extends Controller
                 'effect'      => $data['effect'],
                 'grade'       => $data['grade'],
                 'price'       => $data['price'],
-                'is_bundle'   => $request->boolean('is_bundle'),
             ]);
 
             // Remove photos

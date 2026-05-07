@@ -59,7 +59,7 @@ class ProductSeeder extends Seeder
             ['name' => 'Ironbark Greataxe',      'description' => 'A massive axe hewn from petrified ironbark wood. Reinforces the wielder\'s endurance and delivers devastating blows.',      'category_id' => 4, 'effect' => 'Fortitude',   'base_price' => 130],
         ];
 
-        foreach ($bases as $base) {
+        foreach ($bases as $baseIndex => $base) {
             $basePrice = $base['base_price'];
             unset($base['base_price']);
 
@@ -67,6 +67,7 @@ class ProductSeeder extends Seeder
                 Product::create(array_merge($base, [
                     'grade' => $grade,
                     'price' => (int) round($basePrice * $multiplier),
+                    'created_at' => now()->subDays(count($bases) - $baseIndex),
                 ]));
             }
         }
@@ -81,7 +82,6 @@ class ProductSeeder extends Seeder
                 'effect'      => 'Healing',
                 'grade'       => 'Greater',
                 'price'       => 180,
-                'is_bundle'   => true,
             ],
             [
                 'name'        => 'Pyromancer\'s Kit',
@@ -90,7 +90,6 @@ class ProductSeeder extends Seeder
                 'effect'      => 'Fire',
                 'grade'       => 'Superior',
                 'price'       => 250,
-                'is_bundle'   => true,
             ],
             [
                 'name'        => 'Stormcaller\'s Bundle',
@@ -99,7 +98,6 @@ class ProductSeeder extends Seeder
                 'effect'      => 'Lightning',
                 'grade'       => 'Superior',
                 'price'       => 230,
-                'is_bundle'   => true,
             ],
             [
                 'name'        => 'Shadow Collector\'s Set',
@@ -108,12 +106,13 @@ class ProductSeeder extends Seeder
                 'effect'      => 'Necromancy',
                 'grade'       => 'Supreme',
                 'price'       => 300,
-                'is_bundle'   => true,
             ],
         ];
 
         foreach ($bundles as $bundle) {
-            Product::create($bundle);
+            Product::create(array_merge($bundle, [
+                'created_at' => now(),
+            ]));
         }
     }
 }

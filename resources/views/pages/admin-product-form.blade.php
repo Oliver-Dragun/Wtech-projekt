@@ -86,12 +86,6 @@
         <x-input-error :messages="$errors->get('description')" class="mt-2" />
       </div>
 
-      <div class="form-check mb-4">
-        <input class="form-check-input" type="checkbox" id="is_bundle" name="is_bundle" value="1"
-          {{ old('is_bundle', $product->is_bundle ?? false) ? 'checked' : '' }}>
-        <label class="form-check-label" for="is_bundle">This product is a bundle</label>
-      </div>
-
       @if($isEdit && $product->photos->isNotEmpty())
         <div class="mb-3">
           <label class="form-label">Existing images</label>

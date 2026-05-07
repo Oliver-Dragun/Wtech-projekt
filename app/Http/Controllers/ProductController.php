@@ -18,7 +18,7 @@ class ProductController extends Controller
 
         $recommended = Product::with('mainPhoto')
             ->where('id', '!=', $id)
-            ->where('is_bundle', false)
+            ->where('category_id', '!=', 5)
             ->withCount('orderItems')
             ->orderByDesc('order_items_count')
             ->limit(32)

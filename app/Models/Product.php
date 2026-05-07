@@ -11,11 +11,10 @@ class Product extends Model
 {
     public $timestamps = false;
 
-    protected $fillable = ['name', 'description', 'category_id', 'effect', 'grade', 'price', 'is_bundle'];
+    protected $fillable = ['name', 'description', 'category_id', 'effect', 'grade', 'price', 'created_at'];
 
     protected $casts = [
-        'price'     => 'integer',
-        'is_bundle' => 'boolean',
+        'price' => 'integer',
     ];
 
     public function category(): BelongsTo
@@ -41,11 +40,6 @@ class Product extends Model
     public function orderItems(): HasMany
     {
         return $this->hasMany(OrderItem::class);
-    }
-
-    public function bundleComponents(): HasMany
-    {
-        return $this->hasMany(BundleComponent::class, 'bundle_product_id');
     }
 
     public function scopeSearch($query, string $term)
