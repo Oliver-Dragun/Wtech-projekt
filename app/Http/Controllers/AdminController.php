@@ -47,6 +47,7 @@ class AdminController extends Controller
     public function store(Request $request)
     {
         // Validate text fields and uploaded images
+        $request->validate(['photos' => 'required|array|min:2']);
         $data = $this->validateProduct($request);
 
         // Insert new product and images, if it fails everything is rolled back
