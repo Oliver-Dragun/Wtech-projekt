@@ -44,6 +44,7 @@ class AdminController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate(['photos' => 'required|array|min:2']);
         $data = $this->validateProduct($request);
 
         $product = DB::transaction(function () use ($data, $request) {
