@@ -7,10 +7,10 @@ use App\Models\Order;
 use App\Models\ShippingMethod;
 use Illuminate\Http\Request;
 
-// Handles the checkout page and order submission
+// Handles checkout
 class CheckoutController extends Controller
 {
-    // Shows the checkout form with cart items and shipping options
+    // Renders checkout page from the user's cart
     public function index()
     {
         $cart = Order::with(['items.product.mainPhoto'])
@@ -22,12 +22,13 @@ class CheckoutController extends Controller
         }
 
         $shippingMethods = ShippingMethod::all();
+
         $subtotal = $cart->items->sum(fn($item) => $item->product->price * $item->quantity);
 
         return view('pages.checkout', compact('cart', 'shippingMethods', 'subtotal'));
     }
 
-    // Validates the form, saves shipping address and order details, then redirects to payment
+    // Validates checkout information, adds it to the cart object and redirects to payment
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -58,6 +59,7 @@ class CheckoutController extends Controller
         $shippingMethod = ShippingMethod::findOrFail($validated['shipping_method_id']);
         $subtotal = $cart->items->sum(fn($item) => $item->product->price * $item->quantity);
 
+        // Add order details to cart, status_id stays null until payment is completed
         $cart->update([
             'name' => $validated['name'],
             'surname' => $validated['surname'],

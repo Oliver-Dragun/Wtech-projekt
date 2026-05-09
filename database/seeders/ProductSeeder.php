@@ -72,7 +72,7 @@ class ProductSeeder extends Seeder
             }
         }
 
-        // ── Bundles (category_id = 5) ─────────────────────────────────
+        // Bundles (category_id = 5)
         // Each bundle contains 1 potion + 1 scroll + 1 orb + 1 artifact
         $bundles = [
             [

@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 
-// Handles the payment page and order confirmation
+// Handles payment, no real card validation
 class PaymentController extends Controller
 {
-    // Shows the payment form for the current pending order
+    // Renders payment, if the cart was not checked out -> redirect to checkout
     public function index()
     {
         $order = Order::activeCart()
@@ -21,7 +21,7 @@ class PaymentController extends Controller
         return view('pages.payment', compact('order'));
     }
 
-    // Confirms the order and fills any missing user profile fields from order data
+    // Creates order -> status_id is set
     public function store()
     {
         $order = Order::with('shippingAddress')
@@ -29,8 +29,10 @@ class PaymentController extends Controller
             ->whereNotNull('shipping_address_id')
             ->firstOrFail();
 
+        // Mark order as pending -> next time user adds item, it creates a new cart
         $order->update(['status_id' => 1]);
 
+        // Save user data if they were logged in for future order autofill
         $user = auth()->user();
         $userFill = [];
         if (is_null($user->phone_number) && $order->phone_number) {

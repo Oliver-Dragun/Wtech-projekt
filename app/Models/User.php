@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-// Registered user of the shop
+// Registered user, extends Authenticatable from Laravel for authentication, includes is_admin field
 class User extends Authenticatable
 {
     use Notifiable;
@@ -34,7 +34,6 @@ class User extends Authenticatable
         ];
     }
 
-    // Default saved address of the user
     public function address(): BelongsTo
     {
         return $this->belongsTo(Address::class);

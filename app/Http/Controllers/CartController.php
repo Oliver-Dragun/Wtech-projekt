@@ -7,22 +7,20 @@ use App\Models\OrderItem;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
-// Handles cart logic for both guests (session) and logged-in users (DB)
+// Cart logic
 class CartController extends Controller
 {
-    // Returns cart from session for guests
     private function getSessionCart(): array
     {
         return session('cart', []);
     }
 
-    // Saves cart to session for guests
     private function saveSessionCart(array $cart): void
     {
         session(['cart' => $cart]);
     }
 
-    // Returns DB cart for authenticated user, creates one if missing
+    // Returns logged in user's cart
     private function getDbCart(): Order
     {
         $cart = Order::activeCart()->first();
@@ -34,7 +32,7 @@ class CartController extends Controller
         return $cart;
     }
 
-    // Merges session cart into DB cart on login or registration
+    // Merge guest session cart with logged in user's cart
     public static function mergeGuestCart(): void
     {
         $sessionCart = session('cart', []);
@@ -48,6 +46,7 @@ class CartController extends Controller
         foreach ($sessionCart as $productId => $quantity) {
             $item = $cart->items()->where('product_id', $productId)->first();
 
+            // If the item already is in the logged in cart, the quantity from the guest cart is added
             if ($item) {
                 $item->update(['quantity' => min(99, $item->quantity + $quantity)]);
             } else {
@@ -61,7 +60,7 @@ class CartController extends Controller
         session()->forget('cart');
     }
 
-    // Shows the cart page
+    // Render cart page
     public function index()
     {
         if (auth()->check()) {
@@ -71,6 +70,7 @@ class CartController extends Controller
 
             $items = $cart ? $cart->items : collect();
         } else {
+            // For guests (not logged in) generates a 'items' list since it is not saved in the db, only session
             $sessionCart = $this->getSessionCart();
 
             $products = Product::with('mainPhoto')
@@ -90,7 +90,7 @@ class CartController extends Controller
         return view('pages.cart', compact('items', 'subtotal'));
     }
 
-    // Adds a product to the cart
+    // Adds a product to the cart, has validation and seperate logic for guests and logged in users
     public function add(Request $request)
     {
         $request->validate([
@@ -122,7 +122,7 @@ class CartController extends Controller
         return redirect()->back()->with('success', 'Added to cart.');
     }
 
-    // Updates quantity or removes a cart item
+    // Allows editing quantity or removing items from cart, seperate logic for logged in and guest users
     public function updateItem(Request $request, int $productId)
     {
         $action = $request->input('action');

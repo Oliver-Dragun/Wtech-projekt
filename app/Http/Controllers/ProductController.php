@@ -3,19 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
-use Illuminate\Http\Request;
 
-// Shows a single product page with reviews and recommendations
+// Product detail page
 class ProductController extends Controller
 {
+    // Renders the product detail page
     public function show(int $id)
     {
+        // Product info
         $product = Product::with([
             'photos',
             'category',
             'reviews.user',
         ])->findOrFail($id);
 
+        // Recommendations
         $recommended = Product::with('mainPhoto')
             ->where('id', '!=', $id)
             ->where('category_id', '!=', 5)
@@ -24,6 +26,7 @@ class ProductController extends Controller
             ->limit(32)
             ->get();
 
+        // User's review if they already reviewed this product
         $userReview = auth()->check()
             ? $product->reviews->firstWhere('user_id', auth()->id())
             : null;

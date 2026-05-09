@@ -6,10 +6,13 @@ use App\Models\Review;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
+// Handles product reviews
 class ReviewController extends Controller
 {
+    // Creates a review and redirects back to the product detail page
     public function store(Request $request)
     {
+        // Get product id for redirect path
         $productId = (int) $request->input('product_id');
 
         try {
@@ -26,6 +29,7 @@ class ReviewController extends Controller
 
         $userId = auth()->id();
 
+        // Ensure only one review per product per user
         $already = Review::where('user_id', $userId)
             ->where('product_id', $validated['product_id'])
             ->exists();
@@ -35,6 +39,8 @@ class ReviewController extends Controller
                 ->with('review_error', 'You have already reviewed this product.');
         }
 
+        
+        // Insert new review
         Review::create([
             'user_id' => $userId,
             'product_id' => $validated['product_id'],

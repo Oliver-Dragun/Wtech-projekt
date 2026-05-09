@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-// Stores a physical address, used by both users and orders
+// Physical address. Used for both the user's saved address and order shipping address.
 class Address extends Model
 {
     public $timestamps = false;
@@ -19,11 +19,13 @@ class Address extends Model
         'country',
     ];
 
+    // The user this address belongs to (if saved)
     public function user(): HasOne
     {
         return $this->hasOne(User::class);
     }
 
+    // Orders that shipped to this address
     public function orders(): HasMany
     {
         return $this->hasMany(Order::class, 'shipping_address_id');

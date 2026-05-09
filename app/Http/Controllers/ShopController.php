@@ -6,30 +6,35 @@ use App\Models\Product;
 use App\Models\ProductCategory;
 use Illuminate\Http\Request;
 
-// Handles the shop listing page and product search
+// Handles the shop page and search bar in the header
 class ShopController extends Controller
 {
-    // Returns paginated products with filters and sorting applied
+    // Renders the store page catalogue based on filter, all filters are applied sequentially
     public function index(Request $request)
     {
         $query = Product::with('mainPhoto');
 
+        // Filter by search if search is filled
         if ($request->filled('search')) {
             $query->search($request->search);
         }
 
+        // Filter by category
         if ($request->filled('category')) {
             $query->where('category_id', $request->category);
         }
 
+        // Filter by effect
         if ($request->filled('effects')) {
             $query->whereIn('effect', $request->effects);
         }
 
+        // Filter by grade
         if ($request->filled('grades')) {
             $query->whereIn('grade', $request->grades);
         }
 
+        // Price range filter
         if ($request->filled('price_min')) {
             $query->where('price', '>=', (int) $request->price_min);
         }
@@ -37,6 +42,7 @@ class ShopController extends Controller
             $query->where('price', '<=', (int) $request->price_max);
         }
 
+        // Sort results
         match ($request->input('sort', '')) {
             'price_asc' => $query->orderBy('price', 'asc'),
             'price_desc' => $query->orderBy('price', 'desc'),
@@ -49,6 +55,7 @@ class ShopController extends Controller
 
         $products = $query->paginate(12)->withQueryString();
 
+        // Efects and categories for the sidebar
         $scopedQuery = Product::query();
         if ($request->filled('category')) {
             $scopedQuery->where('category_id', $request->category);
@@ -60,6 +67,7 @@ class ShopController extends Controller
             ->sortBy(fn($g) => array_search($g, ['Basic', 'Greater', 'Superior', 'Supreme']))
             ->values();
 
+        // Page title based on selected category
         $categoryName = 'All Products';
         if ($request->filled('category')) {
             $category = ProductCategory::find($request->category);
@@ -69,7 +77,7 @@ class ShopController extends Controller
         return view('pages.shop', compact('products', 'effects', 'grades', 'categoryName'));
     }
 
-    // Returns up to 5 product suggestions for the search dropdown
+    // Returns the matches of searched product name with debounce from the search bar
     public function search(Request $request)
     {
         $search = $request->input('q', '');
@@ -78,6 +86,7 @@ class ShopController extends Controller
             return response()->json([]);
         }
 
+        // Each product only apears once even when it has multiple entries with different grades
         $results = Product::with('mainPhoto')
             ->search($search)
             ->whereIn('id', function ($q) use ($search) {

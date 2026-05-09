@@ -8,13 +8,13 @@ use App\Models\ProductPhoto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-// Admin panel: product list + add / edit / remove 
+// Handles admin CRUD
 class AdminController extends Controller
 {
     private const GRADES = ['Basic', 'Greater', 'Superior', 'Supreme'];
-
     private const UPLOAD_DIR = 'images/product-images/uploaded';
 
+    // Renders product list with paging and the option to add filters
     public function index(Request $request)
     {
         $query = Product::with('mainPhoto');
@@ -33,6 +33,7 @@ class AdminController extends Controller
         return view('pages.admin', compact('products', 'categories'));
     }
 
+    // Renders the add product form, ('product' => null) means it opens in add mode, not edit
     public function create()
     {
         return view('pages.admin-product-form', [
@@ -42,10 +43,13 @@ class AdminController extends Controller
         ]);
     }
 
+    // POST /admin/products — handles the Add form submission.
     public function store(Request $request)
     {
+        // Validate text fields and uploaded images
         $data = $this->validateProduct($request);
 
+        // Insert new product and images, if it fails everything is rolled back
         $product = DB::transaction(function () use ($data, $request) {
             $product = Product::create([
                 'name'        => $data['name'],
@@ -54,7 +58,7 @@ class AdminController extends Controller
                 'effect'      => $data['effect'],
                 'grade'       => $data['grade'],
                 'price'       => $data['price'],
-                'created_at'   => now(),
+                'created_at'  => now(),
             ]);
 
             if ($request->hasFile('photos')) {
@@ -67,6 +71,7 @@ class AdminController extends Controller
         return redirect('/admin')->with('status', "Product \"{$product->name}\" created.");
     }
 
+    // Renders product for in edit mode ('product' => $product)
     public function edit(Product $product)
     {
         $product->load('photos');
@@ -78,11 +83,14 @@ class AdminController extends Controller
         ]);
     }
 
+    // Applies edits from edit form
     public function update(Request $request, Product $product)
     {
         $data = $this->validateProduct($request);
 
+       // Update db, delete marked photos and add new photos
         DB::transaction(function () use ($data, $request, $product) {
+            // Step 1: update the products row itself.
             $product->update([
                 'name'        => $data['name'],
                 'description' => $data['description'],
@@ -92,7 +100,6 @@ class AdminController extends Controller
                 'price'       => $data['price'],
             ]);
 
-            // Remove photos
             $removeIds = collect($request->input('remove_photos', []))->map('intval')->all();
             if (!empty($removeIds)) {
                 $toRemove = $product->photos()->whereIn('id', $removeIds)->get();
@@ -102,19 +109,18 @@ class AdminController extends Controller
                 }
             }
 
-            // Append any new photos at the end of the other photos
             $remaining = $product->photos()->count();
             if ($request->hasFile('photos')) {
                 $this->saveUploadedPhotos($product, $request->file('photos'), startNumber: $remaining);
             }
 
-            // Renumber photos so the first one is always number 0 (main)
             $this->renumberPhotos($product);
         });
 
         return redirect('/admin')->with('status', "Product \"{$product->name}\" updated.");
     }
 
+    // Deletes product from db, does not delete initial photos from the seed 
     public function destroy(Product $product)
     {
         DB::transaction(function () use ($product) {
@@ -142,15 +148,18 @@ class AdminController extends Controller
         ]);
     }
 
-    /** Save uploaded files to public/images/product-images/uploaded and create rows. */
+    // Move uploaded photos into 'images/product-images/uploaded', register them in db and link to product
     private function saveUploadedPhotos(Product $product, array $files, int $startNumber): void
     {
         $absoluteDir = public_path(self::UPLOAD_DIR);
+        
+        // Creates 'images/product-images/uploaded' if it does not exist
         if (!is_dir($absoluteDir)) {
             mkdir($absoluteDir, 0775, true);
         }
 
         foreach ($files as $i => $file) {
+            // Create filename
             $ext = strtolower($file->getClientOriginalExtension() ?: 'png');
             $name = 'p' . $product->id . '_' . uniqid() . '.' . $ext;
             $file->move($absoluteDir, $name);
@@ -163,7 +172,7 @@ class AdminController extends Controller
         }
     }
 
-    /** Only delete uploaded files, not the seeded sample images. */
+   // Remove uploaded photo from 'images/product-images/uploaded'
     private function deletePhotoFile(string $relativePath): void
     {
         if (!str_starts_with($relativePath, self::UPLOAD_DIR . '/')) {
@@ -175,6 +184,7 @@ class AdminController extends Controller
         }
     }
 
+    // Update photo numbers afterr adding/removing photos
     private function renumberPhotos(Product $product): void
     {
         $photos = $product->photos()->orderBy('number')->orderBy('id')->get();

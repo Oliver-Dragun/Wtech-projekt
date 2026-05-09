@@ -11,21 +11,27 @@ use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+// Routes for the whole app
+
+// Store paths
 Route::get('/', [\App\Http\Controllers\HomeController::class, 'index']);
 Route::get('/shop', [ShopController::class, 'index']);
 Route::get('/search', [ShopController::class, 'search']);
 Route::get('/product/{id}', [ProductController::class, 'show']);
 
+// Cart paths
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
 Route::post('/cart/items/{productId}', [CartController::class, 'updateItem'])->name('cart.update');
 
+// Checkout and payment, both require login to allow access 
 Route::get('/checkout', [CheckoutController::class, 'index'])->middleware('auth');
 Route::post('/checkout', [CheckoutController::class, 'store'])->middleware('auth');
 
 Route::get('/payment', [PaymentController::class, 'index'])->middleware('auth');
 Route::post('/payment', [PaymentController::class, 'store'])->middleware('auth');
 
+// Profile path, builds user info inline
 Route::get('/profile', function () {
     $user = auth()->user()->load('address');
     $orders = Order::with(['items.product.mainPhoto', 'status'])
@@ -36,9 +42,11 @@ Route::get('/profile', function () {
     return view('pages.profile', compact('user', 'orders'));
 })->middleware('auth');
 
+// Update profile
 Route::patch('/profile', function (Request $request) {
     $user = auth()->user();
 
+    // Validates text fields, allows same email as before edits
     $validated = $request->validate([
         'full_name' => 'required|string|max:127',
         'email' => 'required|email|max:127|unique:users,email,' . $user->id,
@@ -49,6 +57,7 @@ Route::patch('/profile', function (Request $request) {
         'country' => 'nullable|string|max:127',
     ]);
 
+    // Split full_name into name and surname on first space
     $parts = explode(' ', trim($validated['full_name']), 2);
     $user->update([
         'name' => $parts[0],
@@ -57,6 +66,7 @@ Route::patch('/profile', function (Request $request) {
         'phone_number' => $validated['phone_number'] ?? null,
     ]);
 
+    // Update address
     $hasAddress = !empty($validated['street_address'])
                || !empty($validated['city'])
                || !empty($validated['postal_code'])
@@ -64,6 +74,7 @@ Route::patch('/profile', function (Request $request) {
 
     if ($hasAddress) {
         if ($user->address) {
+            // Update existing address
             $user->address->update([
                 'street_address' => $validated['street_address'] ?? $user->address->street_address,
                 'city' => $validated['city'] ?? $user->address->city,
@@ -71,6 +82,7 @@ Route::patch('/profile', function (Request $request) {
                 'country' => $validated['country'] ?? $user->address->country,
             ]);
         } else {
+            // New address
             $address = Address::create([
                 'street_address' => $validated['street_address'] ?? '',
                 'city'           => $validated['city'] ?? '',
@@ -84,8 +96,10 @@ Route::patch('/profile', function (Request $request) {
     return redirect('/profile');
 })->middleware('auth');
 
+// Only logged in users can leave reviews
 Route::post('/reviews', [ReviewController::class, 'store'])->middleware('auth');
 
+// Admin routes behind IsAdmin middleware registered under alias 'admin' in bootstrap/app.php
 Route::middleware('admin')->group(function () {
     Route::get('/admin', [\App\Http\Controllers\AdminController::class, 'index']);
     Route::get('/admin/products/create', [\App\Http\Controllers\AdminController::class, 'create'])->name('admin.products.create');
@@ -95,4 +109,5 @@ Route::middleware('admin')->group(function () {
     Route::delete('/admin/products/{product}', [\App\Http\Controllers\AdminController::class, 'destroy'])->name('admin.products.destroy');
 });
 
+// Runs auth paths
 require __DIR__.'/auth.php';

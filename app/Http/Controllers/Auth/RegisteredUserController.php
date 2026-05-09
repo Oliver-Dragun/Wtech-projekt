@@ -11,12 +11,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
-use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
-// Handles user registration
+// Handles registration
 class RegisteredUserController extends Controller
 {
+    // Render registration form
     public function create(): View
     {
         if (request()->has('redirect')) {
@@ -26,8 +26,10 @@ class RegisteredUserController extends Controller
         return view('auth.register');
     }
 
+    // Validates form, creates new user account and logs in
     public function store(Request $request): RedirectResponse
     {
+        // Validate form data: enforce string max length, email uniqueness, password and repeat password match
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'surname' => ['required', 'string', 'max:255'],
@@ -35,6 +37,7 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+        // Creates user and hashes password for safety
         $user = User::create([
             'name' => $request->name,
             'surname' => $request->surname,

@@ -4,15 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 
-// Loads products for the home page sections
+// Handles homepage rendering
 class HomeController extends Controller
 {
     public function index()
     {
+        // Main offer card
         $featuredBundle = Product::with('mainPhoto')
             ->where('category_id', 5)
             ->first();
 
+        // Side offer cards
         $sideOffers = collect();
         foreach ([3, 4] as $catId) {
             $offer = Product::with('mainPhoto')
@@ -24,12 +26,14 @@ class HomeController extends Controller
             }
         }
 
+        // New product cards
         $newProducts = Product::with('mainPhoto')
             ->where('category_id', '!=', 5)
             ->orderByDesc('created_at')
             ->take(8)
             ->get();
 
+        // Recommended products -> recommend products with the most orders
         $recommended = Product::with('mainPhoto')
             ->where('category_id', '!=', 5)
             ->withCount('orderItems')
