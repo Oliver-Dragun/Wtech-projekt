@@ -7,12 +7,23 @@ use App\Models\Order;
 // Handles payment, no real card validation
 class PaymentController extends Controller
 {
-    // Renders payment, if the cart was not checked out -> redirect to checkout
+    // Renders payment page — finds order by active cart or guest_order_id session
     public function index()
     {
-        $order = Order::activeCart()
-            ->whereNotNull('shipping_address_id')
-            ->first();
+        if (auth()->check()) {
+            $order = Order::activeCart()
+                ->whereNotNull('shipping_address_id')
+                ->first();
+        } else {
+            $orderId = session('guest_order_id');
+            $order = $orderId
+                ? Order::whereNull('user_id')
+                    ->whereNull('status_id')
+                    ->whereNotNull('shipping_address_id')
+                    ->where('id', $orderId)
+                    ->first()
+                : null;
+        }
 
         if (!$order) {
             return redirect('/checkout');
@@ -21,30 +32,42 @@ class PaymentController extends Controller
         return view('pages.payment', compact('order'));
     }
 
-    // Creates order -> status_id is set
+    // Confirms order — sets status_id, saves user data (auth only), clears guest session
     public function store()
     {
-        $order = Order::with('shippingAddress')
-            ->activeCart()
+        if (auth()->check()) {
+            $order = Order::with('shippingAddress')
+                ->activeCart()
+                ->whereNotNull('shipping_address_id')
+                ->firstOrFail();
+
+            $order->update(['status_id' => 1]);
+
+            $user = auth()->user();
+            $userFill = [];
+            if (is_null($user->phone_number) && $order->phone_number) {
+                $userFill['phone_number'] = $order->phone_number;
+            }
+            if (is_null($user->address_id) && $order->shipping_address_id) {
+                $userFill['address_id'] = $order->shipping_address_id;
+            }
+            if ($userFill) {
+                $user->update($userFill);
+            }
+
+            return redirect('/profile');
+        }
+
+        $orderId = session('guest_order_id');
+        $order = Order::whereNull('user_id')
+            ->whereNull('status_id')
             ->whereNotNull('shipping_address_id')
+            ->where('id', $orderId ?? 0)
             ->firstOrFail();
 
-        // Mark order as pending -> next time user adds item, it creates a new cart
         $order->update(['status_id' => 1]);
+        session()->forget('guest_order_id');
 
-        // Save user data if they were logged in for future order autofill
-        $user = auth()->user();
-        $userFill = [];
-        if (is_null($user->phone_number) && $order->phone_number) {
-            $userFill['phone_number'] = $order->phone_number;
-        }
-        if (is_null($user->address_id) && $order->shipping_address_id) {
-            $userFill['address_id'] = $order->shipping_address_id;
-        }
-        if ($userFill) {
-            $user->update($userFill);
-        }
-
-        return redirect('/profile');
+        return redirect('/');
     }
 }

@@ -118,7 +118,7 @@ return new class extends Migration
 
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
             $table->string('name', 63)->nullable();
             $table->string('surname', 63)->nullable();
             $table->string('email', 127)->nullable();

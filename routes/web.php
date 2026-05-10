@@ -24,12 +24,11 @@ Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
 Route::post('/cart/items/{productId}', [CartController::class, 'updateItem'])->name('cart.update');
 
-// Checkout and payment, both require login to allow access 
-Route::get('/checkout', [CheckoutController::class, 'index'])->middleware('auth');
-Route::post('/checkout', [CheckoutController::class, 'store'])->middleware('auth');
+Route::get('/checkout', [CheckoutController::class, 'index']);
+Route::post('/checkout', [CheckoutController::class, 'store']);
 
-Route::get('/payment', [PaymentController::class, 'index'])->middleware('auth');
-Route::post('/payment', [PaymentController::class, 'store'])->middleware('auth');
+Route::get('/payment', [PaymentController::class, 'index']);
+Route::post('/payment', [PaymentController::class, 'store']);
 
 // Profile path, builds user info inline
 Route::get('/profile', function () {

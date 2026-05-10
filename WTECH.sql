@@ -54,7 +54,7 @@ CREATE TABLE order_statuses (
 
 CREATE TABLE orders (
                         id integer PRIMARY KEY,
-                        user_id integer NOT NULL,
+                        user_id integer,
                         name varchar(63),
                         surname varchar(63),
                         email varchar(127),

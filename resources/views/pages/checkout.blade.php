@@ -38,7 +38,7 @@
               <div class="col-12 col-sm-6">
                 <label for="name" class="ps-checkout-label">First Name</label>
                 <input type="text" class="ps-checkout-input @error('name') is-invalid @enderror"
-                  id="name" name="name" value="{{ old('name', auth()->user()->name) }}" />
+                  id="name" name="name" value="{{ old('name', auth()->user()?->name ?? '') }}" />
                 @error('name')
                   <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -46,7 +46,7 @@
               <div class="col-12 col-sm-6">
                 <label for="surname" class="ps-checkout-label">Last Name</label>
                 <input type="text" class="ps-checkout-input @error('surname') is-invalid @enderror"
-                  id="surname" name="surname" value="{{ old('surname', auth()->user()->surname) }}" />
+                  id="surname" name="surname" value="{{ old('surname', auth()->user()?->surname ?? '') }}" />
                 @error('surname')
                   <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -57,7 +57,7 @@
               <div class="col-12 col-sm-6">
                 <label for="email" class="ps-checkout-label">Email Address</label>
                 <input type="email" class="ps-checkout-input @error('email') is-invalid @enderror"
-                  id="email" name="email" value="{{ old('email', auth()->user()->email) }}" />
+                  id="email" name="email" value="{{ old('email', auth()->user()?->email ?? '') }}" />
                 @error('email')
                   <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -66,7 +66,7 @@
                 <label for="phone_number" class="ps-checkout-label">Phone Number</label>
                 <input type="tel" class="ps-checkout-input @error('phone_number') is-invalid @enderror"
                   id="phone_number" name="phone_number"
-                  value="{{ old('phone_number', auth()->user()->phone_number) }}" />
+                  value="{{ old('phone_number', auth()->user()?->phone_number ?? '') }}" />
                 @error('phone_number')
                   <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -90,7 +90,7 @@
             <div class="mb-3">
               <label for="street_address" class="ps-checkout-label">Street Address</label>
               <input type="text" class="ps-checkout-input @error('street_address') is-invalid @enderror"
-                id="street_address" name="street_address" value="{{ old('street_address', auth()->user()->address?->street_address ?? '') }}" />
+                id="street_address" name="street_address" value="{{ old('street_address', auth()->user()?->address?->street_address ?? '') }}" />
               @error('street_address')
                 <div class="invalid-feedback">{{ $message }}</div>
               @enderror
@@ -100,7 +100,7 @@
               <div class="col-12 col-sm-6">
                 <label for="apartment" class="ps-checkout-label">Apartment / Suite (Optional)</label>
                 <input type="text" class="ps-checkout-input @error('apartment') is-invalid @enderror"
-                  id="apartment" name="apartment" value="{{ old('apartment', auth()->user()->address?->apartment ?? '') }}" />
+                  id="apartment" name="apartment" value="{{ old('apartment', auth()->user()?->address?->apartment ?? '') }}" />
                 @error('apartment')
                   <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -108,7 +108,7 @@
               <div class="col-12 col-sm-6">
                 <label for="city" class="ps-checkout-label">City</label>
                 <input type="text" class="ps-checkout-input @error('city') is-invalid @enderror"
-                  id="city" name="city" value="{{ old('city', auth()->user()->address?->city ?? '') }}" />
+                  id="city" name="city" value="{{ old('city', auth()->user()?->address?->city ?? '') }}" />
                 @error('city')
                   <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -119,7 +119,7 @@
               <div class="col-12 col-sm-6">
                 <label for="postal_code" class="ps-checkout-label">Postal / ZIP Code</label>
                 <input type="text" class="ps-checkout-input @error('postal_code') is-invalid @enderror"
-                  id="postal_code" name="postal_code" value="{{ old('postal_code', auth()->user()->address?->postal_code ?? '') }}" />
+                  id="postal_code" name="postal_code" value="{{ old('postal_code', auth()->user()?->address?->postal_code ?? '') }}" />
                 @error('postal_code')
                   <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -127,7 +127,7 @@
               <div class="col-12 col-sm-6">
                 <label for="country" class="ps-checkout-label">Country</label>
                 <input type="text" class="ps-checkout-input @error('country') is-invalid @enderror"
-                  id="country" name="country" value="{{ old('country', auth()->user()->address?->country ?? '') }}" />
+                  id="country" name="country" value="{{ old('country', auth()->user()?->address?->country ?? '') }}" />
                 @error('country')
                   <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
