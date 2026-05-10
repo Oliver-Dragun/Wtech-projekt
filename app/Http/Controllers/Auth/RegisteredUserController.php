@@ -31,9 +31,9 @@ class RegisteredUserController extends Controller
     {
         // Validate form data: enforce string max length, email uniqueness, password and repeat password match
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'surname' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'name' => ['required', 'string', 'max:63'],
+            'surname' => ['required', 'string', 'max:63'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:127', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 

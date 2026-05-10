@@ -18,10 +18,4 @@ class OrderItem extends Model
     {
         return $this->belongsTo(Product::class);
     }
-
-    // The cart/order this item belongs to
-    public function order(): BelongsTo
-    {
-        return $this->belongsTo(Order::class);
-    }
 }

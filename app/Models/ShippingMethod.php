@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 // Shipping option shown on the checkout page
 class ShippingMethod extends Model
@@ -11,9 +10,4 @@ class ShippingMethod extends Model
     public $timestamps = false;
 
     protected $fillable = ['name', 'price'];
-
-    public function orders(): HasMany
-    {
-        return $this->hasMany(Order::class, 'shipping_method_id');
-    }
 }

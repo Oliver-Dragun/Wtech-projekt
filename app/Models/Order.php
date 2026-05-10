@@ -24,20 +24,10 @@ class Order extends Model
         'status_id',
     ];
 
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
-
     // Address used for this order
     public function shippingAddress(): BelongsTo
     {
         return $this->belongsTo(Address::class, 'shipping_address_id');
-    }
-
-    public function shippingMethod(): BelongsTo
-    {
-        return $this->belongsTo(ShippingMethod::class, 'shipping_method_id');
     }
 
     // Returns the status, null if it is a cart
