@@ -7,7 +7,7 @@ use App\Models\Order;
 // Handles payment, no real card validation
 class PaymentController extends Controller
 {
-    // Renders payment page — finds order by active cart or guest_order_id session
+    // Renders payment page, finds order by active cart or guest_order_id session
     public function index()
     {
         if (auth()->check()) {
@@ -32,7 +32,7 @@ class PaymentController extends Controller
         return view('pages.payment', compact('order'));
     }
 
-    // Confirms order — sets status_id, saves user data (auth only), clears guest session
+    // Confirms order, sets status_id, saves user data (auth only), clears guest session
     public function store()
     {
         if (auth()->check()) {

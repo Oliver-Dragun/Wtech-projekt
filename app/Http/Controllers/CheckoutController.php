@@ -50,7 +50,7 @@ class CheckoutController extends Controller
         return view('pages.checkout', compact('cart', 'shippingMethods', 'subtotal'));
     }
 
-    // Validates checkout info — saves to DB cart or creates guest order
+    // Validates checkout info, saves to DB cart or creates guest order
     public function store(Request $request)
     {
         $validated = $request->validate([
