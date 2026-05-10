@@ -85,7 +85,7 @@ password: admin
 
 - `app/Http/Controllers/` -> controllers (cart, checkout, payment, admin, etc.)
 - `app/Models/` -> models of db tables
-- `routes/web.php` — route definitions
+- `routes/web.php` -> route definitions
 - `resources/views/` -> blade templates
 - `public/images/` -> product images and assets
 - `database/migrations/final_migration.php` -> schema
